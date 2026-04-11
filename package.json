@@ -7,7 +7,9 @@
     "dev": "ts-node src/index.ts",
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
-    "prisma:seed": "ts-node prisma/seed.ts"
+    "prisma:seed": "ts-node prisma/seed.ts",
+    "data:export": "ts-node scripts/export_master_data.ts",
+    "data:restore": "ts-node scripts/seed_from_snapshot.ts"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
