@@ -22,6 +22,7 @@ async function main() {
     console.log('--- Starting Master Data Export ---\n');
 
     // 1. Core Catalog
+    await exportTable('admins', await prisma.admin.findMany());
     await exportTable('categories', await prisma.category.findMany());
     
     // Products with nested relations for easier portability
@@ -50,6 +51,7 @@ async function main() {
     }));
     await exportTable('reviews', await prisma.review.findMany());
     await exportTable('notifications', await prisma.notification.findMany());
+    await exportTable('banned_emails', await prisma.bannedEmail.findMany());
 
     console.log('\n--- Export Complete! ---');
     console.log(`Files saved in: ${EXPORT_DIR}`);

@@ -15,6 +15,8 @@ async function clearDatabase() {
     console.log('Clearing existing database...');
     // Delete in order to avoid FK violations
     await prisma.notification.deleteMany();
+    await prisma.admin.deleteMany();
+    await prisma.bannedEmail.deleteMany();
     await prisma.review.deleteMany();
     await prisma.orderItem.deleteMany();
     await prisma.order.deleteMany();
@@ -39,6 +41,19 @@ async function main() {
     console.log('--- Starting Master Data Restore (Seed) ---\n');
 
     await clearDatabase();
+
+    // 0. Admins
+    const admins = await readSnapshot('admins');
+    if (admins) {
+        console.log('Seeding Admins...');
+        for (const a of admins) await prisma.admin.create({ data: a });
+    }
+    
+    const bannedEmails = await readSnapshot('banned_emails');
+    if (bannedEmails) {
+        console.log('Seeding Banned Emails...');
+        for (const e of bannedEmails) await prisma.bannedEmail.create({ data: e });
+    }
 
     // 1. Categories (Handling Parents/Children)
     const categories = await readSnapshot('categories');
