@@ -41,11 +41,16 @@ async function main() {
         
         for (const p of productsFull) {
             const { variants, images, ...productData } = p;
+            
+            // Clean variants and images: Remove productId as it's handled by the nested create
+            const cleanVariants = variants?.map(({ productId, ...v }: any) => v) || [];
+            const cleanImages = images?.map(({ productId, ...img }: any) => img) || [];
+
             await prisma.product.create({
                 data: {
                     ...productData,
-                    variants: { create: variants },
-                    images: { create: images }
+                    variants: { create: cleanVariants },
+                    images: { create: cleanImages }
                 }
             });
         }
@@ -101,12 +106,29 @@ async function main() {
         for (const p of pairings) await prisma.categoryPairing.create({ data: p });
     }
 
-    // 4. Operational Data (Optional Sync)
+    // 4. Operational Data
     const users = await readSnapshot('users');
     if (users) {
         console.log('Seeding Users...');
         await prisma.user.deleteMany();
         for (const u of users) await prisma.user.create({ data: u });
+    }
+
+    const ordersFull = await readSnapshot('orders_full');
+    if (ordersFull) {
+        console.log('Seeding Orders and Order Items...');
+        await prisma.order.deleteMany();
+        for (const o of ordersFull) {
+            const { items, ...orderData } = o;
+            // Clean items: Remove orderId as it's handled by the nested create
+            const cleanItems = items?.map(({ orderId, ...item }: any) => item) || [];
+            await prisma.order.create({
+                data: {
+                    ...orderData,
+                    items: { create: cleanItems }
+                }
+            });
+        }
     }
 
     console.log('\n--- Restore Complete! ---');
