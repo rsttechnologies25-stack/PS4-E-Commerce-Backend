@@ -11,16 +11,39 @@ async function readSnapshot(fileName: string) {
     return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 }
 
+async function clearDatabase() {
+    console.log('Clearing existing database...');
+    // Delete in order to avoid FK violations
+    await prisma.notification.deleteMany();
+    await prisma.review.deleteMany();
+    await prisma.orderItem.deleteMany();
+    await prisma.order.deleteMany();
+    await prisma.cartItem.deleteMany();
+    await prisma.heroBanner.deleteMany();
+    await prisma.productImage.deleteMany();
+    await prisma.productVariant.deleteMany();
+    await prisma.product.deleteMany();
+    await prisma.categoryPairing.deleteMany();
+    await prisma.category.deleteMany();
+    await prisma.user.deleteMany();
+    await prisma.branch.deleteMany();
+    await prisma.shippingRule.deleteMany();
+    await prisma.coupon.deleteMany();
+    await prisma.announcement.deleteMany();
+    await prisma.whatsAppTemplate.deleteMany();
+    await prisma.siteSettings.deleteMany();
+    console.log('[✔] Database cleared.\n');
+}
+
 async function main() {
     console.log('--- Starting Master Data Restore (Seed) ---\n');
+
+    await clearDatabase();
 
     // 1. Categories (Handling Parents/Children)
     const categories = await readSnapshot('categories');
     if (categories) {
         console.log('Seeding Categories...');
-        // Clear old ones first to avoid constraint errors
-        await prisma.category.deleteMany();
-        
         // Split into parents and children for safe insertion
         const parents = categories.filter((c: any) => !c.parentId);
         const children = categories.filter((c: any) => c.parentId);
@@ -37,8 +60,6 @@ async function main() {
     const productsFull = await readSnapshot('products_full');
     if (productsFull) {
         console.log('Seeding Products, Variants, and Images...');
-        await prisma.product.deleteMany();
-        
         for (const p of productsFull) {
             const { variants, images, ...productData } = p;
             
@@ -60,49 +81,42 @@ async function main() {
     const siteSettings = await readSnapshot('site_settings');
     if (siteSettings) {
         console.log('Seeding Site Settings...');
-        await prisma.siteSettings.deleteMany();
         for (const s of siteSettings) await prisma.siteSettings.create({ data: s });
     }
 
     const banners = await readSnapshot('hero_banners');
     if (banners) {
         console.log('Seeding Hero Banners...');
-        await prisma.heroBanner.deleteMany();
         for (const b of banners) await prisma.heroBanner.create({ data: b });
     }
 
     const branches = await readSnapshot('branches');
     if (branches) {
         console.log('Seeding Branches...');
-        await prisma.branch.deleteMany();
         for (const b of branches) await prisma.branch.create({ data: b });
     }
 
     const shippingRules = await readSnapshot('shipping_rules');
     if (shippingRules) {
         console.log('Seeding Shipping Rules...');
-        await prisma.shippingRule.deleteMany();
         for (const r of shippingRules) await prisma.shippingRule.create({ data: r });
     }
 
     const coupons = await readSnapshot('coupons');
     if (coupons) {
         console.log('Seeding Coupons...');
-        await prisma.coupon.deleteMany();
         for (const c of coupons) await prisma.coupon.create({ data: c });
     }
 
     const announcements = await readSnapshot('announcements');
     if (announcements) {
         console.log('Seeding Announcements...');
-        await prisma.announcement.deleteMany();
         for (const a of announcements) await prisma.announcement.create({ data: a });
     }
 
     const pairings = await readSnapshot('category_pairings');
     if (pairings) {
         console.log('Seeding Category Pairings...');
-        await prisma.categoryPairing.deleteMany();
         for (const p of pairings) await prisma.categoryPairing.create({ data: p });
     }
 
@@ -110,14 +124,12 @@ async function main() {
     const users = await readSnapshot('users');
     if (users) {
         console.log('Seeding Users...');
-        await prisma.user.deleteMany();
         for (const u of users) await prisma.user.create({ data: u });
     }
 
     const ordersFull = await readSnapshot('orders_full');
     if (ordersFull) {
         console.log('Seeding Orders and Order Items...');
-        await prisma.order.deleteMany();
         for (const o of ordersFull) {
             const { items, ...orderData } = o;
             // Clean items: Remove orderId as it's handled by the nested create
