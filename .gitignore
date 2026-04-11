@@ -22,6 +22,7 @@ brace_counter.js
 !package.json
 !tsconfig.json
 !composer.json
+!data/master-snapshot/*.json
 startup_log.txt
 *.log
 

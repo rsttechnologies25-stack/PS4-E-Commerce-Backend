@@ -1,0 +1,90 @@
+[
+  {
+    "id": "cmna802tc0006l1ysvw71uou8",
+    "areaName": "OTTERI",
+    "pincodes": "600012",
+    "baseWeightLimit": 1,
+    "baseCharge": 60,
+    "additionalChargePerKg": 30,
+    "isActive": true,
+    "createdAt": "2026-03-28T11:01:46.176Z",
+    "updatedAt": "2026-03-28T11:24:59.281Z"
+  },
+  {
+    "id": "cmna7zpab0005l1ysla0tyuz0",
+    "areaName": "CHENNAI",
+    "pincodes": "600*",
+    "baseWeightLimit": 1,
+    "baseCharge": 150,
+    "additionalChargePerKg": 30,
+    "isActive": true,
+    "createdAt": "2026-03-28T11:01:28.643Z",
+    "updatedAt": "2026-03-28T11:24:59.292Z"
+  },
+  {
+    "id": "cmmrd3g3o002al1wwkpw65wak",
+    "areaName": "TAMIL NADU",
+    "pincodes": "*",
+    "baseWeightLimit": 1,
+    "baseCharge": 200,
+    "additionalChargePerKg": 40,
+    "isActive": true,
+    "createdAt": "2026-03-15T06:16:44.100Z",
+    "updatedAt": "2026-03-28T11:24:59.294Z"
+  },
+  {
+    "id": "cmmrd3g3o002bl1wwmnbjfq3v",
+    "areaName": "OTHER STATES",
+    "pincodes": "*",
+    "baseWeightLimit": 1,
+    "baseCharge": 250,
+    "additionalChargePerKg": 50,
+    "isActive": true,
+    "createdAt": "2026-03-15T06:16:44.100Z",
+    "updatedAt": "2026-03-28T11:24:59.297Z"
+  },
+  {
+    "id": "cmna93aqf0006l1z0mfo8mf3h",
+    "areaName": "KODAMBAKKAM",
+    "pincodes": "600024",
+    "baseWeightLimit": 1,
+    "baseCharge": 90,
+    "additionalChargePerKg": 30,
+    "isActive": true,
+    "createdAt": "2026-03-28T11:32:16.024Z",
+    "updatedAt": "2026-03-28T11:33:35.979Z"
+  },
+  {
+    "id": "cmna9kyan000al1z0sjz1zcjn",
+    "areaName": "TUTICORIN",
+    "pincodes": "600896",
+    "baseWeightLimit": 1,
+    "baseCharge": 3540,
+    "additionalChargePerKg": 385,
+    "isActive": true,
+    "createdAt": "2026-03-28T11:45:59.711Z",
+    "updatedAt": "2026-03-28T11:53:40.480Z"
+  },
+  {
+    "id": "cmnngipgr000pl1ow8majs5xs",
+    "areaName": "AYANAVARAM",
+    "pincodes": "600023",
+    "baseWeightLimit": 1,
+    "baseCharge": 50,
+    "additionalChargePerKg": 5,
+    "isActive": true,
+    "createdAt": "2026-04-06T17:21:12.555Z",
+    "updatedAt": "2026-04-06T17:21:12.555Z"
+  },
+  {
+    "id": "cmnpp6reh000cl1yg4n4eay0w",
+    "areaName": "AMBATHUR",
+    "pincodes": "618626",
+    "baseWeightLimit": 1,
+    "baseCharge": 5,
+    "additionalChargePerKg": 1,
+    "isActive": true,
+    "createdAt": "2026-04-08T06:59:24.089Z",
+    "updatedAt": "2026-04-08T06:59:24.089Z"
+  }
+]

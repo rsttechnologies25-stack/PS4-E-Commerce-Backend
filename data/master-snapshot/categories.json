@@ -1,0 +1,194 @@
+[
+  {
+    "id": "cmmrd3g0w0001l1wwk18colbh",
+    "name": "Sweets",
+    "slug": "sweets",
+    "image": "/hero_motichoor_laddu.jpg",
+    "parentId": null,
+    "deliveryInfo": null
+  },
+  {
+    "id": "cmmrd3g2f0008l1wwk2j4k403",
+    "name": "Sev",
+    "slug": "sev",
+    "image": "https://cdn.shopify.com/s/files/1/0625/9834/8887/files/MINI_KARA_SEV.jpg?v=1753017794",
+    "parentId": null,
+    "deliveryInfo": null
+  },
+  {
+    "id": "cmmrd3g2h000bl1wwb9ffaim3",
+    "name": "Savouries",
+    "slug": "savouries",
+    "image": "https://perambursrinivasa.com/cdn/shop/files/ANDHRA_MURUKKU.jpg?v=1753018411",
+    "parentId": null,
+    "deliveryInfo": null
+  },
+  {
+    "id": "cmmrd3g2j000el1wwkx7b6kal",
+    "name": "Pickle",
+    "slug": "pickle",
+    "image": "https://cdn.shopify.com/s/files/1/0625/9834/8887/files/image6.webp?v=1746161359",
+    "parentId": null,
+    "deliveryInfo": null
+  },
+  {
+    "id": "cmmrd3g2o000ol1ww6b672fh4",
+    "name": "Cookies",
+    "slug": "cookies",
+    "image": "https://perambursrinivasa.com/cdn/shop/files/KESAR_BADAM_COOKIES.jpg?v=1753017309&width=500",
+    "parentId": null,
+    "deliveryInfo": null
+  },
+  {
+    "id": "cmmrd3g2m000jl1wwo10usnem",
+    "name": "Podi",
+    "slug": "podi",
+    "image": "https://perambursrinivasa.com/cdn/shop/files/IDLY_PODI_34e04bc4-aee0-42a9-949a-2bd13815a4f1.jpg?v=1753016470&width=500",
+    "parentId": null,
+    "deliveryInfo": null
+  },
+  {
+    "id": "cmmrd3g2q000tl1wws48daa6f",
+    "name": "Gifting",
+    "slug": "gifting",
+    "image": "https://perambursrinivasa.com/cdn/shop/files/KESAR_BADAM_COOKIES.jpg?v=1753017309&width=500",
+    "parentId": null,
+    "deliveryInfo": null
+  },
+  {
+    "id": "cmmrd3g2s000wl1wwgu2im4dw",
+    "name": "Outdoor Catering",
+    "slug": "outdoor-catering",
+    "image": "https://perambursrinivasa.com/cdn/shop/files/KESAR_BADAM_COOKIES.jpg?v=1753017309&width=500",
+    "parentId": null,
+    "deliveryInfo": null
+  },
+  {
+    "id": "cmmrd3g0y0003l1ww7igrm6yq",
+    "name": "Milk Sweets",
+    "slug": "milk-sweets",
+    "image": "https://cdn.shopify.com/s/files/1/0625/9834/8887/files/SPL_MILK_CAKE.jpg?v=1753341841",
+    "parentId": "cmmrd3g0w0001l1wwk18colbh",
+    "deliveryInfo": null
+  },
+  {
+    "id": "cmmrd3g2a0007l1ww5lzkg22g",
+    "name": "Ghee Sweets",
+    "slug": "ghee-sweets",
+    "image": "/hero_motichoor_laddu.jpg",
+    "parentId": "cmmrd3g0w0001l1wwk18colbh",
+    "deliveryInfo": null
+  },
+  {
+    "id": "cmmrd3g280005l1wwnbjz2qdn",
+    "name": "Cashew Sweets",
+    "slug": "cashew-sweets",
+    "image": "https://cdn.shopify.com/s/files/1/0025/9834/8887/files/KAJU_KATLI.jpg?v=1753000606",
+    "parentId": "cmmrd3g0w0001l1wwk18colbh",
+    "deliveryInfo": null
+  },
+  {
+    "id": "cmmrd3g2g000al1wwr2iwhgoc",
+    "name": "Kara Sev",
+    "slug": "kara-sev",
+    "image": "https://cdn.shopify.com/s/files/1/0625/9834/8887/files/MINI_KARA_SEV.jpg?v=1753017794",
+    "parentId": "cmmrd3g2f0008l1wwk2j4k403",
+    "deliveryInfo": null
+  },
+  {
+    "id": "cmmrd3g2i000dl1ww6uvmeytq",
+    "name": "Mixture",
+    "slug": "mixture",
+    "image": "https://cdn.shopify.com/s/files/1/0625/9834/8887/files/SPL_MIXTURE.jpg?v=1753017688",
+    "parentId": "cmmrd3g2h000bl1wwb9ffaim3",
+    "deliveryInfo": null
+  },
+  {
+    "id": "cmn6boxv8000rl138t9krxh7d",
+    "name": "Murukku",
+    "slug": "murukku",
+    "image": null,
+    "parentId": "cmmrd3g2h000bl1wwb9ffaim3",
+    "deliveryInfo": null
+  },
+  {
+    "id": "cmn6boxwn000tl1380oq9fbii",
+    "name": "Chips",
+    "slug": "chips",
+    "image": null,
+    "parentId": "cmmrd3g2h000bl1wwb9ffaim3",
+    "deliveryInfo": null
+  },
+  {
+    "id": "cmmrd3g2k000hl1ww0wdd635d",
+    "name": "Thokku",
+    "slug": "thokku",
+    "image": "https://cdn.shopify.com/s/files/1/0625/9834/8887/files/image4.webp?v=1746161348",
+    "parentId": "cmmrd3g2j000el1wwkx7b6kal",
+    "deliveryInfo": null
+  },
+  {
+    "id": "cmmrd3g2k000il1wwc1caew9f",
+    "name": "Vegetable Pickles",
+    "slug": "veg-pickles",
+    "image": "https://cdn.shopify.com/s/files/1/0625/9834/8887/files/image3.webp?v=1746161336",
+    "parentId": "cmmrd3g2j000el1wwkx7b6kal",
+    "deliveryInfo": null
+  },
+  {
+    "id": "cmmrd3g2n000nl1ww5dh2ictt",
+    "name": "Idly Podi",
+    "slug": "idly-podi",
+    "image": "https://cdn.shopify.com/s/files/1/0625/9834/8887/files/IDLY_PODI_34e04bc4-aee0-42a9-949a-2bd13815a4f1.jpg?v=1753016470",
+    "parentId": "cmmrd3g2m000jl1wwo10usnem",
+    "deliveryInfo": null
+  },
+  {
+    "id": "cmmrd3g2n000ml1wwpnlsub1f",
+    "name": "Rice Podi",
+    "slug": "rice-podi",
+    "image": "https://cdn.shopify.com/s/files/1/0625/9834/8887/files/PARUPPUPODI.jpg?v=1747888955",
+    "parentId": "cmmrd3g2m000jl1wwo10usnem",
+    "deliveryInfo": null
+  },
+  {
+    "id": "cmmrd3g2p000rl1wwdlli4mm3",
+    "name": "Butter Cookies",
+    "slug": "butter-cookies",
+    "image": "https://cdn.shopify.com/s/files/1/0625/9834/8887/files/KESAR_BADAM_COOKIES.jpg?v=1753017309",
+    "parentId": "cmmrd3g2o000ol1ww6b672fh4",
+    "deliveryInfo": null
+  },
+  {
+    "id": "cmmrd3g2p000sl1wwpojizxhs",
+    "name": "Health Cookies",
+    "slug": "health-cookies",
+    "image": "https://cdn.shopify.com/s/files/1/0625/9834/8887/files/RAGI_COOKIES.jpg?v=1753017272",
+    "parentId": "cmmrd3g2o000ol1ww6b672fh4",
+    "deliveryInfo": null
+  },
+  {
+    "id": "cmmrd3g2r000vl1wwuq6vzw18",
+    "name": "Festival Boxes",
+    "slug": "festival-boxes",
+    "image": "https://perambursrinivasa.com/cdn/shop/files/KESAR_BADAM_COOKIES.jpg?v=1753017309",
+    "parentId": "cmmrd3g2q000tl1wws48daa6f",
+    "deliveryInfo": null
+  },
+  {
+    "id": "cmmrd3g2t000yl1wwoejabrko",
+    "name": "Wedding Catering",
+    "slug": "wedding-catering",
+    "image": "https://perambursrinivasa.com/cdn/shop/files/KESAR_BADAM_COOKIES.jpg?v=1753017309",
+    "parentId": "cmmrd3g2s000wl1wwgu2im4dw",
+    "deliveryInfo": null
+  },
+  {
+    "id": "cmn6cqds40001l11wbatppk5b",
+    "name": "Burfi",
+    "slug": "burfi",
+    "image": "/hero_motichoor_laddu.jpg",
+    "parentId": "cmmrd3g0w0001l1wwk18colbh",
+    "deliveryInfo": null
+  }
+]

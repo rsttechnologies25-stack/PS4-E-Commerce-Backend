@@ -1,0 +1,26 @@
+[
+  {
+    "id": "cmmuewbzx0000l1uwywreb8xm",
+    "message": "hello",
+    "isActive": true,
+    "sortOrder": 0,
+    "createdAt": "2026-03-17T09:30:29.950Z",
+    "updatedAt": "2026-03-17T09:30:29.950Z"
+  },
+  {
+    "id": "cmn75pnrv0016l1e8689zhlc1",
+    "message": "test",
+    "isActive": true,
+    "sortOrder": 1,
+    "createdAt": "2026-03-26T07:34:22.364Z",
+    "updatedAt": "2026-03-26T07:34:22.364Z"
+  },
+  {
+    "id": "cmnngeox7000ol1owlabfjbxb",
+    "message": "RST",
+    "isActive": true,
+    "sortOrder": 2,
+    "createdAt": "2026-04-06T17:18:05.227Z",
+    "updatedAt": "2026-04-06T17:18:05.227Z"
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "id": "cmmufet42000hl1uwyypiqhex",
+    "categoryId": "cmmrd3g0y0003l1ww7igrm6yq",
+    "pairedCategoryId": "cmmrd3g2m000jl1wwo10usnem",
+    "sortOrder": 1,
+    "isActive": true,
+    "createdAt": "2026-03-17T09:44:51.938Z",
+    "updatedAt": "2026-03-17T09:44:51.938Z"
+  },
+  {
+    "id": "cmn75wnl5001cl1e8q0nh95bf",
+    "categoryId": "cmmrd3g2j000el1wwkx7b6kal",
+    "pairedCategoryId": "cmmrd3g2o000ol1ww6b672fh4",
+    "sortOrder": 2,
+    "isActive": true,
+    "createdAt": "2026-03-26T07:39:48.714Z",
+    "updatedAt": "2026-03-26T07:39:48.714Z"
+  },
+  {
+    "id": "cmnngefe3000nl1ow7xjzdrvv",
+    "categoryId": "cmmrd3g2n000ml1wwpnlsub1f",
+    "pairedCategoryId": "cmmrd3g0y0003l1ww7igrm6yq",
+    "sortOrder": 2,
+    "isActive": true,
+    "createdAt": "2026-04-06T17:17:52.876Z",
+    "updatedAt": "2026-04-06T17:17:52.876Z"
+  }
+]

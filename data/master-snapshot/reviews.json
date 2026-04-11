@@ -1,0 +1,58 @@
+[
+  {
+    "id": "cmn75uxhn001al1e8e8pdfh7h",
+    "customerName": "test",
+    "rating": 1,
+    "comment": "good",
+    "createdAt": "2026-03-26T07:38:28.235Z",
+    "isVerified": false,
+    "productId": "cmmrd3g310015l1ww9kn5n9jt",
+    "status": "APPROVED",
+    "updatedAt": "2026-03-26T07:38:45.458Z",
+    "userId": "cmn74xjxq0000l1e8cnaj0z2q",
+    "adminReply": null,
+    "repliedAt": null
+  },
+  {
+    "id": "cmnpw2cgg0007l130q46tkb8c",
+    "customerName": "saran",
+    "rating": 1,
+    "comment": "v",
+    "createdAt": "2026-04-08T10:11:55.408Z",
+    "isVerified": false,
+    "productId": "cmna5swwh001wl1oczuv3kubp",
+    "status": "APPROVED",
+    "updatedAt": "2026-04-08T10:12:10.024Z",
+    "userId": "cmnpvubod0001l1309wlqmtce",
+    "adminReply": null,
+    "repliedAt": null
+  },
+  {
+    "id": "cmnpu0m6q000hl1rswuulpz80",
+    "customerName": "cv ",
+    "rating": 1,
+    "comment": "fc ",
+    "createdAt": "2026-04-08T09:14:35.474Z",
+    "isVerified": false,
+    "productId": "cmna5swwh001wl1oczuv3kubp",
+    "status": "APPROVED",
+    "updatedAt": "2026-04-08T10:12:11.190Z",
+    "userId": "cmn74xjxq0000l1e8cnaj0z2q",
+    "adminReply": null,
+    "repliedAt": null
+  },
+  {
+    "id": "cmnaa7zud0014l1z0f4htfsj5",
+    "customerName": "test",
+    "rating": 5,
+    "comment": "test",
+    "createdAt": "2026-03-28T12:03:54.805Z",
+    "isVerified": false,
+    "productId": "cmmrd3g36001al1wwdego5yxy",
+    "status": "APPROVED",
+    "updatedAt": "2026-04-08T10:12:11.819Z",
+    "userId": "cmn74xjxq0000l1e8cnaj0z2q",
+    "adminReply": null,
+    "repliedAt": null
+  }
+]

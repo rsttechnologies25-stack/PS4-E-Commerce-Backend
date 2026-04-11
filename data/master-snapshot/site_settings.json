@@ -1,0 +1,145 @@
+[
+  {
+    "id": "default",
+    "deliveryPopupEnabled": true,
+    "deliveryPopupTitle": "Delivery Notification! ",
+    "deliveryPopupContent": "• Chennai: Order before 3:00 PM for next-day delivery by 7PM.\n• Rest of India: Order before 3:00 PM for next-day dispatch.\n• Delivery Timeline: Rest of India: 2–4 days.",
+    "updatedAt": "2026-04-06T17:23:50.626Z",
+    "whatsappNumber": "919282445577",
+    "aboutPageContent": {
+      "hero": {
+        "image": "http://localhost:4000/uploads/products/product-1773767775918-622902925.png",
+        "title": "Our Legacy",
+        "subtitle": "The PS4 Story",
+        "description": "Crafting sweetness and tradition since 1981. A testament to quality, trust, and excellence."
+      },
+      "stats": [
+        {
+          "icon": "Calendar",
+          "label": "Established",
+          "value": "1981"
+        },
+        {
+          "icon": "MapPin",
+          "label": "Branches",
+          "value": "26+"
+        },
+        {
+          "icon": "Factory",
+          "label": "Sq. Ft. Factory",
+          "value": "50K"
+        },
+        {
+          "icon": "Globe2",
+          "label": "Global Export",
+          "value": "USA"
+        }
+      ],
+      "footer": {
+        "quote": "We thank our valued customers for their continued trust and promise to keep introducing new and exciting flavours for everyone to enjoy.",
+        "title": "Pure Quality. Pure Trust.",
+        "subText": "Third Generation Leadership",
+        "legacyText": "Legacy Since 1981",
+        "titleAccent": "Pure Trust."
+      },
+      "global": {
+        "image": "/ps4_sweets_hero_1.png",
+        "title": "Sharing Traditional Flavors Worldwide",
+        "isVisible": true,
+        "description": "Our brand has crossed oceans with PS4 Foodz, proudly exporting our authentic South Indian sweets and snacks to the United States of America (USA). We are committed to maintaining the highest export standards, ensuring that every bite tastes exactly as it does in our Chennai kitchens.",
+        "titleAccent": "Flavors Worldwide"
+      },
+      "legacy": {
+        "badge": "Our Roots",
+        "image": "/about_legacy_img.png",
+        "quote": "Now led by the third generation, PS4 continues to build on its legacy of trust and excellence.",
+        "title": "A Journey That Began in 1981",
+        "content": [
+          "Perambur Sri Srinivasa Sweets and Snacks (PS4) roots can be traced all the way back to 1981. Founded by Late Mr. P. Devendran Naidu, Mrs. D. Kasthuri Devendran, and his brother Mr. P. Boopalan Naidu, SRI SRINIVASA SWEETS AND SNACKS began with a simple vision: to share authentic Indian flavors with the community.",
+          "What started as a small sweet shop has grown into a trusted brand known for its authentic taste and quality. Each product is made with passion and dedication, offering customers the perfect blend of traditional recipes and modern standards."
+        ]
+      },
+      "quality": {
+        "title": "Modern Quality, Traditional Taste",
+        "features": [
+          {
+            "desc": "We use only the finest natural ingredients without any harmful additives.",
+            "icon": "ShieldCheck",
+            "title": "Pure Ingredients"
+          },
+          {
+            "desc": "Our 50,000 sq. ft. facility follows the strictest hygiene protocols.",
+            "icon": "Heart",
+            "title": "Hygienic Standards"
+          },
+          {
+            "desc": "A perfect blend of traditional recipes passed through three generations.",
+            "icon": "Star",
+            "title": "Best Taste"
+          }
+        ],
+        "description": "Today, PS4 proudly operates 26+ branches across Chennai, Tiruvallur, and Tirupati, supported by a modern 50,000 sq. ft. factory. Every sweet and snack we make is prepared in a clean and hygienic environment."
+      },
+      "restaurant": {
+        "image": "/hero_motichoor_laddu.jpg",
+        "title": "PS4 Pure Veg Restaurant & Catering",
+        "isVisible": true,
+        "description": "Beyond our famous sweets, we have expanded into the culinary world with our Pure Veg Restaurant, serving a curated menu of traditional flavors. Our dedicated catering wing brings the same PS4 excellence to your corporate events and auspicious family celebrations, ensuring every guest experiences the true taste of tradition.",
+        "titleAccent": "Restaurant & Catering"
+      }
+    },
+    "contactPageContent": {
+      "hq": {
+        "badge": "Corporate HQ",
+        "email": "care@perambursrinivasa.com",
+        "hours": "Mon-Sat: 9AM - 9PM | Sun: 10AM - 6PM",
+        "phone": "+91 91500 81981",
+        "title": "Visit our Headquarters",
+        "address": "Sri Srinivasa Sweets and Snacks, Chennai, Tamil Nadu, India",
+        "mapsLink": "https://www.google.com/maps/search/?api=1&query=Perambur+Srinivasa+Sweets+And+Snacks",
+        "titleAccent": "Headquarters"
+      },
+      "map": {
+        "badge": "Headquarters",
+        "subText": "Discover Tradition",
+        "iframeUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124376.88372691456!2d80.14152862024823!3d13.04944122171569!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52646274431785%3A0xc6ad50f8376263a!2sPerambur%20Sri%20Srinivasa%20Sweets%20And%20Snacks!5e0!3m2!1sen!2sin!4v1709575000000!5m2!1sen!2sin"
+      },
+      "hero": {
+        "badge": "Get in Touch",
+        "image": "/ps4_sweets_hero_1.png",
+        "title": "Connect With Us"
+      },
+      "feedback": {
+        "stats": [
+          {
+            "label": "Outlets",
+            "value": "24+"
+          },
+          {
+            "label": "Est. Year",
+            "value": "1981"
+          }
+        ],
+        "title": "Your Opinion Changes Us",
+        "reviewLink": "https://review.perambursrinivasa.co.in/reviews/new",
+        "description": "We cherish every tradition, but we embrace every suggestion. Lend us your voice.",
+        "titleAccent": "Changes Us"
+      }
+    },
+    "privacy_content": "\n# Privacy Policy\n\nLast Updated: March 2026\n\nAt Perambur Sri Srinivasa Sweets & Snacks (PS4), we value your privacy. This policy describes how we collect, use, and handle your information.\n\n## 1. Information Collection\nWe collect information you provide directly to us when creating an account, placing an order, or contacting customer support.\n\n## 2. Information Usage\nWe use your information to process orders, improve our services, and communicate updates or promotions.\n\n## 3. Data Protection\nWe implement industry-standard security measures to protect your personal data from unauthorized access.\n\n## 4. Contact Us\nFor any privacy-related queries, please contact us at care@perambursrinivasa.com.\n",
+    "terms_content": "\n# Terms & Conditions\n\nWelcome to PS4. By using our website or mobile app, you agree to these terms.\n\n## 1. Ordering & Payments\nAll orders are subject to availability. Payments must be made through our authorized payment gateways.\n\n## 2. Delivery\nWe strive to deliver within the estimated timelines. However, delays may occur due to unforeseen circumstances.\n\n## 3. User Conduct\nUsers are expected to provide accurate information and maintain the confidentiality of their accounts.\n\n## 4. Governing Law\nThese terms are governed by the laws of India and exclusive jurisdiction of Chennai courts.\n",
+    "shipping_content": "\n# Shipping Policy\n\n## 1. Order Processing\n- Chennai Orders: Orders placed before 3:00 PM are processed for next-day delivery.\n- Rest of India: Orders are dispatched within 24-48 hours.\n\n## 2. Shipping Charges\nShipping charges are calculated based on order weight and delivery location (Chennai / Tamil Nadu / Rest of India).\n\n## 3. Delivery Timelines\n- Chennai: 1-2 days\n- Rest of India: 3-7 days depending on the location.\n\n## 4. Packaging\nAll sweets and snacks are packed in clean, hygienic, and damage-resistant packaging to ensure freshness.\n",
+    "refund_content": "\n# Refund & Cancellation Policy\n\n## 1. Cancellations\nOrders can only be cancelled within 1 hour of placement, as we process fresh items quickly.\n\n## 2. Damaged Products\nIf you receive a damaged or incorrect product, please notify us within 24 hours of delivery with photos at care@perambursrinivasa.com.\n\n## 3. Refunds\nApproved refunds will be processed back to the original payment method within 5-7 business days.\n\n## 4. Perishable Items\nDue to the perishable nature of our products, we do not accept returns.\n",
+    "splashContent": {
+      "text": "PS4 SWEETS & SNACKS",
+      "image": "/logo-v1.png",
+      "duration": 2,
+      "textColor": "#FFFFFF",
+      "useDefault": true,
+      "backgroundColor": "#7C2D12"
+    },
+    "dispatchCutoffHour": 13,
+    "dispatchSundayPolicy": true,
+    "dispatchLimitText": "ORDER WITHIN {time} HOURS 1234"
+  }
+]
