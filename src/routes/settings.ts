@@ -148,6 +148,11 @@ router.get('/', async (req, res) => {
     }
 });
 
+// GET Public Razorpay Key (Option B - Domain Agnostic)
+router.get('/razorpay-key', (req, res) => {
+    res.json({ keyId: process.env.RAZORPAY_KEY_ID });
+});
+
 // Update settings
 router.put('/', authMiddleware, async (req, res) => {
     const {
