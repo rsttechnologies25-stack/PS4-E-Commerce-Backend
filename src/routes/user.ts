@@ -183,7 +183,8 @@ router.post('/forgot-password', authLimiter, validate(forgotPasswordSchema), asy
             }
         });
 
-        await sendResetPasswordEmail(email, resetToken, false);
+        const { frontendUrl } = req.body;
+        await sendResetPasswordEmail(email, resetToken, false, frontendUrl);
         res.json({ success: true, message: 'Reset link sent to your email' });
     } catch (error) {
         res.status(500).json({ error: 'Failed to process forgot password' });

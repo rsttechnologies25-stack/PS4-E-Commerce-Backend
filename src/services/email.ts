@@ -9,11 +9,14 @@ const getResendClient = () => {
     return new Resend(apiKey);
 };
 
-export const sendResetPasswordEmail = async (email: string, token: string, isAdmin: boolean = false) => {
+export const sendResetPasswordEmail = async (email: string, token: string, isAdmin: boolean = false, frontendUrlOverride?: string) => {
     const resend = getResendClient();
-    const resetUrl = isAdmin
-        ? `${process.env.ADMIN_URL || 'http://localhost:3001'}/reset-password?token=${token}`
-        : `${process.env.FRONTEND_URL || 'http://localhost:3000'}/reset-password?token=${token}`;
+    
+    // Choose the base URL: Priority 1: Override from frontend, Priority 2: Env Var, Priority 3: Localhost
+    const baseUrl = frontendUrlOverride || (isAdmin ? process.env.ADMIN_URL : process.env.FRONTEND_URL);
+    const fallbackUrl = isAdmin ? 'http://localhost:3001' : 'http://localhost:3000';
+    
+    const resetUrl = `${baseUrl || fallbackUrl}/reset-password?token=${token}`;
 
     if (!resend) {
         console.error('Email failed: Resend client not initialized (missing API key)');
