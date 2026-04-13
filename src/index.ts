@@ -44,6 +44,7 @@ import { rlsMiddleware } from './middleware/rls';
 import rateLimit from 'express-rate-limit';
 
 const app = express();
+app.set('trust proxy', 1); // Fixes rate limit ValidationError: X-Forwarded-For when behind a reverse proxy
 const port = process.env.PORT || 4000;
 
 // 1. Basic Middlewares (MUST be first for preflight requests)
