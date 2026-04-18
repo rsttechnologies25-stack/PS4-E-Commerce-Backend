@@ -4,6 +4,7 @@ import validator from 'validator';
 // Custom escape for common XSS characters but keeping some safe ones for rich text if needed.
 // For now, full escape is safer for name and message fields.
 const sanitizeString = (val: string) => validator.escape(val.trim());
+const sanitizeAddress = (val: string) => val.trim();
 
 export const registerSchema = z.object({
   email: z.string().email('Invalid email format').toLowerCase().trim(),
@@ -18,12 +19,12 @@ export const loginSchema = z.object({
 
 export const updateProfileSchema = z.object({
   name: z.string().min(2, 'Name is too short').transform(sanitizeString).optional(),
-  customerName: z.string().transform(sanitizeString).optional(),
+  customerName: z.string().transform(sanitizeAddress).optional(),
   phoneNumber: z.string().regex(/^\+?[\d\s\-]{10,15}$/, 'Invalid phone number format').optional(),
-  addressLine1: z.string().transform(sanitizeString).optional(),
-  addressLine2: z.string().transform(sanitizeString).optional(),
-  city: z.string().transform(sanitizeString).optional(),
-  state: z.string().transform(sanitizeString).optional(),
+  addressLine1: z.string().transform(sanitizeAddress).optional(),
+  addressLine2: z.string().transform(sanitizeAddress).optional(),
+  city: z.string().transform(sanitizeAddress).optional(),
+  state: z.string().transform(sanitizeAddress).optional(),
   pincode: z.string().regex(/^\d{6}$/, 'Pincode must be 6 digits').optional(),
 });
 
@@ -39,11 +40,11 @@ export const orderSchema = z.object({
   discountAmount: z.number().optional(),
   shippingCharge: z.number().optional(),
   couponCode: z.string().nullable().optional(),
-  customerName: z.string().min(2, 'Customer name is required').transform(sanitizeString),
+  customerName: z.string().min(2, 'Customer name is required').transform(sanitizeAddress),
   phoneNumber: z.string().regex(/^\+?[\d\s\-]{10,15}$/, 'Invalid phone number format'),
-  addressLine1: z.string().min(5, 'Address Line 1 is required').transform(sanitizeString),
-  addressLine2: z.string().transform(sanitizeString).optional().nullable(),
-  city: z.string().min(2, 'City is required').transform(sanitizeString),
+  addressLine1: z.string().min(5, 'Address Line 1 is required').transform(sanitizeAddress),
+  addressLine2: z.string().transform(sanitizeAddress).optional().nullable(),
+  city: z.string().min(2, 'City is required').transform(sanitizeAddress),
   pincode: z.string().regex(/^\d{6}$/, 'Pincode must be 6 digits'),
 });
 
