@@ -36,6 +36,7 @@ router.get('/', async (req, res) => {
 router.post('/', authMiddleware, async (req, res) => {
     const { name, slug, image, parentId, deliveryInfo, sortOrder } = req.body;
     try {
+        console.log(`[DATABASE_UPDATE] Creating category "${name}" with sortOrder:`, (sortOrder !== undefined && sortOrder !== null) ? Number(sortOrder) : 0);
         const category = await prisma.category.create({
             data: {
                 name,
@@ -56,6 +57,7 @@ router.post('/', authMiddleware, async (req, res) => {
 router.put('/:id', authMiddleware, async (req, res) => {
     const { name, slug, image, parentId, deliveryInfo, sortOrder } = req.body;
     try {
+        console.log(`[DATABASE_UPDATE] Updating category ID: ${req.params.id} with sortOrder:`, (sortOrder !== undefined && sortOrder !== null) ? Number(sortOrder) : 0);
         const category = await prisma.category.update({
             where: { id: req.params.id as string },
             data: {
