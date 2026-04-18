@@ -23,7 +23,8 @@ router.get('/', async (req, res) => {
         });
         const result = categories.map(c => ({
             ...c,
-            sortOrder: Number((c as any).sortOrder || 0)
+            sortOrder: Number((c as any).sortOrder || 0),
+            _debugId: "v1.0.3"
         }));
         res.json(result);
     } catch (error) {
