@@ -122,7 +122,11 @@ router.get('/', async (req, res) => {
                     splashContent: DEFAULT_SPLASH_CONTENT,
                     dispatchCutoffHour: 14,
                     dispatchSundayPolicy: false,
-                    dispatchLimitText: 'ORDER WITHIN {time} HOURS'
+                    dispatchLimitText: 'ORDER WITHIN {time} HOURS',
+                    nextOrderNumber: 1,
+                    orderIdPrefix: '#',
+                    orderIdSuffix: '',
+                    orderIdPadding: 3
                 }
             });
         } else if (!settings.aboutPageContent || !settings.contactPageContent || !settings.splashContent || (settings.splashContent as any).useDefault === undefined) {
@@ -136,7 +140,11 @@ router.get('/', async (req, res) => {
                     privacy_content: settings.privacy_content || '',
                     terms_content: settings.terms_content || '',
                     shipping_content: settings.shipping_content || '',
-                    refund_content: settings.refund_content || ''
+                    refund_content: settings.refund_content || '',
+                    nextOrderNumber: settings.nextOrderNumber || 1,
+                    orderIdPrefix: settings.orderIdPrefix || '#',
+                    orderIdSuffix: settings.orderIdSuffix || '',
+                    orderIdPadding: settings.orderIdPadding || 3
                 }
             });
         }
@@ -169,7 +177,11 @@ router.put('/', authMiddleware, async (req, res) => {
         splashContent,
         dispatchCutoffHour,
         dispatchSundayPolicy,
-        dispatchLimitText
+        dispatchLimitText,
+        nextOrderNumber,
+        orderIdPrefix,
+        orderIdSuffix,
+        orderIdPadding
     } = req.body;
 
     try {
@@ -189,7 +201,11 @@ router.put('/', authMiddleware, async (req, res) => {
                 splashContent,
                 dispatchCutoffHour,
                 dispatchSundayPolicy,
-                dispatchLimitText
+                dispatchLimitText,
+                nextOrderNumber: nextOrderNumber !== undefined ? nextOrderNumber : undefined,
+                orderIdPrefix,
+                orderIdSuffix,
+                orderIdPadding
             },
             create: {
                 id: 'default',
@@ -206,7 +222,11 @@ router.put('/', authMiddleware, async (req, res) => {
                 refund_content: refund_content || '',
                 dispatchCutoffHour: dispatchCutoffHour !== undefined ? dispatchCutoffHour : 14,
                 dispatchSundayPolicy: dispatchSundayPolicy !== undefined ? dispatchSundayPolicy : false,
-                dispatchLimitText: dispatchLimitText || 'ORDER WITHIN {time} HOURS'
+                dispatchLimitText: dispatchLimitText || 'ORDER WITHIN {time} HOURS',
+                nextOrderNumber: nextOrderNumber !== undefined ? nextOrderNumber : 1,
+                orderIdPrefix: orderIdPrefix || '#',
+                orderIdSuffix: orderIdSuffix || '',
+                orderIdPadding: orderIdPadding !== undefined ? orderIdPadding : 3
             }
         });
         res.json(settings);

@@ -5,6 +5,25 @@ import { userAuthMiddleware } from '../middleware/userAuth';
 
 const router = Router();
 
+// GET all approved reviews
+router.get('/', async (req, res) => {
+    try {
+        const reviews = await prisma.review.findMany({
+            where: { status: 'APPROVED' },
+            include: {
+                product: {
+                    select: { name: true, slug: true, image: true }
+                }
+            },
+            orderBy: { createdAt: 'desc' }
+        });
+        res.json(reviews);
+    } catch (error) {
+        console.error('Fetch all reviews error:', error);
+        res.status(500).json({ error: 'Failed to fetch reviews' });
+    }
+});
+
 // GET reviews for a specific product (Approved only)
 router.get('/product/:productId', async (req, res) => {
     try {
