@@ -159,7 +159,7 @@ router.post('/verify-payment', userAuthMiddleware, async (req, res) => {
                     userId: order.userId,
                     isAdmin: false,
                     type: 'ORDER_CONFIRMED',
-                    message: `Thank you! Your order #${order.id.slice(-6)} has been confirmed and is now being processed.`,
+                    message: `Thank you! Your order ${order.readableId || "#" + order.id.slice(-6)} has been confirmed and is now being processed.`,
                     orderId: order.id
                 }
             });
@@ -170,7 +170,7 @@ router.post('/verify-payment', userAuthMiddleware, async (req, res) => {
                     isAdmin: true,
                     priority: 'HIGH',
                     type: 'NEW_ORDER',
-                    message: `New Order #${order.id.slice(-6)} received! Click to process.`,
+                    message: `New Order ${order.readableId || "#" + order.id.slice(-6)} received! Click to process.`,
                     orderId: order.id
                 }
             });
@@ -324,13 +324,14 @@ router.patch('/admin/:id/status', authMiddleware, async (req, res) => {
         });
 
         // Create User Notification for status change
-        let notificationMessage = `Your order #${order.id.slice(-6)} status has been updated to ${status.toLowerCase()}.`;
+        const displayId = order.readableId || "#" + order.id.slice(-6);
+        let notificationMessage = `Your order ${displayId} status has been updated to ${status.toLowerCase()}.`;
         if (status === 'SHIPPED') {
-            notificationMessage = `Great news! Your order #${order.id.slice(-6)} has been shipped. Click to track!`;
+            notificationMessage = `Great news! Your order ${displayId} has been shipped. Click to track!`;
         } else if (status === 'DELIVERED') {
-            notificationMessage = `Your order #${order.id.slice(-6)} has been delivered. Enjoy your snacks!`;
+            notificationMessage = `Your order ${displayId} has been delivered. Enjoy your snacks!`;
         } else if (status === 'CANCELLED') {
-            notificationMessage = `Your order #${order.id.slice(-6)} has been cancelled.`;
+            notificationMessage = `Your order ${displayId} has been cancelled.`;
         }
 
         await prisma.notification.create({

@@ -67,11 +67,10 @@ export function replaceTemplateVariables(
     order: any,
     extras: { feedbackLink?: string } = {}
 ): string {
-    const shortOrderId = order.id?.slice(-8)?.toUpperCase() || 'N/A';
-
+    const displayId = order.readableId || `#${order.id?.slice(-8)?.toUpperCase() || 'N/A'}`;
     return template
         .replace(/\{customerName\}/g, order.customerName || 'Customer')
-        .replace(/\{orderId\}/g, `#${shortOrderId}`)
+        .replace(/\{orderId\}/g, displayId)
         .replace(/\{totalAmount\}/g, `₹${order.totalAmount}`)
         .replace(/\{trackingLink\}/g, order.trackingLink || 'N/A')
         .replace(/\{trackingId\}/g, order.trackingId || 'N/A')
