@@ -24,7 +24,8 @@ router.get('/', async (req, res) => {
         const result = categories.map(c => ({
             ...c,
             sortOrder: Number((c as any).sortOrder || 0),
-            _debugId: "v1.0.3"
+            _debugId: "v1.0.3",
+            _serverPath: process.cwd()
         }));
         res.json(result);
     } catch (error) {
