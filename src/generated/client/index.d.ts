@@ -13126,10 +13126,14 @@ export namespace Prisma {
 
   export type SiteSettingsAvgAggregateOutputType = {
     dispatchCutoffHour: number | null
+    nextOrderNumber: number | null
+    orderIdPadding: number | null
   }
 
   export type SiteSettingsSumAggregateOutputType = {
     dispatchCutoffHour: number | null
+    nextOrderNumber: number | null
+    orderIdPadding: number | null
   }
 
   export type SiteSettingsMinAggregateOutputType = {
@@ -13146,6 +13150,10 @@ export namespace Prisma {
     dispatchCutoffHour: number | null
     dispatchSundayPolicy: boolean | null
     dispatchLimitText: string | null
+    nextOrderNumber: number | null
+    orderIdPrefix: string | null
+    orderIdSuffix: string | null
+    orderIdPadding: number | null
   }
 
   export type SiteSettingsMaxAggregateOutputType = {
@@ -13162,6 +13170,10 @@ export namespace Prisma {
     dispatchCutoffHour: number | null
     dispatchSundayPolicy: boolean | null
     dispatchLimitText: string | null
+    nextOrderNumber: number | null
+    orderIdPrefix: string | null
+    orderIdSuffix: string | null
+    orderIdPadding: number | null
   }
 
   export type SiteSettingsCountAggregateOutputType = {
@@ -13181,16 +13193,24 @@ export namespace Prisma {
     dispatchCutoffHour: number
     dispatchSundayPolicy: number
     dispatchLimitText: number
+    nextOrderNumber: number
+    orderIdPrefix: number
+    orderIdSuffix: number
+    orderIdPadding: number
     _all: number
   }
 
 
   export type SiteSettingsAvgAggregateInputType = {
     dispatchCutoffHour?: true
+    nextOrderNumber?: true
+    orderIdPadding?: true
   }
 
   export type SiteSettingsSumAggregateInputType = {
     dispatchCutoffHour?: true
+    nextOrderNumber?: true
+    orderIdPadding?: true
   }
 
   export type SiteSettingsMinAggregateInputType = {
@@ -13207,6 +13227,10 @@ export namespace Prisma {
     dispatchCutoffHour?: true
     dispatchSundayPolicy?: true
     dispatchLimitText?: true
+    nextOrderNumber?: true
+    orderIdPrefix?: true
+    orderIdSuffix?: true
+    orderIdPadding?: true
   }
 
   export type SiteSettingsMaxAggregateInputType = {
@@ -13223,6 +13247,10 @@ export namespace Prisma {
     dispatchCutoffHour?: true
     dispatchSundayPolicy?: true
     dispatchLimitText?: true
+    nextOrderNumber?: true
+    orderIdPrefix?: true
+    orderIdSuffix?: true
+    orderIdPadding?: true
   }
 
   export type SiteSettingsCountAggregateInputType = {
@@ -13242,6 +13270,10 @@ export namespace Prisma {
     dispatchCutoffHour?: true
     dispatchSundayPolicy?: true
     dispatchLimitText?: true
+    nextOrderNumber?: true
+    orderIdPrefix?: true
+    orderIdSuffix?: true
+    orderIdPadding?: true
     _all?: true
   }
 
@@ -13348,6 +13380,10 @@ export namespace Prisma {
     dispatchCutoffHour: number
     dispatchSundayPolicy: boolean
     dispatchLimitText: string
+    nextOrderNumber: number
+    orderIdPrefix: string
+    orderIdSuffix: string
+    orderIdPadding: number
     _count: SiteSettingsCountAggregateOutputType | null
     _avg: SiteSettingsAvgAggregateOutputType | null
     _sum: SiteSettingsSumAggregateOutputType | null
@@ -13386,6 +13422,10 @@ export namespace Prisma {
     dispatchCutoffHour?: boolean
     dispatchSundayPolicy?: boolean
     dispatchLimitText?: boolean
+    nextOrderNumber?: boolean
+    orderIdPrefix?: boolean
+    orderIdSuffix?: boolean
+    orderIdPadding?: boolean
   }, ExtArgs["result"]["siteSettings"]>
 
   export type SiteSettingsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -13405,6 +13445,10 @@ export namespace Prisma {
     dispatchCutoffHour?: boolean
     dispatchSundayPolicy?: boolean
     dispatchLimitText?: boolean
+    nextOrderNumber?: boolean
+    orderIdPrefix?: boolean
+    orderIdSuffix?: boolean
+    orderIdPadding?: boolean
   }, ExtArgs["result"]["siteSettings"]>
 
   export type SiteSettingsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -13424,6 +13468,10 @@ export namespace Prisma {
     dispatchCutoffHour?: boolean
     dispatchSundayPolicy?: boolean
     dispatchLimitText?: boolean
+    nextOrderNumber?: boolean
+    orderIdPrefix?: boolean
+    orderIdSuffix?: boolean
+    orderIdPadding?: boolean
   }, ExtArgs["result"]["siteSettings"]>
 
   export type SiteSettingsSelectScalar = {
@@ -13443,9 +13491,13 @@ export namespace Prisma {
     dispatchCutoffHour?: boolean
     dispatchSundayPolicy?: boolean
     dispatchLimitText?: boolean
+    nextOrderNumber?: boolean
+    orderIdPrefix?: boolean
+    orderIdSuffix?: boolean
+    orderIdPadding?: boolean
   }
 
-  export type SiteSettingsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "deliveryPopupEnabled" | "deliveryPopupTitle" | "deliveryPopupContent" | "updatedAt" | "whatsappNumber" | "aboutPageContent" | "contactPageContent" | "privacy_content" | "terms_content" | "shipping_content" | "refund_content" | "splashContent" | "dispatchCutoffHour" | "dispatchSundayPolicy" | "dispatchLimitText", ExtArgs["result"]["siteSettings"]>
+  export type SiteSettingsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "deliveryPopupEnabled" | "deliveryPopupTitle" | "deliveryPopupContent" | "updatedAt" | "whatsappNumber" | "aboutPageContent" | "contactPageContent" | "privacy_content" | "terms_content" | "shipping_content" | "refund_content" | "splashContent" | "dispatchCutoffHour" | "dispatchSundayPolicy" | "dispatchLimitText" | "nextOrderNumber" | "orderIdPrefix" | "orderIdSuffix" | "orderIdPadding", ExtArgs["result"]["siteSettings"]>
 
   export type $SiteSettingsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "SiteSettings"
@@ -13467,6 +13519,10 @@ export namespace Prisma {
       dispatchCutoffHour: number
       dispatchSundayPolicy: boolean
       dispatchLimitText: string
+      nextOrderNumber: number
+      orderIdPrefix: string
+      orderIdSuffix: string
+      orderIdPadding: number
     }, ExtArgs["result"]["siteSettings"]>
     composites: {}
   }
@@ -13906,6 +13962,10 @@ export namespace Prisma {
     readonly dispatchCutoffHour: FieldRef<"SiteSettings", 'Int'>
     readonly dispatchSundayPolicy: FieldRef<"SiteSettings", 'Boolean'>
     readonly dispatchLimitText: FieldRef<"SiteSettings", 'String'>
+    readonly nextOrderNumber: FieldRef<"SiteSettings", 'Int'>
+    readonly orderIdPrefix: FieldRef<"SiteSettings", 'String'>
+    readonly orderIdSuffix: FieldRef<"SiteSettings", 'String'>
+    readonly orderIdPadding: FieldRef<"SiteSettings", 'Int'>
   }
     
 
@@ -16724,6 +16784,7 @@ export namespace Prisma {
 
   export type OrderMinAggregateOutputType = {
     id: string | null
+    readableId: string | null
     userId: string | null
     status: string | null
     totalAmount: number | null
@@ -16756,6 +16817,7 @@ export namespace Prisma {
 
   export type OrderMaxAggregateOutputType = {
     id: string | null
+    readableId: string | null
     userId: string | null
     status: string | null
     totalAmount: number | null
@@ -16788,6 +16850,7 @@ export namespace Prisma {
 
   export type OrderCountAggregateOutputType = {
     id: number
+    readableId: number
     userId: number
     status: number
     totalAmount: number
@@ -16834,6 +16897,7 @@ export namespace Prisma {
 
   export type OrderMinAggregateInputType = {
     id?: true
+    readableId?: true
     userId?: true
     status?: true
     totalAmount?: true
@@ -16866,6 +16930,7 @@ export namespace Prisma {
 
   export type OrderMaxAggregateInputType = {
     id?: true
+    readableId?: true
     userId?: true
     status?: true
     totalAmount?: true
@@ -16898,6 +16963,7 @@ export namespace Prisma {
 
   export type OrderCountAggregateInputType = {
     id?: true
+    readableId?: true
     userId?: true
     status?: true
     totalAmount?: true
@@ -17017,6 +17083,7 @@ export namespace Prisma {
 
   export type OrderGroupByOutputType = {
     id: string
+    readableId: string | null
     userId: string
     status: string
     totalAmount: number
@@ -17068,6 +17135,7 @@ export namespace Prisma {
 
   export type OrderSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    readableId?: boolean
     userId?: boolean
     status?: boolean
     totalAmount?: boolean
@@ -17103,6 +17171,7 @@ export namespace Prisma {
 
   export type OrderSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    readableId?: boolean
     userId?: boolean
     status?: boolean
     totalAmount?: boolean
@@ -17136,6 +17205,7 @@ export namespace Prisma {
 
   export type OrderSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    readableId?: boolean
     userId?: boolean
     status?: boolean
     totalAmount?: boolean
@@ -17169,6 +17239,7 @@ export namespace Prisma {
 
   export type OrderSelectScalar = {
     id?: boolean
+    readableId?: boolean
     userId?: boolean
     status?: boolean
     totalAmount?: boolean
@@ -17199,7 +17270,7 @@ export namespace Prisma {
     whatsappShippedSent?: boolean
   }
 
-  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "status" | "totalAmount" | "createdAt" | "updatedAt" | "couponCode" | "discountAmount" | "shippingCharge" | "addressLine1" | "addressLine2" | "city" | "customerName" | "phoneNumber" | "pincode" | "razorpayOrderId" | "razorpayPaymentId" | "razorpaySignature" | "paymentStatus" | "deliveryManName" | "deliveryManPhone" | "trackingId" | "trackingLink" | "deliveredAt" | "feedbackSentAt" | "whatsappDeliveredSent" | "whatsappFeedbackSent" | "whatsappOrderSent" | "whatsappShippedSent", ExtArgs["result"]["order"]>
+  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "readableId" | "userId" | "status" | "totalAmount" | "createdAt" | "updatedAt" | "couponCode" | "discountAmount" | "shippingCharge" | "addressLine1" | "addressLine2" | "city" | "customerName" | "phoneNumber" | "pincode" | "razorpayOrderId" | "razorpayPaymentId" | "razorpaySignature" | "paymentStatus" | "deliveryManName" | "deliveryManPhone" | "trackingId" | "trackingLink" | "deliveredAt" | "feedbackSentAt" | "whatsappDeliveredSent" | "whatsappFeedbackSent" | "whatsappOrderSent" | "whatsappShippedSent", ExtArgs["result"]["order"]>
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     items?: boolean | Order$itemsArgs<ExtArgs>
@@ -17220,6 +17291,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      readableId: string | null
       userId: string
       status: string
       totalAmount: number
@@ -17674,6 +17746,7 @@ export namespace Prisma {
    */ 
   interface OrderFieldRefs {
     readonly id: FieldRef<"Order", 'String'>
+    readonly readableId: FieldRef<"Order", 'String'>
     readonly userId: FieldRef<"Order", 'String'>
     readonly status: FieldRef<"Order", 'String'>
     readonly totalAmount: FieldRef<"Order", 'Float'>
@@ -25709,7 +25782,11 @@ export namespace Prisma {
     splashContent: 'splashContent',
     dispatchCutoffHour: 'dispatchCutoffHour',
     dispatchSundayPolicy: 'dispatchSundayPolicy',
-    dispatchLimitText: 'dispatchLimitText'
+    dispatchLimitText: 'dispatchLimitText',
+    nextOrderNumber: 'nextOrderNumber',
+    orderIdPrefix: 'orderIdPrefix',
+    orderIdSuffix: 'orderIdSuffix',
+    orderIdPadding: 'orderIdPadding'
   };
 
   export type SiteSettingsScalarFieldEnum = (typeof SiteSettingsScalarFieldEnum)[keyof typeof SiteSettingsScalarFieldEnum]
@@ -25755,6 +25832,7 @@ export namespace Prisma {
 
   export const OrderScalarFieldEnum: {
     id: 'id',
+    readableId: 'readableId',
     userId: 'userId',
     status: 'status',
     totalAmount: 'totalAmount',
@@ -26745,6 +26823,10 @@ export namespace Prisma {
     dispatchCutoffHour?: IntFilter<"SiteSettings"> | number
     dispatchSundayPolicy?: BoolFilter<"SiteSettings"> | boolean
     dispatchLimitText?: StringFilter<"SiteSettings"> | string
+    nextOrderNumber?: IntFilter<"SiteSettings"> | number
+    orderIdPrefix?: StringFilter<"SiteSettings"> | string
+    orderIdSuffix?: StringFilter<"SiteSettings"> | string
+    orderIdPadding?: IntFilter<"SiteSettings"> | number
   }
 
   export type SiteSettingsOrderByWithRelationInput = {
@@ -26764,6 +26846,10 @@ export namespace Prisma {
     dispatchCutoffHour?: SortOrder
     dispatchSundayPolicy?: SortOrder
     dispatchLimitText?: SortOrder
+    nextOrderNumber?: SortOrder
+    orderIdPrefix?: SortOrder
+    orderIdSuffix?: SortOrder
+    orderIdPadding?: SortOrder
   }
 
   export type SiteSettingsWhereUniqueInput = Prisma.AtLeast<{
@@ -26786,6 +26872,10 @@ export namespace Prisma {
     dispatchCutoffHour?: IntFilter<"SiteSettings"> | number
     dispatchSundayPolicy?: BoolFilter<"SiteSettings"> | boolean
     dispatchLimitText?: StringFilter<"SiteSettings"> | string
+    nextOrderNumber?: IntFilter<"SiteSettings"> | number
+    orderIdPrefix?: StringFilter<"SiteSettings"> | string
+    orderIdSuffix?: StringFilter<"SiteSettings"> | string
+    orderIdPadding?: IntFilter<"SiteSettings"> | number
   }, "id">
 
   export type SiteSettingsOrderByWithAggregationInput = {
@@ -26805,6 +26895,10 @@ export namespace Prisma {
     dispatchCutoffHour?: SortOrder
     dispatchSundayPolicy?: SortOrder
     dispatchLimitText?: SortOrder
+    nextOrderNumber?: SortOrder
+    orderIdPrefix?: SortOrder
+    orderIdSuffix?: SortOrder
+    orderIdPadding?: SortOrder
     _count?: SiteSettingsCountOrderByAggregateInput
     _avg?: SiteSettingsAvgOrderByAggregateInput
     _max?: SiteSettingsMaxOrderByAggregateInput
@@ -26832,6 +26926,10 @@ export namespace Prisma {
     dispatchCutoffHour?: IntWithAggregatesFilter<"SiteSettings"> | number
     dispatchSundayPolicy?: BoolWithAggregatesFilter<"SiteSettings"> | boolean
     dispatchLimitText?: StringWithAggregatesFilter<"SiteSettings"> | string
+    nextOrderNumber?: IntWithAggregatesFilter<"SiteSettings"> | number
+    orderIdPrefix?: StringWithAggregatesFilter<"SiteSettings"> | string
+    orderIdSuffix?: StringWithAggregatesFilter<"SiteSettings"> | string
+    orderIdPadding?: IntWithAggregatesFilter<"SiteSettings"> | number
   }
 
   export type UserWhereInput = {
@@ -27044,6 +27142,7 @@ export namespace Prisma {
     OR?: OrderWhereInput[]
     NOT?: OrderWhereInput | OrderWhereInput[]
     id?: StringFilter<"Order"> | string
+    readableId?: StringNullableFilter<"Order"> | string | null
     userId?: StringFilter<"Order"> | string
     status?: StringFilter<"Order"> | string
     totalAmount?: FloatFilter<"Order"> | number
@@ -27078,6 +27177,7 @@ export namespace Prisma {
 
   export type OrderOrderByWithRelationInput = {
     id?: SortOrder
+    readableId?: SortOrderInput | SortOrder
     userId?: SortOrder
     status?: SortOrder
     totalAmount?: SortOrder
@@ -27112,6 +27212,7 @@ export namespace Prisma {
 
   export type OrderWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    readableId?: string
     razorpayOrderId?: string
     AND?: OrderWhereInput | OrderWhereInput[]
     OR?: OrderWhereInput[]
@@ -27145,10 +27246,11 @@ export namespace Prisma {
     whatsappShippedSent?: BoolFilter<"Order"> | boolean
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     items?: OrderItemListRelationFilter
-  }, "id" | "razorpayOrderId">
+  }, "id" | "readableId" | "razorpayOrderId">
 
   export type OrderOrderByWithAggregationInput = {
     id?: SortOrder
+    readableId?: SortOrderInput | SortOrder
     userId?: SortOrder
     status?: SortOrder
     totalAmount?: SortOrder
@@ -27189,6 +27291,7 @@ export namespace Prisma {
     OR?: OrderScalarWhereWithAggregatesInput[]
     NOT?: OrderScalarWhereWithAggregatesInput | OrderScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Order"> | string
+    readableId?: StringNullableWithAggregatesFilter<"Order"> | string | null
     userId?: StringWithAggregatesFilter<"Order"> | string
     status?: StringWithAggregatesFilter<"Order"> | string
     totalAmount?: FloatWithAggregatesFilter<"Order"> | number
@@ -28500,6 +28603,10 @@ export namespace Prisma {
     dispatchCutoffHour?: number
     dispatchSundayPolicy?: boolean
     dispatchLimitText?: string
+    nextOrderNumber?: number
+    orderIdPrefix?: string
+    orderIdSuffix?: string
+    orderIdPadding?: number
   }
 
   export type SiteSettingsUncheckedCreateInput = {
@@ -28519,6 +28626,10 @@ export namespace Prisma {
     dispatchCutoffHour?: number
     dispatchSundayPolicy?: boolean
     dispatchLimitText?: string
+    nextOrderNumber?: number
+    orderIdPrefix?: string
+    orderIdSuffix?: string
+    orderIdPadding?: number
   }
 
   export type SiteSettingsUpdateInput = {
@@ -28538,6 +28649,10 @@ export namespace Prisma {
     dispatchCutoffHour?: IntFieldUpdateOperationsInput | number
     dispatchSundayPolicy?: BoolFieldUpdateOperationsInput | boolean
     dispatchLimitText?: StringFieldUpdateOperationsInput | string
+    nextOrderNumber?: IntFieldUpdateOperationsInput | number
+    orderIdPrefix?: StringFieldUpdateOperationsInput | string
+    orderIdSuffix?: StringFieldUpdateOperationsInput | string
+    orderIdPadding?: IntFieldUpdateOperationsInput | number
   }
 
   export type SiteSettingsUncheckedUpdateInput = {
@@ -28557,6 +28672,10 @@ export namespace Prisma {
     dispatchCutoffHour?: IntFieldUpdateOperationsInput | number
     dispatchSundayPolicy?: BoolFieldUpdateOperationsInput | boolean
     dispatchLimitText?: StringFieldUpdateOperationsInput | string
+    nextOrderNumber?: IntFieldUpdateOperationsInput | number
+    orderIdPrefix?: StringFieldUpdateOperationsInput | string
+    orderIdSuffix?: StringFieldUpdateOperationsInput | string
+    orderIdPadding?: IntFieldUpdateOperationsInput | number
   }
 
   export type SiteSettingsCreateManyInput = {
@@ -28576,6 +28695,10 @@ export namespace Prisma {
     dispatchCutoffHour?: number
     dispatchSundayPolicy?: boolean
     dispatchLimitText?: string
+    nextOrderNumber?: number
+    orderIdPrefix?: string
+    orderIdSuffix?: string
+    orderIdPadding?: number
   }
 
   export type SiteSettingsUpdateManyMutationInput = {
@@ -28595,6 +28718,10 @@ export namespace Prisma {
     dispatchCutoffHour?: IntFieldUpdateOperationsInput | number
     dispatchSundayPolicy?: BoolFieldUpdateOperationsInput | boolean
     dispatchLimitText?: StringFieldUpdateOperationsInput | string
+    nextOrderNumber?: IntFieldUpdateOperationsInput | number
+    orderIdPrefix?: StringFieldUpdateOperationsInput | string
+    orderIdSuffix?: StringFieldUpdateOperationsInput | string
+    orderIdPadding?: IntFieldUpdateOperationsInput | number
   }
 
   export type SiteSettingsUncheckedUpdateManyInput = {
@@ -28614,6 +28741,10 @@ export namespace Prisma {
     dispatchCutoffHour?: IntFieldUpdateOperationsInput | number
     dispatchSundayPolicy?: BoolFieldUpdateOperationsInput | boolean
     dispatchLimitText?: StringFieldUpdateOperationsInput | string
+    nextOrderNumber?: IntFieldUpdateOperationsInput | number
+    orderIdPrefix?: StringFieldUpdateOperationsInput | string
+    orderIdSuffix?: StringFieldUpdateOperationsInput | string
+    orderIdPadding?: IntFieldUpdateOperationsInput | number
   }
 
   export type UserCreateInput = {
@@ -28856,6 +28987,7 @@ export namespace Prisma {
 
   export type OrderCreateInput = {
     id?: string
+    readableId?: string | null
     status?: string
     totalAmount: number
     createdAt?: Date | string
@@ -28889,6 +29021,7 @@ export namespace Prisma {
 
   export type OrderUncheckedCreateInput = {
     id?: string
+    readableId?: string | null
     userId: string
     status?: string
     totalAmount: number
@@ -28922,6 +29055,7 @@ export namespace Prisma {
 
   export type OrderUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    readableId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     totalAmount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28955,6 +29089,7 @@ export namespace Prisma {
 
   export type OrderUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    readableId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     totalAmount?: FloatFieldUpdateOperationsInput | number
@@ -28988,6 +29123,7 @@ export namespace Prisma {
 
   export type OrderCreateManyInput = {
     id?: string
+    readableId?: string | null
     userId: string
     status?: string
     totalAmount: number
@@ -29020,6 +29156,7 @@ export namespace Prisma {
 
   export type OrderUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    readableId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     totalAmount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29051,6 +29188,7 @@ export namespace Prisma {
 
   export type OrderUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    readableId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     totalAmount?: FloatFieldUpdateOperationsInput | number
@@ -30351,10 +30489,16 @@ export namespace Prisma {
     dispatchCutoffHour?: SortOrder
     dispatchSundayPolicy?: SortOrder
     dispatchLimitText?: SortOrder
+    nextOrderNumber?: SortOrder
+    orderIdPrefix?: SortOrder
+    orderIdSuffix?: SortOrder
+    orderIdPadding?: SortOrder
   }
 
   export type SiteSettingsAvgOrderByAggregateInput = {
     dispatchCutoffHour?: SortOrder
+    nextOrderNumber?: SortOrder
+    orderIdPadding?: SortOrder
   }
 
   export type SiteSettingsMaxOrderByAggregateInput = {
@@ -30371,6 +30515,10 @@ export namespace Prisma {
     dispatchCutoffHour?: SortOrder
     dispatchSundayPolicy?: SortOrder
     dispatchLimitText?: SortOrder
+    nextOrderNumber?: SortOrder
+    orderIdPrefix?: SortOrder
+    orderIdSuffix?: SortOrder
+    orderIdPadding?: SortOrder
   }
 
   export type SiteSettingsMinOrderByAggregateInput = {
@@ -30387,10 +30535,16 @@ export namespace Prisma {
     dispatchCutoffHour?: SortOrder
     dispatchSundayPolicy?: SortOrder
     dispatchLimitText?: SortOrder
+    nextOrderNumber?: SortOrder
+    orderIdPrefix?: SortOrder
+    orderIdSuffix?: SortOrder
+    orderIdPadding?: SortOrder
   }
 
   export type SiteSettingsSumOrderByAggregateInput = {
     dispatchCutoffHour?: SortOrder
+    nextOrderNumber?: SortOrder
+    orderIdPadding?: SortOrder
   }
   export type JsonNullableWithAggregatesFilter<$PrismaModel = never> = 
     | PatchUndefined<
@@ -30554,6 +30708,7 @@ export namespace Prisma {
 
   export type OrderCountOrderByAggregateInput = {
     id?: SortOrder
+    readableId?: SortOrder
     userId?: SortOrder
     status?: SortOrder
     totalAmount?: SortOrder
@@ -30592,6 +30747,7 @@ export namespace Prisma {
 
   export type OrderMaxOrderByAggregateInput = {
     id?: SortOrder
+    readableId?: SortOrder
     userId?: SortOrder
     status?: SortOrder
     totalAmount?: SortOrder
@@ -30624,6 +30780,7 @@ export namespace Prisma {
 
   export type OrderMinOrderByAggregateInput = {
     id?: SortOrder
+    readableId?: SortOrder
     userId?: SortOrder
     status?: SortOrder
     totalAmount?: SortOrder
@@ -33186,6 +33343,7 @@ export namespace Prisma {
 
   export type OrderCreateWithoutUserInput = {
     id?: string
+    readableId?: string | null
     status?: string
     totalAmount: number
     createdAt?: Date | string
@@ -33218,6 +33376,7 @@ export namespace Prisma {
 
   export type OrderUncheckedCreateWithoutUserInput = {
     id?: string
+    readableId?: string | null
     status?: string
     totalAmount: number
     createdAt?: Date | string
@@ -33365,6 +33524,7 @@ export namespace Prisma {
     OR?: OrderScalarWhereInput[]
     NOT?: OrderScalarWhereInput | OrderScalarWhereInput[]
     id?: StringFilter<"Order"> | string
+    readableId?: StringNullableFilter<"Order"> | string | null
     userId?: StringFilter<"Order"> | string
     status?: StringFilter<"Order"> | string
     totalAmount?: FloatFilter<"Order"> | number
@@ -33781,6 +33941,7 @@ export namespace Prisma {
 
   export type OrderCreateWithoutItemsInput = {
     id?: string
+    readableId?: string | null
     status?: string
     totalAmount: number
     createdAt?: Date | string
@@ -33813,6 +33974,7 @@ export namespace Prisma {
 
   export type OrderUncheckedCreateWithoutItemsInput = {
     id?: string
+    readableId?: string | null
     userId: string
     status?: string
     totalAmount: number
@@ -33908,6 +34070,7 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    readableId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     totalAmount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -33940,6 +34103,7 @@ export namespace Prisma {
 
   export type OrderUncheckedUpdateWithoutItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    readableId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     totalAmount?: FloatFieldUpdateOperationsInput | number
@@ -34555,6 +34719,7 @@ export namespace Prisma {
 
   export type OrderCreateManyUserInput = {
     id?: string
+    readableId?: string | null
     status?: string
     totalAmount: number
     createdAt?: Date | string
@@ -34666,6 +34831,7 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    readableId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     totalAmount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34698,6 +34864,7 @@ export namespace Prisma {
 
   export type OrderUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    readableId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     totalAmount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34730,6 +34897,7 @@ export namespace Prisma {
 
   export type OrderUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    readableId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     totalAmount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

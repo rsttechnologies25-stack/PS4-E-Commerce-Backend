@@ -35,9 +35,19 @@ router.post('/', userAuthMiddleware, validate(orderSchema), async (req, res) => 
 
     try {
         const order = await prisma.$transaction(async (tx) => {
+            // Fetch ID settings
+            const settings = await tx.siteSettings.findUnique({ where: { id: 'default' } });
+            const prefix = settings?.orderIdPrefix || '#';
+            const suffix = settings?.orderIdSuffix || '';
+            const padding = settings?.orderIdPadding || 3;
+            const currentNum = settings?.nextOrderNumber || 1;
+
+            const readableId = `${prefix}${currentNum.toString().padStart(padding, '0')}${suffix}`;
+
             const newOrder = await tx.order.create({
                 data: {
                     userId: req.user!.id,
+                    readableId: readableId,
                     totalAmount: parseFloat(totalAmount),
                     discountAmount: parseFloat(discountAmount || 0),
                     shippingCharge: parseFloat(shippingCharge || 0),
@@ -60,6 +70,12 @@ router.post('/', userAuthMiddleware, validate(orderSchema), async (req, res) => 
                     }
                 },
                 include: { items: true }
+            });
+
+            // Increment the order counter
+            await tx.siteSettings.update({
+                where: { id: 'default' },
+                data: { nextOrderNumber: currentNum + 1 }
             });
 
             // Create Razorpay Order

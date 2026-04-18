@@ -153,6 +153,10 @@ model SiteSettings {
   dispatchCutoffHour   Int      @default(14)
   dispatchSundayPolicy Boolean  @default(false)
   dispatchLimitText    String   @default("ORDER WITHIN {time} HOURS")
+  nextOrderNumber      Int      @default(1)
+  orderIdPrefix        String   @default("#")
+  orderIdSuffix        String   @default("")
+  orderIdPadding       Int      @default(3)
 }
 
 model User {
@@ -197,6 +201,7 @@ model CartItem {
 
 model Order {
   id                    String      @id @default(cuid())
+  readableId            String?     @unique
   userId                String
   status                String      @default("PENDING")
   totalAmount           Float
