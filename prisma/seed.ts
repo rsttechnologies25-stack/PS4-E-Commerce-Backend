@@ -4,14 +4,17 @@ import bcrypt from 'bcryptjs';
 const prisma = new PrismaClient();
 
 async function main() {
-    // Clear existing data (in order of dependencies)
-    await prisma.cartItem.deleteMany({});
+    // Clear existing data (in order of dependencies: Children first)
     await prisma.orderItem.deleteMany({});
-    await prisma.order.deleteMany({});
+    await prisma.cartItem.deleteMany({});
     await prisma.review.deleteMany({});
-    await prisma.notification.deleteMany({});
-    await prisma.user.deleteMany({});
+    await prisma.productImage.deleteMany({});
+    await prisma.productVariant.deleteMany({});
     await prisma.heroBanner.deleteMany({});
+    await prisma.notification.deleteMany({});
+    await prisma.order.deleteMany({});
+    await prisma.user.deleteMany({});
+    await prisma.categoryPairing.deleteMany({});
     await prisma.product.deleteMany({});
     await prisma.category.deleteMany({});
     await prisma.admin.deleteMany({});
@@ -19,6 +22,8 @@ async function main() {
     await prisma.shippingRule.deleteMany({});
     await prisma.announcement.deleteMany({});
     await prisma.whatsAppTemplate.deleteMany({});
+    await prisma.coupon.deleteMany({});
+    await prisma.bannedEmail.deleteMany({});
     await prisma.siteSettings.deleteMany({});
 
     // Default Site Settings
@@ -32,7 +37,8 @@ async function main() {
             deliveryPopupContent: '• Chennai: Order before 3:00 PM for next-day delivery by 7PM.\n• Rest of India: Order before 3:00 PM for next-day dispatch.\n• Delivery Timeline: Rest of India: 2–4 days.',
             nextOrderNumber: 1,
             orderIdPrefix: '#',
-            orderIdPadding: 3
+            orderIdPadding: 3,
+            whatsappNumber: '919282445577'
         }
     });
 
