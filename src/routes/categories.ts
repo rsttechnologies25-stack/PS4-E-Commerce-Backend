@@ -21,7 +21,11 @@ router.get('/', async (req, res) => {
                 products: { take: 4 }
             }
         });
-        res.json(categories);
+        const result = categories.map(c => ({
+            ...c,
+            sortOrder: Number((c as any).sortOrder || 0)
+        }));
+        res.json(result);
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch categories' });
     }
