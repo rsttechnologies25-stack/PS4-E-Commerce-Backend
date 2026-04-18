@@ -4,15 +4,37 @@ import bcrypt from 'bcryptjs';
 const prisma = new PrismaClient();
 
 async function main() {
-    // Clear existing data
-    await prisma.admin.deleteMany({});
+    // Clear existing data (in order of dependencies)
+    await prisma.cartItem.deleteMany({});
+    await prisma.orderItem.deleteMany({});
+    await prisma.order.deleteMany({});
     await prisma.review.deleteMany({});
+    await prisma.notification.deleteMany({});
+    await prisma.user.deleteMany({});
+    await prisma.heroBanner.deleteMany({});
     await prisma.product.deleteMany({});
     await prisma.category.deleteMany({});
+    await prisma.admin.deleteMany({});
     await prisma.branch.deleteMany({});
     await prisma.shippingRule.deleteMany({});
-    await prisma.heroBanner.deleteMany({});
     await prisma.announcement.deleteMany({});
+    await prisma.whatsAppTemplate.deleteMany({});
+    await prisma.siteSettings.deleteMany({});
+
+    // Default Site Settings
+    await prisma.siteSettings.upsert({
+        where: { id: 'default' },
+        update: {},
+        create: {
+            id: 'default',
+            deliveryPopupEnabled: true,
+            deliveryPopupTitle: 'Delivery Notification!',
+            deliveryPopupContent: '• Chennai: Order before 3:00 PM for next-day delivery by 7PM.\n• Rest of India: Order before 3:00 PM for next-day dispatch.\n• Delivery Timeline: Rest of India: 2–4 days.',
+            nextOrderNumber: 1,
+            orderIdPrefix: '#',
+            orderIdPadding: 3
+        }
+    });
 
     // Admin
     const hashedPassword = await bcrypt.hash('admin123', 10);
