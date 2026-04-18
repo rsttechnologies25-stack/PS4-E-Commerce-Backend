@@ -9,6 +9,7 @@ router.get('/', async (req, res) => {
         const { parent } = req.query;
         const categories = await prisma.category.findMany({
             where: parent ? { parentId: parent as string } : {},
+            orderBy: { sortOrder: 'asc' },
             select: {
                 id: true,
                 name: true,
@@ -16,6 +17,7 @@ router.get('/', async (req, res) => {
                 image: true,
                 deliveryInfo: true,
                 parentId: true,
+                sortOrder: true,
                 products: { take: 4 }
             }
         });
@@ -26,7 +28,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', authMiddleware, async (req, res) => {
-    const { name, slug, image, parentId, deliveryInfo } = req.body;
+    const { name, slug, image, parentId, deliveryInfo, sortOrder } = req.body;
     try {
         const category = await prisma.category.create({
             data: {
@@ -34,7 +36,8 @@ router.post('/', authMiddleware, async (req, res) => {
                 slug,
                 image: image || null,
                 parentId: parentId || null,
-                deliveryInfo: deliveryInfo || null
+                deliveryInfo: deliveryInfo || null,
+                sortOrder: sortOrder ? parseInt(sortOrder.toString()) : 0
             }
         });
         res.status(201).json(category);
@@ -45,7 +48,7 @@ router.post('/', authMiddleware, async (req, res) => {
 });
 
 router.put('/:id', authMiddleware, async (req, res) => {
-    const { name, slug, image, parentId, deliveryInfo } = req.body;
+    const { name, slug, image, parentId, deliveryInfo, sortOrder } = req.body;
     try {
         const category = await prisma.category.update({
             where: { id: req.params.id as string },
@@ -54,7 +57,8 @@ router.put('/:id', authMiddleware, async (req, res) => {
                 slug,
                 image: image || null,
                 parentId: parentId || null,
-                deliveryInfo: deliveryInfo || null
+                deliveryInfo: deliveryInfo || null,
+                sortOrder: sortOrder ? parseInt(sortOrder.toString()) : 0
             }
         });
         res.json(category);
