@@ -86,6 +86,7 @@ model Branch {
   isHeadOffice Boolean @default(false)
   latitude     Float?
   longitude    Float?
+  mapLink      String?
 }
 
 model Announcement {

@@ -14,10 +14,10 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', authMiddleware, async (req, res) => {
-    const { name, address, city, phone, image, isHeadOffice, latitude, longitude } = req.body;
+    const { name, address, city, phone, image, isHeadOffice, latitude, longitude, mapLink } = req.body;
     try {
         const branch = await prisma.branch.create({
-            data: { name, address, city, phone, image, isHeadOffice, latitude: latitude ? parseFloat(latitude) : null, longitude: longitude ? parseFloat(longitude) : null }
+            data: { name, address, city, phone, image, isHeadOffice, latitude: latitude ? parseFloat(latitude) : null, longitude: longitude ? parseFloat(longitude) : null, mapLink }
         });
         res.status(201).json(branch);
     } catch (error) {
@@ -26,11 +26,11 @@ router.post('/', authMiddleware, async (req, res) => {
 });
 
 router.put('/:id', authMiddleware, async (req, res) => {
-    const { name, address, city, phone, image, isHeadOffice, latitude, longitude } = req.body;
+    const { name, address, city, phone, image, isHeadOffice, latitude, longitude, mapLink } = req.body;
     try {
         const branch = await prisma.branch.update({
             where: { id: req.params.id as string },
-            data: { name, address, city, phone, image, isHeadOffice, latitude: latitude ? parseFloat(latitude) : null, longitude: longitude ? parseFloat(longitude) : null }
+            data: { name, address, city, phone, image, isHeadOffice, latitude: latitude ? parseFloat(latitude) : null, longitude: longitude ? parseFloat(longitude) : null, mapLink }
         });
         res.json(branch);
     } catch (error) {
