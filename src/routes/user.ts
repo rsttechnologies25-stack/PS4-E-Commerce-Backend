@@ -224,39 +224,35 @@ router.post('/reset-password', authLimiter, validate(resetPasswordSchema), async
 // Delete Account
 router.delete('/me', userAuthMiddleware, async (req, res) => {
     try {
-        const { password } = req.body;
-        const user = await prisma.user.findUnique({ where: { id: req.user?.id } });
-        if (!user) return res.status(404).json({ error: 'User not found' });
+        const userId = req.user?.id;
+        if (!userId) return res.status(401).json({ error: 'Unauthorized' });
 
-        // Verify password before deletion
-        if (password) {
-            const isValid = await bcrypt.compare(password, user.password);
-            if (!isValid) return res.status(401).json({ error: 'Incorrect password' });
-        }
+        // 1. Delete cart items
+        await prisma.cartItem.deleteMany({ where: { userId } });
 
-        // Anonymize and delete the user
-        await prisma.user.update({
-            where: { id: req.user?.id },
+        // 2. Dissociate/Anonymize reviews (set userId to null, customerName to Anonymous)
+        await prisma.review.updateMany({
+            where: { userId },
             data: {
-                email: `deleted_${req.user?.id}@deleted.com`,
-                name: 'Deleted User',
-                customerName: null,
-                phoneNumber: null,
-                addressLine1: null,
-                addressLine2: null,
-                city: null,
-                state: null,
-                pincode: null,
-                password: '',
+                userId: null,
+                customerName: 'Anonymous'
             }
         });
 
-        res.json({ success: true, message: 'Your account has been successfully deleted.' });
+        // 3. Delete notifications
+        await prisma.notification.deleteMany({ where: { userId } });
+
+        // 4. Delete orders (order items are cascade deleted automatically by the database schema)
+        await prisma.order.deleteMany({ where: { userId } });
+
+        // 5. Delete the user
+        await prisma.user.delete({ where: { id: userId } });
+
+        res.json({ success: true, message: 'Your account and all associated data have been permanently deleted.' });
     } catch (error) {
-        console.error('Account deletion error:', error);
-        res.status(500).json({ error: 'Failed to delete account' });
+        console.error('Delete account error:', error);
+        res.status(500).json({ error: 'Failed to delete account. Please try again later.' });
     }
 });
 
 export default router;
-
