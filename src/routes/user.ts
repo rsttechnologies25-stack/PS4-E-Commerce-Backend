@@ -221,4 +221,42 @@ router.post('/reset-password', authLimiter, validate(resetPasswordSchema), async
     }
 });
 
+// Delete Account
+router.delete('/me', userAuthMiddleware, async (req, res) => {
+    try {
+        const { password } = req.body;
+        const user = await prisma.user.findUnique({ where: { id: req.user?.id } });
+        if (!user) return res.status(404).json({ error: 'User not found' });
+
+        // Verify password before deletion
+        if (password) {
+            const isValid = await bcrypt.compare(password, user.password);
+            if (!isValid) return res.status(401).json({ error: 'Incorrect password' });
+        }
+
+        // Anonymize and delete the user
+        await prisma.user.update({
+            where: { id: req.user?.id },
+            data: {
+                email: `deleted_${req.user?.id}@deleted.com`,
+                name: 'Deleted User',
+                customerName: null,
+                phoneNumber: null,
+                addressLine1: null,
+                addressLine2: null,
+                city: null,
+                state: null,
+                pincode: null,
+                password: '',
+            }
+        });
+
+        res.json({ success: true, message: 'Your account has been successfully deleted.' });
+    } catch (error) {
+        console.error('Account deletion error:', error);
+        res.status(500).json({ error: 'Failed to delete account' });
+    }
+});
+
 export default router;
+
