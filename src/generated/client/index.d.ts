@@ -8597,6 +8597,7 @@ export namespace Prisma {
     isHeadOffice: boolean | null
     latitude: number | null
     longitude: number | null
+    mapLink: string | null
   }
 
   export type BranchMaxAggregateOutputType = {
@@ -8609,6 +8610,7 @@ export namespace Prisma {
     isHeadOffice: boolean | null
     latitude: number | null
     longitude: number | null
+    mapLink: string | null
   }
 
   export type BranchCountAggregateOutputType = {
@@ -8621,6 +8623,7 @@ export namespace Prisma {
     isHeadOffice: number
     latitude: number
     longitude: number
+    mapLink: number
     _all: number
   }
 
@@ -8645,6 +8648,7 @@ export namespace Prisma {
     isHeadOffice?: true
     latitude?: true
     longitude?: true
+    mapLink?: true
   }
 
   export type BranchMaxAggregateInputType = {
@@ -8657,6 +8661,7 @@ export namespace Prisma {
     isHeadOffice?: true
     latitude?: true
     longitude?: true
+    mapLink?: true
   }
 
   export type BranchCountAggregateInputType = {
@@ -8669,6 +8674,7 @@ export namespace Prisma {
     isHeadOffice?: true
     latitude?: true
     longitude?: true
+    mapLink?: true
     _all?: true
   }
 
@@ -8768,6 +8774,7 @@ export namespace Prisma {
     isHeadOffice: boolean
     latitude: number | null
     longitude: number | null
+    mapLink: string | null
     _count: BranchCountAggregateOutputType | null
     _avg: BranchAvgAggregateOutputType | null
     _sum: BranchSumAggregateOutputType | null
@@ -8799,6 +8806,7 @@ export namespace Prisma {
     isHeadOffice?: boolean
     latitude?: boolean
     longitude?: boolean
+    mapLink?: boolean
   }, ExtArgs["result"]["branch"]>
 
   export type BranchSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -8811,6 +8819,7 @@ export namespace Prisma {
     isHeadOffice?: boolean
     latitude?: boolean
     longitude?: boolean
+    mapLink?: boolean
   }, ExtArgs["result"]["branch"]>
 
   export type BranchSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -8823,6 +8832,7 @@ export namespace Prisma {
     isHeadOffice?: boolean
     latitude?: boolean
     longitude?: boolean
+    mapLink?: boolean
   }, ExtArgs["result"]["branch"]>
 
   export type BranchSelectScalar = {
@@ -8835,9 +8845,10 @@ export namespace Prisma {
     isHeadOffice?: boolean
     latitude?: boolean
     longitude?: boolean
+    mapLink?: boolean
   }
 
-  export type BranchOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "address" | "city" | "phone" | "image" | "isHeadOffice" | "latitude" | "longitude", ExtArgs["result"]["branch"]>
+  export type BranchOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "address" | "city" | "phone" | "image" | "isHeadOffice" | "latitude" | "longitude" | "mapLink", ExtArgs["result"]["branch"]>
 
   export type $BranchPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Branch"
@@ -8852,6 +8863,7 @@ export namespace Prisma {
       isHeadOffice: boolean
       latitude: number | null
       longitude: number | null
+      mapLink: string | null
     }, ExtArgs["result"]["branch"]>
     composites: {}
   }
@@ -9284,6 +9296,7 @@ export namespace Prisma {
     readonly isHeadOffice: FieldRef<"Branch", 'Boolean'>
     readonly latitude: FieldRef<"Branch", 'Float'>
     readonly longitude: FieldRef<"Branch", 'Float'>
+    readonly mapLink: FieldRef<"Branch", 'String'>
   }
     
 
@@ -14335,6 +14348,8 @@ export namespace Prisma {
     email: string | null
     password: string | null
     name: string | null
+    otp: string | null
+    otpExpires: Date | null
     passwordResetToken: string | null
     passwordResetExpires: Date | null
     createdAt: Date | null
@@ -14356,6 +14371,8 @@ export namespace Prisma {
     email: string | null
     password: string | null
     name: string | null
+    otp: string | null
+    otpExpires: Date | null
     passwordResetToken: string | null
     passwordResetExpires: Date | null
     createdAt: Date | null
@@ -14377,6 +14394,8 @@ export namespace Prisma {
     email: number
     password: number
     name: number
+    otp: number
+    otpExpires: number
     passwordResetToken: number
     passwordResetExpires: number
     createdAt: number
@@ -14400,6 +14419,8 @@ export namespace Prisma {
     email?: true
     password?: true
     name?: true
+    otp?: true
+    otpExpires?: true
     passwordResetToken?: true
     passwordResetExpires?: true
     createdAt?: true
@@ -14421,6 +14442,8 @@ export namespace Prisma {
     email?: true
     password?: true
     name?: true
+    otp?: true
+    otpExpires?: true
     passwordResetToken?: true
     passwordResetExpires?: true
     createdAt?: true
@@ -14442,6 +14465,8 @@ export namespace Prisma {
     email?: true
     password?: true
     name?: true
+    otp?: true
+    otpExpires?: true
     passwordResetToken?: true
     passwordResetExpires?: true
     createdAt?: true
@@ -14533,9 +14558,11 @@ export namespace Prisma {
 
   export type UserGroupByOutputType = {
     id: string
-    email: string
-    password: string
+    email: string | null
+    password: string | null
     name: string | null
+    otp: string | null
+    otpExpires: Date | null
     passwordResetToken: string | null
     passwordResetExpires: Date | null
     createdAt: Date
@@ -14574,6 +14601,8 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     name?: boolean
+    otp?: boolean
+    otpExpires?: boolean
     passwordResetToken?: boolean
     passwordResetExpires?: boolean
     createdAt?: boolean
@@ -14600,6 +14629,8 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     name?: boolean
+    otp?: boolean
+    otpExpires?: boolean
     passwordResetToken?: boolean
     passwordResetExpires?: boolean
     createdAt?: boolean
@@ -14621,6 +14652,8 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     name?: boolean
+    otp?: boolean
+    otpExpires?: boolean
     passwordResetToken?: boolean
     passwordResetExpires?: boolean
     createdAt?: boolean
@@ -14642,6 +14675,8 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     name?: boolean
+    otp?: boolean
+    otpExpires?: boolean
     passwordResetToken?: boolean
     passwordResetExpires?: boolean
     createdAt?: boolean
@@ -14658,7 +14693,7 @@ export namespace Prisma {
     adminNotes?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "name" | "passwordResetToken" | "passwordResetExpires" | "createdAt" | "updatedAt" | "addressLine1" | "addressLine2" | "city" | "customerName" | "phoneNumber" | "pincode" | "state" | "fcmToken" | "isBanned" | "adminNotes", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "name" | "otp" | "otpExpires" | "passwordResetToken" | "passwordResetExpires" | "createdAt" | "updatedAt" | "addressLine1" | "addressLine2" | "city" | "customerName" | "phoneNumber" | "pincode" | "state" | "fcmToken" | "isBanned" | "adminNotes", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     cartItems?: boolean | User$cartItemsArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
@@ -14679,9 +14714,11 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      email: string
-      password: string
+      email: string | null
+      password: string | null
       name: string | null
+      otp: string | null
+      otpExpires: Date | null
       passwordResetToken: string | null
       passwordResetExpires: Date | null
       createdAt: Date
@@ -15127,6 +15164,8 @@ export namespace Prisma {
     readonly email: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly name: FieldRef<"User", 'String'>
+    readonly otp: FieldRef<"User", 'String'>
+    readonly otpExpires: FieldRef<"User", 'DateTime'>
     readonly passwordResetToken: FieldRef<"User", 'String'>
     readonly passwordResetExpires: FieldRef<"User", 'DateTime'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
@@ -25708,7 +25747,8 @@ export namespace Prisma {
     image: 'image',
     isHeadOffice: 'isHeadOffice',
     latitude: 'latitude',
-    longitude: 'longitude'
+    longitude: 'longitude',
+    mapLink: 'mapLink'
   };
 
   export type BranchScalarFieldEnum = (typeof BranchScalarFieldEnum)[keyof typeof BranchScalarFieldEnum]
@@ -25797,6 +25837,8 @@ export namespace Prisma {
     email: 'email',
     password: 'password',
     name: 'name',
+    otp: 'otp',
+    otpExpires: 'otpExpires',
     passwordResetToken: 'passwordResetToken',
     passwordResetExpires: 'passwordResetExpires',
     createdAt: 'createdAt',
@@ -26475,6 +26517,7 @@ export namespace Prisma {
     isHeadOffice?: BoolFilter<"Branch"> | boolean
     latitude?: FloatNullableFilter<"Branch"> | number | null
     longitude?: FloatNullableFilter<"Branch"> | number | null
+    mapLink?: StringNullableFilter<"Branch"> | string | null
   }
 
   export type BranchOrderByWithRelationInput = {
@@ -26487,6 +26530,7 @@ export namespace Prisma {
     isHeadOffice?: SortOrder
     latitude?: SortOrderInput | SortOrder
     longitude?: SortOrderInput | SortOrder
+    mapLink?: SortOrderInput | SortOrder
   }
 
   export type BranchWhereUniqueInput = Prisma.AtLeast<{
@@ -26502,6 +26546,7 @@ export namespace Prisma {
     isHeadOffice?: BoolFilter<"Branch"> | boolean
     latitude?: FloatNullableFilter<"Branch"> | number | null
     longitude?: FloatNullableFilter<"Branch"> | number | null
+    mapLink?: StringNullableFilter<"Branch"> | string | null
   }, "id">
 
   export type BranchOrderByWithAggregationInput = {
@@ -26514,6 +26559,7 @@ export namespace Prisma {
     isHeadOffice?: SortOrder
     latitude?: SortOrderInput | SortOrder
     longitude?: SortOrderInput | SortOrder
+    mapLink?: SortOrderInput | SortOrder
     _count?: BranchCountOrderByAggregateInput
     _avg?: BranchAvgOrderByAggregateInput
     _max?: BranchMaxOrderByAggregateInput
@@ -26534,6 +26580,7 @@ export namespace Prisma {
     isHeadOffice?: BoolWithAggregatesFilter<"Branch"> | boolean
     latitude?: FloatNullableWithAggregatesFilter<"Branch"> | number | null
     longitude?: FloatNullableWithAggregatesFilter<"Branch"> | number | null
+    mapLink?: StringNullableWithAggregatesFilter<"Branch"> | string | null
   }
 
   export type AnnouncementWhereInput = {
@@ -26937,9 +26984,11 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     id?: StringFilter<"User"> | string
-    email?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
+    email?: StringNullableFilter<"User"> | string | null
+    password?: StringNullableFilter<"User"> | string | null
     name?: StringNullableFilter<"User"> | string | null
+    otp?: StringNullableFilter<"User"> | string | null
+    otpExpires?: DateTimeNullableFilter<"User"> | Date | string | null
     passwordResetToken?: StringNullableFilter<"User"> | string | null
     passwordResetExpires?: DateTimeNullableFilter<"User"> | Date | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
@@ -26962,9 +27011,11 @@ export namespace Prisma {
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
-    email?: SortOrder
-    password?: SortOrder
+    email?: SortOrderInput | SortOrder
+    password?: SortOrderInput | SortOrder
     name?: SortOrderInput | SortOrder
+    otp?: SortOrderInput | SortOrder
+    otpExpires?: SortOrderInput | SortOrder
     passwordResetToken?: SortOrderInput | SortOrder
     passwordResetExpires?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -26988,11 +27039,14 @@ export namespace Prisma {
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     email?: string
+    phoneNumber?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    password?: StringFilter<"User"> | string
+    password?: StringNullableFilter<"User"> | string | null
     name?: StringNullableFilter<"User"> | string | null
+    otp?: StringNullableFilter<"User"> | string | null
+    otpExpires?: DateTimeNullableFilter<"User"> | Date | string | null
     passwordResetToken?: StringNullableFilter<"User"> | string | null
     passwordResetExpires?: DateTimeNullableFilter<"User"> | Date | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
@@ -27001,7 +27055,6 @@ export namespace Prisma {
     addressLine2?: StringNullableFilter<"User"> | string | null
     city?: StringNullableFilter<"User"> | string | null
     customerName?: StringNullableFilter<"User"> | string | null
-    phoneNumber?: StringNullableFilter<"User"> | string | null
     pincode?: StringNullableFilter<"User"> | string | null
     state?: StringNullableFilter<"User"> | string | null
     fcmToken?: StringNullableFilter<"User"> | string | null
@@ -27011,13 +27064,15 @@ export namespace Prisma {
     notifications?: NotificationListRelationFilter
     orders?: OrderListRelationFilter
     reviews?: ReviewListRelationFilter
-  }, "id" | "email">
+  }, "id" | "email" | "phoneNumber">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
-    email?: SortOrder
-    password?: SortOrder
+    email?: SortOrderInput | SortOrder
+    password?: SortOrderInput | SortOrder
     name?: SortOrderInput | SortOrder
+    otp?: SortOrderInput | SortOrder
+    otpExpires?: SortOrderInput | SortOrder
     passwordResetToken?: SortOrderInput | SortOrder
     passwordResetExpires?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -27042,9 +27097,11 @@ export namespace Prisma {
     OR?: UserScalarWhereWithAggregatesInput[]
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"User"> | string
-    email?: StringWithAggregatesFilter<"User"> | string
-    password?: StringWithAggregatesFilter<"User"> | string
+    email?: StringNullableWithAggregatesFilter<"User"> | string | null
+    password?: StringNullableWithAggregatesFilter<"User"> | string | null
     name?: StringNullableWithAggregatesFilter<"User"> | string | null
+    otp?: StringNullableWithAggregatesFilter<"User"> | string | null
+    otpExpires?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     passwordResetToken?: StringNullableWithAggregatesFilter<"User"> | string | null
     passwordResetExpires?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -28214,6 +28271,7 @@ export namespace Prisma {
     isHeadOffice?: boolean
     latitude?: number | null
     longitude?: number | null
+    mapLink?: string | null
   }
 
   export type BranchUncheckedCreateInput = {
@@ -28226,6 +28284,7 @@ export namespace Prisma {
     isHeadOffice?: boolean
     latitude?: number | null
     longitude?: number | null
+    mapLink?: string | null
   }
 
   export type BranchUpdateInput = {
@@ -28238,6 +28297,7 @@ export namespace Prisma {
     isHeadOffice?: BoolFieldUpdateOperationsInput | boolean
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLink?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BranchUncheckedUpdateInput = {
@@ -28250,6 +28310,7 @@ export namespace Prisma {
     isHeadOffice?: BoolFieldUpdateOperationsInput | boolean
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLink?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BranchCreateManyInput = {
@@ -28262,6 +28323,7 @@ export namespace Prisma {
     isHeadOffice?: boolean
     latitude?: number | null
     longitude?: number | null
+    mapLink?: string | null
   }
 
   export type BranchUpdateManyMutationInput = {
@@ -28274,6 +28336,7 @@ export namespace Prisma {
     isHeadOffice?: BoolFieldUpdateOperationsInput | boolean
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLink?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BranchUncheckedUpdateManyInput = {
@@ -28286,6 +28349,7 @@ export namespace Prisma {
     isHeadOffice?: BoolFieldUpdateOperationsInput | boolean
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLink?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AnnouncementCreateInput = {
@@ -28749,9 +28813,11 @@ export namespace Prisma {
 
   export type UserCreateInput = {
     id?: string
-    email: string
-    password: string
+    email?: string | null
+    password?: string | null
     name?: string | null
+    otp?: string | null
+    otpExpires?: Date | string | null
     passwordResetToken?: string | null
     passwordResetExpires?: Date | string | null
     createdAt?: Date | string
@@ -28774,9 +28840,11 @@ export namespace Prisma {
 
   export type UserUncheckedCreateInput = {
     id?: string
-    email: string
-    password: string
+    email?: string | null
+    password?: string | null
     name?: string | null
+    otp?: string | null
+    otpExpires?: Date | string | null
     passwordResetToken?: string | null
     passwordResetExpires?: Date | string | null
     createdAt?: Date | string
@@ -28799,9 +28867,11 @@ export namespace Prisma {
 
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28824,9 +28894,11 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28849,9 +28921,11 @@ export namespace Prisma {
 
   export type UserCreateManyInput = {
     id?: string
-    email: string
-    password: string
+    email?: string | null
+    password?: string | null
     name?: string | null
+    otp?: string | null
+    otpExpires?: Date | string | null
     passwordResetToken?: string | null
     passwordResetExpires?: Date | string | null
     createdAt?: Date | string
@@ -28870,9 +28944,11 @@ export namespace Prisma {
 
   export type UserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28891,9 +28967,11 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30244,6 +30322,7 @@ export namespace Prisma {
     isHeadOffice?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
+    mapLink?: SortOrder
   }
 
   export type BranchAvgOrderByAggregateInput = {
@@ -30261,6 +30340,7 @@ export namespace Prisma {
     isHeadOffice?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
+    mapLink?: SortOrder
   }
 
   export type BranchMinOrderByAggregateInput = {
@@ -30273,6 +30353,7 @@ export namespace Prisma {
     isHeadOffice?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
+    mapLink?: SortOrder
   }
 
   export type BranchSumOrderByAggregateInput = {
@@ -30597,6 +30678,8 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     name?: SortOrder
+    otp?: SortOrder
+    otpExpires?: SortOrder
     passwordResetToken?: SortOrder
     passwordResetExpires?: SortOrder
     createdAt?: SortOrder
@@ -30618,6 +30701,8 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     name?: SortOrder
+    otp?: SortOrder
+    otpExpires?: SortOrder
     passwordResetToken?: SortOrder
     passwordResetExpires?: SortOrder
     createdAt?: SortOrder
@@ -30639,6 +30724,8 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     name?: SortOrder
+    otp?: SortOrder
+    otpExpires?: SortOrder
     passwordResetToken?: SortOrder
     passwordResetExpires?: SortOrder
     createdAt?: SortOrder
@@ -33114,9 +33201,11 @@ export namespace Prisma {
 
   export type UserCreateWithoutReviewsInput = {
     id?: string
-    email: string
-    password: string
+    email?: string | null
+    password?: string | null
     name?: string | null
+    otp?: string | null
+    otpExpires?: Date | string | null
     passwordResetToken?: string | null
     passwordResetExpires?: Date | string | null
     createdAt?: Date | string
@@ -33138,9 +33227,11 @@ export namespace Prisma {
 
   export type UserUncheckedCreateWithoutReviewsInput = {
     id?: string
-    email: string
-    password: string
+    email?: string | null
+    password?: string | null
     name?: string | null
+    otp?: string | null
+    otpExpires?: Date | string | null
     passwordResetToken?: string | null
     passwordResetExpires?: Date | string | null
     createdAt?: Date | string
@@ -33231,9 +33322,11 @@ export namespace Prisma {
 
   export type UserUpdateWithoutReviewsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -33255,9 +33348,11 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutReviewsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -33620,9 +33715,11 @@ export namespace Prisma {
 
   export type UserCreateWithoutCartItemsInput = {
     id?: string
-    email: string
-    password: string
+    email?: string | null
+    password?: string | null
     name?: string | null
+    otp?: string | null
+    otpExpires?: Date | string | null
     passwordResetToken?: string | null
     passwordResetExpires?: Date | string | null
     createdAt?: Date | string
@@ -33644,9 +33741,11 @@ export namespace Prisma {
 
   export type UserUncheckedCreateWithoutCartItemsInput = {
     id?: string
-    email: string
-    password: string
+    email?: string | null
+    password?: string | null
     name?: string | null
+    otp?: string | null
+    otpExpires?: Date | string | null
     passwordResetToken?: string | null
     passwordResetExpires?: Date | string | null
     createdAt?: Date | string
@@ -33737,9 +33836,11 @@ export namespace Prisma {
 
   export type UserUpdateWithoutCartItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -33761,9 +33862,11 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutCartItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -33785,9 +33888,11 @@ export namespace Prisma {
 
   export type UserCreateWithoutOrdersInput = {
     id?: string
-    email: string
-    password: string
+    email?: string | null
+    password?: string | null
     name?: string | null
+    otp?: string | null
+    otpExpires?: Date | string | null
     passwordResetToken?: string | null
     passwordResetExpires?: Date | string | null
     createdAt?: Date | string
@@ -33809,9 +33914,11 @@ export namespace Prisma {
 
   export type UserUncheckedCreateWithoutOrdersInput = {
     id?: string
-    email: string
-    password: string
+    email?: string | null
+    password?: string | null
     name?: string | null
+    otp?: string | null
+    otpExpires?: Date | string | null
     passwordResetToken?: string | null
     passwordResetExpires?: Date | string | null
     createdAt?: Date | string
@@ -33877,9 +33984,11 @@ export namespace Prisma {
 
   export type UserUpdateWithoutOrdersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -33901,9 +34010,11 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutOrdersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34189,9 +34300,11 @@ export namespace Prisma {
 
   export type UserCreateWithoutNotificationsInput = {
     id?: string
-    email: string
-    password: string
+    email?: string | null
+    password?: string | null
     name?: string | null
+    otp?: string | null
+    otpExpires?: Date | string | null
     passwordResetToken?: string | null
     passwordResetExpires?: Date | string | null
     createdAt?: Date | string
@@ -34213,9 +34326,11 @@ export namespace Prisma {
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
     id?: string
-    email: string
-    password: string
+    email?: string | null
+    password?: string | null
     name?: string | null
+    otp?: string | null
+    otpExpires?: Date | string | null
     passwordResetToken?: string | null
     passwordResetExpires?: Date | string | null
     createdAt?: Date | string
@@ -34253,9 +34368,11 @@ export namespace Prisma {
 
   export type UserUpdateWithoutNotificationsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34277,9 +34394,11 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

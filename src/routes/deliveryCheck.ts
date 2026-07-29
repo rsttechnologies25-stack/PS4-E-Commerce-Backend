@@ -146,7 +146,7 @@ router.post('/check-pincode', async (req, res) => {
         } else {
             // 2. Check for Wildcard Match (e.g. 600*)
             const wildcardRule = shippingRules.find(r => 
-                r.pincodes?.split(',').map(p => p.trim()).some(p => p.endsWith('*') && pincode.startsWith(p.slice(0, -1)))
+                r.pincodes?.split(',').map(p => p.trim()).some(p => p.endsWith('*') && p.length > 1 && pincode.startsWith(p.slice(0, -1)))
             );
             
             if (wildcardRule) {

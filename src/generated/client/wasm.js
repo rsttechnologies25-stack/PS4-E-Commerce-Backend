@@ -182,7 +182,8 @@ exports.Prisma.BranchScalarFieldEnum = {
   image: 'image',
   isHeadOffice: 'isHeadOffice',
   latitude: 'latitude',
-  longitude: 'longitude'
+  longitude: 'longitude',
+  mapLink: 'mapLink'
 };
 
 exports.Prisma.AnnouncementScalarFieldEnum = {
@@ -256,6 +257,8 @@ exports.Prisma.UserScalarFieldEnum = {
   email: 'email',
   password: 'password',
   name: 'name',
+  otp: 'otp',
+  otpExpires: 'otpExpires',
   passwordResetToken: 'passwordResetToken',
   passwordResetExpires: 'passwordResetExpires',
   createdAt: 'createdAt',

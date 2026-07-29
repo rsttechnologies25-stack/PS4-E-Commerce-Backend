@@ -12,7 +12,9 @@ import {
     updateProfileSchema, 
     forgotPasswordSchema, 
     resetPasswordSchema, 
-    changePasswordSchema 
+    changePasswordSchema,
+    sendOtpSchema,
+    verifyOtpSchema
 } from '../lib/schemas';
 import { sendResetPasswordEmail } from '../services/email';
 
@@ -64,6 +66,10 @@ router.post('/login', authLimiter, validate(loginSchema), async (req, res) => {
         if (!user) return res.status(401).json({ error: 'Invalid credentials' });
 
         if (user.isBanned) return res.status(403).json({ error: 'Your account has been permanently banned' });
+
+        if (!user.password) {
+            return res.status(400).json({ error: 'Please login using your mobile number and OTP' });
+        }
 
         const isValid = await bcrypt.compare(password, user.password);
         if (!isValid) return res.status(401).json({ error: 'Invalid credentials' });
@@ -146,6 +152,10 @@ router.put('/me/change-password', userAuthMiddleware, validate(changePasswordSch
     try {
         const user = await prisma.user.findUnique({ where: { id: req.user?.id } });
         if (!user) return res.status(404).json({ error: 'User not found' });
+
+        if (!user.password) {
+            return res.status(400).json({ error: 'You do not have a password set. Please use password reset to set a password.' });
+        }
 
         const isValid = await bcrypt.compare(oldPassword, user.password);
         if (!isValid) return res.status(401).json({ error: 'Current password incorrect' });
@@ -252,6 +262,129 @@ router.delete('/me', userAuthMiddleware, async (req, res) => {
     } catch (error) {
         console.error('Delete account error:', error);
         res.status(500).json({ error: 'Failed to delete account. Please try again later.' });
+    }
+});
+
+// Send OTP
+router.post('/send-otp', validate(sendOtpSchema), async (req, res) => {
+    const { phoneNumber } = req.body;
+    
+    try {
+        // Generate a 6-digit verification code
+        const otp = Math.floor(100000 + Math.random() * 900000).toString();
+        const expiry = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes
+        const hashedOtp = await bcrypt.hash(otp, 10);
+
+        let user = await prisma.user.findUnique({ where: { phoneNumber } });
+        
+        if (!user) {
+            // New user registration via phone number
+            user = await prisma.user.create({
+                data: {
+                    phoneNumber,
+                    otp: hashedOtp,
+                    otpExpires: expiry
+                }
+            });
+        } else {
+            if (user.isBanned) {
+                return res.status(403).json({ error: 'Your account has been permanently banned' });
+            }
+            
+            // Update existing user with OTP fields
+            await prisma.user.update({
+                where: { id: user.id },
+                data: {
+                    otp: hashedOtp,
+                    otpExpires: expiry
+                }
+            });
+        }
+
+        // Send OTP via 2Factor.in SMS Gateway
+        const apiKey = process.env.TWO_FACTOR_API_KEY;
+        if (!apiKey) {
+            console.warn('[Warning] TWO_FACTOR_API_KEY is not defined in environment variables.');
+        } else {
+            try {
+                const response = await fetch(`https://2factor.in/API/V1/${apiKey}/SMS/${phoneNumber}/${otp}/AUTOGEN2`);
+                const result: any = await response.json();
+                if (result.Status !== 'Success') {
+                    console.error('2Factor API error details:', result);
+                    throw new Error(result.Details || 'Failed to send SMS');
+                }
+            } catch (smsError) {
+                console.error('Failed to send OTP via SMS:', smsError);
+                // In development, log the error and allow proceeding so developers don't get blocked
+                if (process.env.NODE_ENV !== 'development') {
+                    return res.status(500).json({ error: 'Failed to deliver OTP SMS. Please try again.' });
+                }
+            }
+        }
+
+        // Always print OTP in console in development mode to save API credits and ease testing
+        if (process.env.NODE_ENV === 'development') {
+            console.log(`\n[DEV ONLY] OTP code for ${phoneNumber} is: ${otp}\n`);
+        }
+
+        res.json({ success: true, message: 'OTP sent successfully' });
+    } catch (error) {
+        console.error('Send OTP error:', error);
+        res.status(500).json({ error: 'Failed to send OTP. Please try again.' });
+    }
+});
+
+// Verify OTP
+router.post('/verify-otp', validate(verifyOtpSchema), async (req, res) => {
+    const { phoneNumber, otp } = req.body;
+    
+    try {
+        const user = await prisma.user.findUnique({ where: { phoneNumber } });
+        if (!user) {
+            return res.status(404).json({ error: 'User account not found' });
+        }
+
+        if (user.isBanned) {
+            return res.status(403).json({ error: 'Your account has been permanently banned' });
+        }
+
+        if (!user.otp || !user.otpExpires || user.otpExpires < new Date()) {
+            return res.status(400).json({ error: 'OTP has expired. Please request a new code.' });
+        }
+
+        const isValid = await bcrypt.compare(otp, user.otp);
+        if (!isValid) {
+            return res.status(400).json({ error: 'Invalid OTP code' });
+        }
+
+        // OTP is valid. Clear OTP fields
+        await prisma.user.update({
+            where: { id: user.id },
+            data: {
+                otp: null,
+                otpExpires: null
+            }
+        });
+
+        // Generate session JWT token
+        const token = jwt.sign(
+            { id: user.id, email: user.email }, 
+            process.env.USER_JWT_SECRET!, 
+            { expiresIn: '24h' }
+        );
+
+        res.json({ 
+            token, 
+            user: { 
+                id: user.id, 
+                email: user.email, 
+                name: user.name || 'Customer',
+                phoneNumber: user.phoneNumber
+            } 
+        });
+    } catch (error) {
+        console.error('Verify OTP error:', error);
+        res.status(500).json({ error: 'Failed to verify OTP. Please try again.' });
     }
 });
 

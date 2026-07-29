@@ -86,6 +86,7 @@ model Branch {
   isHeadOffice Boolean @default(false)
   latitude     Float?
   longitude    Float?
+  mapLink      String?
 }
 
 model Announcement {
@@ -161,9 +162,11 @@ model SiteSettings {
 
 model User {
   id                   String         @id @default(cuid())
-  email                String         @unique
-  password             String
+  email                String?        @unique
+  password             String?
   name                 String?
+  otp                  String?
+  otpExpires           DateTime?
   passwordResetToken   String?
   passwordResetExpires DateTime?
   createdAt            DateTime       @default(now())
@@ -172,7 +175,7 @@ model User {
   addressLine2         String?
   city                 String?
   customerName         String?
-  phoneNumber          String?
+  phoneNumber          String?        @unique
   pincode              String?
   state                String?
   fcmToken             String?
