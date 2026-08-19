@@ -306,8 +306,8 @@ router.post('/send-otp', validate(sendOtpSchema), async (req, res) => {
         if (!apiKey) {
             console.warn('[Warning] TWO_FACTOR_API_KEY is not defined in environment variables.');
         } else {
-            try {
-                const response = await fetch(`https://2factor.in/API/V1/${apiKey}/SMS/${phoneNumber}/${otp}/AUTOGEN2`);
+                const templateName = process.env.TWO_FACTOR_TEMPLATE || 'OTP1';
+                const response = await fetch(`https://2factor.in/API/V1/${apiKey}/SMS/${phoneNumber}/${otp}/${templateName}`);
                 const result: any = await response.json();
                 if (result.Status !== 'Success') {
                     console.error('2Factor API error details:', result);
