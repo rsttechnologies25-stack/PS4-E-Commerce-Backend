@@ -369,7 +369,7 @@ router.post('/verify-otp', validate(verifyOtpSchema), async (req, res) => {
 
         // Generate session JWT token
         const token = jwt.sign(
-            { id: user.id, email: user.email }, 
+            { id: user.id, email: user.email || '', phoneNumber: user.phoneNumber }, 
             process.env.USER_JWT_SECRET!, 
             { expiresIn: '24h' }
         );
@@ -378,9 +378,15 @@ router.post('/verify-otp', validate(verifyOtpSchema), async (req, res) => {
             token, 
             user: { 
                 id: user.id, 
-                email: user.email, 
+                email: user.email || '', 
                 name: user.name || 'Customer',
-                phoneNumber: user.phoneNumber
+                phoneNumber: user.phoneNumber,
+                customerName: user.customerName || null,
+                addressLine1: user.addressLine1 || null,
+                addressLine2: user.addressLine2 || null,
+                city: user.city || null,
+                state: user.state || null,
+                pincode: user.pincode || null,
             } 
         });
     } catch (error) {
