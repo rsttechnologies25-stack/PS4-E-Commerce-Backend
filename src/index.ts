@@ -58,6 +58,8 @@ app.use(helmet({
 const defaultAllowedOrigins = [
     'https://perambursrinivasa.co.in',
     'https://www.perambursrinivasa.co.in',
+    'https://perambursrinivasa.com',
+    'https://www.perambursrinivasa.com',
     'https://ecommerceadmin.perambursrinivasa.co.in',
     'https://admin.perambursrinivasa.co.in',
     'https://ecommerce.perambursrinivasa.co.in',
@@ -82,9 +84,10 @@ const corsOptions: cors.CorsOptions = {
         // Allow requests with no origin (like mobile apps, curl, server-to-server)
         if (!origin) return callback(null, true);
 
-        // Check if origin matches allowed list or is a subdomain of perambursrinivasa.co.in or localhost
+        // Check if origin matches allowed list or is a subdomain of perambursrinivasa.co.in/.com or localhost
         const isAllowed = allAllowedOrigins.includes(origin) ||
                           /^https?:\/\/([a-z0-9-]+\.)*perambursrinivasa\.co\.in(:\d+)?$/i.test(origin) ||
+                          /^https?:\/\/([a-z0-9-]+\.)*perambursrinivasa\.com(:\d+)?$/i.test(origin) ||
                           /^http:\/\/localhost(:\d+)?$/i.test(origin) ||
                           /^http:\/\/127\.0\.0\.1(:\d+)?$/i.test(origin);
 
