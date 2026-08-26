@@ -92,7 +92,7 @@ const corsOptions: cors.CorsOptions = {
             callback(null, true);
         } else {
             console.warn(`[CORS Blocked] Origin: ${origin}`);
-            callback(new Error(`Not allowed by CORS: ${origin}`));
+            callback(null, false);
         }
     },
     credentials: true,
