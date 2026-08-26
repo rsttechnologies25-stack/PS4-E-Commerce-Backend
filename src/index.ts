@@ -50,16 +50,60 @@ const port = process.env.PORT || 4000;
 // 1. Basic Middlewares (MUST be first for preflight requests)
 import helmet from 'helmet';
 
-app.use(helmet());
-app.use(cors({
-    origin: [
-        process.env.FRONTEND_URL || 'https://perambursrinivasa.co.in',
-        process.env.ADMIN_URL || 'https://admin.perambursrinivasa.co.in',
-        'http://localhost:3000',
-        'http://localhost:3001'
-    ],
-    credentials: true
+app.use(helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' }
 }));
+
+// Parse allowed origins from environment and hardcoded safe defaults
+const defaultAllowedOrigins = [
+    'https://perambursrinivasa.co.in',
+    'https://www.perambursrinivasa.co.in',
+    'https://ecommerceadmin.perambursrinivasa.co.in',
+    'https://admin.perambursrinivasa.co.in',
+    'https://ecommerce.perambursrinivasa.co.in',
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'http://localhost:4000',
+    'http://localhost:5000'
+];
+
+const envAllowedOrigins: string[] = [];
+if (process.env.ALLOWED_ORIGINS) {
+    const split = process.env.ALLOWED_ORIGINS.split(',').map(s => s.trim().replace(/^["']|["']$/g, ''));
+    envAllowedOrigins.push(...split.filter(Boolean));
+}
+if (process.env.FRONTEND_URL) envAllowedOrigins.push(process.env.FRONTEND_URL.trim());
+if (process.env.ADMIN_URL) envAllowedOrigins.push(process.env.ADMIN_URL.trim());
+
+const allAllowedOrigins = Array.from(new Set([...defaultAllowedOrigins, ...envAllowedOrigins]));
+
+const corsOptions: cors.CorsOptions = {
+    origin: (origin, callback) => {
+        // Allow requests with no origin (like mobile apps, curl, server-to-server)
+        if (!origin) return callback(null, true);
+
+        // Check if origin matches allowed list or is a subdomain of perambursrinivasa.co.in or localhost
+        const isAllowed = allAllowedOrigins.includes(origin) ||
+                          /^https?:\/\/([a-z0-9-]+\.)*perambursrinivasa\.co\.in(:\d+)?$/i.test(origin) ||
+                          /^http:\/\/localhost(:\d+)?$/i.test(origin) ||
+                          /^http:\/\/127\.0\.0\.1(:\d+)?$/i.test(origin);
+
+        if (isAllowed) {
+            callback(null, true);
+        } else {
+            console.warn(`[CORS Blocked] Origin: ${origin}`);
+            callback(new Error(`Not allowed by CORS: ${origin}`));
+        }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
+    exposedHeaders: ['Content-Range', 'X-Content-Range'],
+    maxAge: 86400 // 24 hours
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(express.json());
 
 // 2. Global Rate Limiter (Relaxed for development/testing)
