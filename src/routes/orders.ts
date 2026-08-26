@@ -29,15 +29,18 @@ router.post('/', userAuthMiddleware, validate(orderSchema), async (req, res) => 
 
         // Fetch actual variant prices and calculate subtotal & weight
         for (const item of items) {
-            const variantId = item.variantId || item.id;
-            const variant = await prisma.productVariant.findUnique({ where: { id: variantId }, include: { product: true } });
+            // Frontend sends item.id = productId and item.weight = variant weight string
+            const variant = await prisma.productVariant.findFirst({ 
+                where: { productId: item.id, weight: item.weight },
+                include: { product: true } 
+            });
             
             if (!variant) {
                 return res.status(400).json({ error: `Item variant not found: ${item.name}` });
             }
 
+            item.variantId = variant.id;
             item.actualPrice = variant.price;
-            item.weight = variant.weight;
             item.productId = variant.productId;
             item.productName = variant.product.name;
             calculatedSubtotal += variant.price * item.quantity;
