@@ -48,13 +48,24 @@ app.set('trust proxy', 1); // Fixes rate limit ValidationError: X-Forwarded-For 
 const port = process.env.PORT || 4000;
 
 // 1. Basic Middlewares (MUST be first for preflight requests)
-app.use(cors());
+import helmet from 'helmet';
+
+app.use(helmet());
+app.use(cors({
+    origin: [
+        process.env.FRONTEND_URL || 'https://perambursrinivasa.co.in',
+        process.env.ADMIN_URL || 'https://admin.perambursrinivasa.co.in',
+        'http://localhost:3000',
+        'http://localhost:3001'
+    ],
+    credentials: true
+}));
 app.use(express.json());
 
 // 2. Global Rate Limiter (Relaxed for development/testing)
 const globalLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 5000, // Increased from 100 to 5000 for development
+    max: 500, // Increased from 100 to 5000 for development, now 500
     standardHeaders: true,
     legacyHeaders: false,
     message: { error: 'Too many requests, please try again later' }
@@ -63,7 +74,6 @@ const globalLimiter = rateLimit({
 // 3. Custom Middlewares
 app.use(rlsMiddleware);
 app.use(globalLimiter);
-app.use(express.json());
 
 // Request logging for debugging
 app.use((req, res, next) => {
@@ -107,7 +117,7 @@ app.get('/', (req, res) => {
 // Global Error Handler
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
     console.error(`[${new Date().toISOString()}] Error:`, err);
-    res.status(500).json({ error: 'Internal Server Error', details: err.message });
+    res.status(500).json({ error: 'Internal Server Error' });
 });
 
 app.listen(Number(port), '0.0.0.0', () => {

@@ -9,11 +9,11 @@ const getResendClient = () => {
     return new Resend(apiKey);
 };
 
-export const sendResetPasswordEmail = async (email: string, token: string, isAdmin: boolean = false, frontendUrlOverride?: string) => {
+export const sendResetPasswordEmail = async (email: string, token: string, isAdmin: boolean = false) => {
     const resend = getResendClient();
     
-    // Choose the base URL: Priority 1: Override from frontend, Priority 2: Env Var, Priority 3: Localhost
-    const baseUrl = frontendUrlOverride || (isAdmin ? process.env.ADMIN_URL : process.env.FRONTEND_URL);
+    // Choose the base URL: Priority 1: Env Var, Priority 2: Localhost
+    const baseUrl = isAdmin ? process.env.ADMIN_URL : process.env.FRONTEND_URL;
     const fallbackUrl = isAdmin ? 'http://localhost:3001' : 'http://localhost:3000';
     
     const resetUrl = `${baseUrl || fallbackUrl}/reset-password?token=${token}`;

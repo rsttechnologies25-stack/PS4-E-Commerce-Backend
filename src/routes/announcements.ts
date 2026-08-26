@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import prisma from '../lib/prisma';
+import { authMiddleware } from '../middleware/auth';
 
 const router = Router();
 
@@ -18,7 +19,7 @@ router.get('/active', async (req, res) => {
 });
 
 // GET all announcements (admin - all)
-router.get('/', async (req, res) => {
+router.get('/', authMiddleware, async (req, res) => {
     try {
         const announcements = await prisma.announcement.findMany({
             orderBy: { sortOrder: 'asc' },
@@ -31,7 +32,7 @@ router.get('/', async (req, res) => {
 });
 
 // POST create announcement
-router.post('/', async (req, res) => {
+router.post('/', authMiddleware, async (req, res) => {
     const { message, isActive, sortOrder } = req.body;
 
     if (!message) {
@@ -54,8 +55,8 @@ router.post('/', async (req, res) => {
 });
 
 // PUT update announcement
-router.put('/:id', async (req, res) => {
-    const { id } = req.params;
+router.put('/:id', authMiddleware, async (req, res) => {
+    const id = req.params.id as string;
     const { message, isActive, sortOrder } = req.body;
 
     try {
@@ -75,8 +76,8 @@ router.put('/:id', async (req, res) => {
 });
 
 // DELETE announcement
-router.delete('/:id', async (req, res) => {
-    const { id } = req.params;
+router.delete('/:id', authMiddleware, async (req, res) => {
+    const id = req.params.id as string;
 
     try {
         await prisma.announcement.delete({ where: { id } });
@@ -88,8 +89,8 @@ router.delete('/:id', async (req, res) => {
 });
 
 // PATCH toggle active status
-router.patch('/:id/toggle', async (req, res) => {
-    const { id } = req.params;
+router.patch('/:id/toggle', authMiddleware, async (req, res) => {
+    const id = req.params.id as string;
 
     try {
         const existing = await prisma.announcement.findUnique({ where: { id } });

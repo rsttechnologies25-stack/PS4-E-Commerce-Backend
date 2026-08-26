@@ -22,7 +22,7 @@ const router = Router();
 
 const authLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 1000, // Increased from 10 to 1000 for development
+    max: 20, // Lowered from 1000 to 20
     message: { error: 'Too many registration/login attempts, please try again after 15 minutes' },
     standardHeaders: true,
     legacyHeaders: false,
@@ -193,8 +193,7 @@ router.post('/forgot-password', authLimiter, validate(forgotPasswordSchema), asy
             }
         });
 
-        const { frontendUrl } = req.body;
-        await sendResetPasswordEmail(email, resetToken, false, frontendUrl);
+        await sendResetPasswordEmail(email, resetToken, false);
         res.json({ success: true, message: 'Reset link sent to your email' });
     } catch (error) {
         res.status(500).json({ error: 'Failed to process forgot password' });
@@ -265,13 +264,21 @@ router.delete('/me', userAuthMiddleware, async (req, res) => {
     }
 });
 
+const otpLimiter = rateLimit({
+    windowMs: 10 * 60 * 1000, // 10 minutes
+    max: 5, // max 5 OTP requests per 10 min
+    message: { error: 'Too many OTP requests. Please try again after 10 minutes.' },
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+
 // Send OTP
-router.post('/send-otp', validate(sendOtpSchema), async (req, res) => {
+router.post('/send-otp', otpLimiter, validate(sendOtpSchema), async (req, res) => {
     const { phoneNumber } = req.body;
     
     try {
         // Generate a 6-digit verification code
-        const otp = Math.floor(100000 + Math.random() * 900000).toString();
+        const otp = crypto.randomInt(100000, 1000000).toString();
         const expiry = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes
         const hashedOtp = await bcrypt.hash(otp, 10);
 
@@ -336,7 +343,7 @@ router.post('/send-otp', validate(sendOtpSchema), async (req, res) => {
 });
 
 // Verify OTP
-router.post('/verify-otp', validate(verifyOtpSchema), async (req, res) => {
+router.post('/verify-otp', otpLimiter, validate(verifyOtpSchema), async (req, res) => {
     const { phoneNumber, otp } = req.body;
     
     try {

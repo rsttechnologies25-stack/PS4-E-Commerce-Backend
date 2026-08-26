@@ -18,22 +18,78 @@ const razorpay = new Razorpay({
 // Create Order
 router.post('/', userAuthMiddleware, validate(orderSchema), async (req, res) => {
     const {
-        items, totalAmount, discountAmount, shippingCharge, couponCode,
+        items, couponCode,
         customerName, phoneNumber, addressLine1, addressLine2, city, pincode
     } = req.body;
     if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
 
-    // Server-side Double Check for Coupon
-    if (couponCode) {
-        const coupon = await prisma.coupon.findUnique({ where: { code: couponCode.toUpperCase() } });
-        const subtotal = items.reduce((sum: number, item: any) => sum + (parseFloat(item.price) * parseInt(item.quantity)), 0);
-
-        if (!coupon || !coupon.isActive || (coupon.expiryDate && new Date(coupon.expiryDate) < new Date()) || subtotal < coupon.minCartAmount) {
-            return res.status(400).json({ error: 'Applied coupon is no longer valid' });
-        }
-    }
-
     try {
+        let calculatedSubtotal = 0;
+        let totalWeightKg = 0;
+
+        // Fetch actual variant prices and calculate subtotal & weight
+        for (const item of items) {
+            const variantId = item.variantId || item.id;
+            const variant = await prisma.productVariant.findUnique({ where: { id: variantId }, include: { product: true } });
+            
+            if (!variant) {
+                return res.status(400).json({ error: `Item variant not found: ${item.name}` });
+            }
+
+            item.actualPrice = variant.price;
+            item.weight = variant.weight;
+            item.productId = variant.productId;
+            item.productName = variant.product.name;
+            calculatedSubtotal += variant.price * item.quantity;
+
+            // Extract weight for shipping calculation
+            const weightMatch = variant.weight.match(/(\d+)\s*(g|kg|ml|l)/i);
+            if (weightMatch) {
+                let w = parseFloat(weightMatch[1]);
+                if (weightMatch[2].toLowerCase() === 'g' || weightMatch[2].toLowerCase() === 'ml') w = w / 1000;
+                totalWeightKg += w * item.quantity;
+            }
+        }
+
+        // Calculate Shipping Charge
+        let calculatedShippingCharge = 0;
+        const shippingRules = await prisma.shippingRule.findMany({ where: { isActive: true } });
+        let matchedRule = shippingRules.find(r => r.pincodes && r.pincodes.includes(pincode));
+        if (!matchedRule) {
+            matchedRule = shippingRules.find(r => r.areaName.toLowerCase() === city?.toLowerCase());
+        }
+        if (!matchedRule) {
+            matchedRule = shippingRules.find(r => r.pincodes === '*');
+        }
+
+        if (matchedRule) {
+            calculatedShippingCharge = matchedRule.baseCharge;
+            if (totalWeightKg > matchedRule.baseWeightLimit) {
+                const extraKg = Math.ceil(totalWeightKg - matchedRule.baseWeightLimit);
+                calculatedShippingCharge += extraKg * matchedRule.additionalChargePerKg;
+            }
+        }
+
+        // Verify Coupon and calculate discount
+        let calculatedDiscount = 0;
+        if (couponCode) {
+            const coupon = await prisma.coupon.findUnique({ where: { code: couponCode.toUpperCase() } });
+            if (!coupon || !coupon.isActive || (coupon.expiryDate && new Date(coupon.expiryDate) < new Date()) || calculatedSubtotal < coupon.minCartAmount) {
+                return res.status(400).json({ error: 'Applied coupon is no longer valid or minimum cart amount not met' });
+            }
+            if (coupon.type === 'FIXED') {
+                calculatedDiscount = coupon.value;
+            } else if (coupon.type === 'PERCENTAGE') {
+                calculatedDiscount = (calculatedSubtotal * coupon.value) / 100;
+            } else {
+                calculatedDiscount = coupon.value;
+            }
+            // Ensure discount doesn't exceed subtotal
+            calculatedDiscount = Math.min(calculatedDiscount, calculatedSubtotal);
+        }
+
+        const finalTotalAmount = calculatedSubtotal + calculatedShippingCharge - calculatedDiscount;
+
         const order = await prisma.$transaction(async (tx) => {
             // Fetch ID settings
             const settings = await tx.siteSettings.findUnique({ where: { id: 'default' } });
@@ -48,9 +104,9 @@ router.post('/', userAuthMiddleware, validate(orderSchema), async (req, res) => 
                 data: {
                     userId: req.user!.id,
                     readableId: readableId,
-                    totalAmount: parseFloat(totalAmount),
-                    discountAmount: parseFloat(discountAmount || 0),
-                    shippingCharge: parseFloat(shippingCharge || 0),
+                    totalAmount: finalTotalAmount,
+                    discountAmount: calculatedDiscount,
+                    shippingCharge: calculatedShippingCharge,
                     couponCode: couponCode || null,
                     customerName: customerName || null,
                     phoneNumber: phoneNumber || null,
@@ -61,10 +117,10 @@ router.post('/', userAuthMiddleware, validate(orderSchema), async (req, res) => 
                     status: 'PENDING',
                     items: {
                         create: items.map((item: any) => ({
-                            productId: item.id,
-                            productName: item.name || "Unknown Product",
+                            productId: item.productId,
+                            productName: item.productName || "Unknown Product",
                             weight: item.weight,
-                            price: parseFloat(item.price),
+                            price: item.actualPrice,
                             quantity: parseInt(item.quantity)
                         }))
                     }
@@ -80,7 +136,7 @@ router.post('/', userAuthMiddleware, validate(orderSchema), async (req, res) => 
 
             // Create Razorpay Order
             const razorpayOrder = await razorpay.orders.create({
-                amount: Math.round(parseFloat(totalAmount) * 100), // Amount in paise
+                amount: Math.round(finalTotalAmount * 100), // Amount in paise
                 currency: 'INR',
                 receipt: newOrder.id,
             });
@@ -132,6 +188,7 @@ router.post('/verify-payment', userAuthMiddleware, async (req, res) => {
     const body = razorpay_order_id + "|" + razorpay_payment_id;
 
     const isSimulation = process.env.NODE_ENV === 'development' && 
+                        process.env.ALLOW_PAYMENT_SIMULATION === 'true' &&
                         razorpay_signature?.startsWith('sim_sig_');
 
     const expectedSignature = crypto
@@ -139,10 +196,33 @@ router.post('/verify-payment', userAuthMiddleware, async (req, res) => {
         .update(body.toString())
         .digest("hex");
 
-    const isSignatureValid = isSimulation || (expectedSignature === razorpay_signature);
+    let isSignatureValid = isSimulation;
+    if (!isSimulation && expectedSignature && razorpay_signature) {
+        try {
+            isSignatureValid = crypto.timingSafeEqual(
+                Buffer.from(expectedSignature),
+                Buffer.from(razorpay_signature)
+            );
+        } catch (e) {
+            isSignatureValid = false;
+        }
+    }
 
     if (isSignatureValid) {
         try {
+            // First find the order to check ownership
+            const existingOrder = await prisma.order.findUnique({
+                where: { razorpayOrderId: razorpay_order_id }
+            });
+
+            if (!existingOrder) {
+                return res.status(404).json({ error: 'Order not found' });
+            }
+
+            if (existingOrder.userId !== req.user?.id) {
+                return res.status(403).json({ error: 'Unauthorized to verify this order' });
+            }
+
             const order = await prisma.order.update({
                 where: { razorpayOrderId: razorpay_order_id },
                 data: {

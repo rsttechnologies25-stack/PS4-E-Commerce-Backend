@@ -1,10 +1,11 @@
 import { Router, Request, Response } from 'express';
 import prisma from '../lib/prisma';
+import { authMiddleware } from '../middleware/auth';
 
 const router = Router();
 
 // GET all pairings (admin)
-router.get('/', async (_req: Request, res: Response) => {
+router.get('/', authMiddleware, async (_req: Request, res: Response) => {
     try {
         const pairings = await prisma.categoryPairing.findMany({
             orderBy: [{ sortOrder: 'asc' }, { createdAt: 'desc' }],
@@ -39,7 +40,7 @@ router.get('/', async (_req: Request, res: Response) => {
 });
 
 // POST create pairing
-router.post('/', async (req: Request, res: Response) => {
+router.post('/', authMiddleware, async (req: Request, res: Response) => {
     try {
         const { categoryId, pairedCategoryId, sortOrder } = req.body;
 
@@ -70,7 +71,7 @@ router.post('/', async (req: Request, res: Response) => {
 });
 
 // DELETE pairing
-router.delete('/:id', async (req: Request, res: Response) => {
+router.delete('/:id', authMiddleware, async (req: Request, res: Response) => {
     try {
         await prisma.categoryPairing.delete({
             where: { id: req.params.id as string },
@@ -83,7 +84,7 @@ router.delete('/:id', async (req: Request, res: Response) => {
 });
 
 // PATCH toggle active
-router.patch('/:id/toggle', async (req: Request, res: Response) => {
+router.patch('/:id/toggle', authMiddleware, async (req: Request, res: Response) => {
     try {
         const pairing = await prisma.categoryPairing.findUnique({
             where: { id: req.params.id as string },

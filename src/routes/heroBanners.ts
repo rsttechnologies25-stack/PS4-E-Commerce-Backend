@@ -3,6 +3,7 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import prisma from '../lib/prisma';
+import { authMiddleware } from '../middleware/auth';
 
 // Ensure upload directory exists
 const uploadDir = path.join(__dirname, '../../public/uploads/banners');
@@ -92,7 +93,7 @@ router.get('/active', async (_req: Request, res: Response) => {
 });
 
 // GET all banners (admin)
-router.get('/', async (_req: Request, res: Response) => {
+router.get('/', authMiddleware, async (_req: Request, res: Response) => {
     try {
         const banners = await prisma.heroBanner.findMany({
             orderBy: { sortOrder: 'asc' },
@@ -131,7 +132,7 @@ router.get('/', async (_req: Request, res: Response) => {
 });
 
 // POST create banner
-router.post('/', upload.single('image'), async (req: Request, res: Response) => {
+router.post('/', authMiddleware, upload.single('image'), async (req: Request, res: Response) => {
     try {
         const file = req.file;
         if (!file) {
@@ -165,7 +166,7 @@ router.post('/', upload.single('image'), async (req: Request, res: Response) => 
 });
 
 // PUT update banner
-router.put('/:id', upload.single('image'), async (req: Request, res: Response) => {
+router.put('/:id', authMiddleware, upload.single('image'), async (req: Request, res: Response) => {
     const id = req.params.id as string;
     const file = req.file;
     const { title, subtitle, ctaText, linkType, productId, categoryId, customUrl, sortOrder, slideInterval, startDate, endDate, isActive } = req.body;
@@ -212,7 +213,7 @@ router.put('/:id', upload.single('image'), async (req: Request, res: Response) =
 });
 
 // DELETE banner
-router.delete('/:id', async (req: Request, res: Response) => {
+router.delete('/:id', authMiddleware, async (req: Request, res: Response) => {
     const id = req.params.id as string;
     try {
         const banner = await prisma.heroBanner.findUnique({ where: { id: id } });
@@ -229,7 +230,7 @@ router.delete('/:id', async (req: Request, res: Response) => {
 });
 
 // PATCH toggle active
-router.patch('/:id/toggle', async (req: Request, res: Response) => {
+router.patch('/:id/toggle', authMiddleware, async (req: Request, res: Response) => {
     const id = req.params.id as string;
     try {
         const existing = await prisma.heroBanner.findUnique({ where: { id: id } });

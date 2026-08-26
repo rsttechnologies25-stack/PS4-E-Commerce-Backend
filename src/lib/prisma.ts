@@ -20,15 +20,15 @@ const prisma = prismaClient.$extends({
         // in PostgreSQL, SET LOCAL only lasts for the current transaction.
         return prismaClient.$transaction(async (tx) => {
           if (userId) {
-            await tx.$executeRawUnsafe(`SELECT set_config('app.current_user_id', '${userId}', TRUE)`);
+            await tx.$executeRaw`SELECT set_config('app.current_user_id', ${userId || ''}, TRUE)`;
           } else {
-            await tx.$executeRawUnsafe(`SELECT set_config('app.current_user_id', '', TRUE)`);
+            await tx.$executeRaw`SELECT set_config('app.current_user_id', '', TRUE)`;
           }
           
           if (isAdmin) {
-            await tx.$executeRawUnsafe(`SELECT set_config('app.is_admin', 'true', TRUE)`);
+            await tx.$executeRaw`SELECT set_config('app.is_admin', 'true', TRUE)`;
           } else {
-            await tx.$executeRawUnsafe(`SELECT set_config('app.is_admin', 'false', TRUE)`);
+            await tx.$executeRaw`SELECT set_config('app.is_admin', 'false', TRUE)`;
           }
 
           return query(args);

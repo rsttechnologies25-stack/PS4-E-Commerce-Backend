@@ -31,6 +31,7 @@ export const updateProfileSchema = z.object({
 export const orderSchema = z.object({
   items: z.array(z.object({
     id: z.string(),
+    variantId: z.string().optional(),
     name: z.string(),
     weight: z.string(),
     price: z.number().positive(),
@@ -71,7 +72,6 @@ export const updateCartItemSchema = z.object({
 
 export const forgotPasswordSchema = z.object({
   email: z.string().email('Invalid email format').toLowerCase().trim(),
-  frontendUrl: z.string().url('Invalid URL format').optional(),
 });
 
 export const resetPasswordSchema = z.object({
