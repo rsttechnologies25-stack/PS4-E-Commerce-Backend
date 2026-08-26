@@ -111,7 +111,7 @@ app.use(express.json());
 // 2. Global Rate Limiter (Relaxed for development/testing)
 const globalLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 500, // Increased from 100 to 5000 for development, now 500
+    max: 2000, // 2000 requests per 15 minutes per IP
     standardHeaders: true,
     legacyHeaders: false,
     message: { error: 'Too many requests, please try again later' }
