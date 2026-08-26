@@ -13,7 +13,7 @@ const router = Router();
 
 const adminAuthLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 5, // Limit each IP to 5 login attempts per windowMs
+    max: 20, // Limit each IP to 20 login attempts per windowMs
     message: { error: 'Too many admin login attempts, please try again after 15 minutes' },
     standardHeaders: true,
     legacyHeaders: false,
@@ -29,8 +29,12 @@ router.post('/login', adminAuthLimiter, validate(adminLoginSchema), async (req, 
         const isValid = await bcrypt.compare(password, admin.password);
         if (!isValid) return res.status(401).json({ error: 'Invalid credentials' });
 
-        const token = jwt.sign({ id: admin.id, email: admin.email }, process.env.JWT_SECRET!, { expiresIn: '1d' });
-        res.json({ token, admin: { email: admin.email } });
+        const token = jwt.sign(
+            { id: admin.id, email: admin.email, role: 'ADMIN' }, 
+            process.env.JWT_SECRET!, 
+            { expiresIn: '1d' }
+        );
+        res.json({ token, admin: { email: admin.email, role: 'ADMIN' } });
     } catch (error) {
         res.status(500).json({ error: 'Login failed' });
     }
