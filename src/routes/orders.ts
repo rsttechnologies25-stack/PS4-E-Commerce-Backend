@@ -15,6 +15,21 @@ const razorpay = new Razorpay({
     key_secret: process.env.RAZORPAY_KEY_SECRET!,
 });
 
+// Temporary test Razorpay instance for iOS App Store review
+const razorpayTest = process.env.RAZORPAY_TEST_KEY_ID ? new Razorpay({
+    key_id: process.env.RAZORPAY_TEST_KEY_ID!,
+    key_secret: process.env.RAZORPAY_TEST_KEY_SECRET!,
+}) : null;
+
+// Helper: pick Razorpay instance and secret based on platform header
+function getRazorpayForRequest(req: any): { instance: Razorpay; secret: string } {
+    const platform = req.headers['x-platform'];
+    if (platform === 'mobile' && razorpayTest) {
+        return { instance: razorpayTest, secret: process.env.RAZORPAY_TEST_KEY_SECRET! };
+    }
+    return { instance: razorpay, secret: process.env.RAZORPAY_KEY_SECRET! };
+}
+
 // Create Order
 router.post('/', userAuthMiddleware, validate(orderSchema), async (req, res) => {
     const {
@@ -137,8 +152,9 @@ router.post('/', userAuthMiddleware, validate(orderSchema), async (req, res) => 
                 data: { nextOrderNumber: currentNum + 1 }
             });
 
-            // Create Razorpay Order
-            const razorpayOrder = await razorpay.orders.create({
+            // Create Razorpay Order (test or prod based on platform)
+            const { instance: rpInstance } = getRazorpayForRequest(req);
+            const razorpayOrder = await rpInstance.orders.create({
                 amount: Math.round(finalTotalAmount * 100), // Amount in paise
                 currency: 'INR',
                 receipt: newOrder.id,
@@ -194,8 +210,10 @@ router.post('/verify-payment', userAuthMiddleware, async (req, res) => {
                         process.env.ALLOW_PAYMENT_SIMULATION === 'true' &&
                         razorpay_signature?.startsWith('sim_sig_');
 
+    // Use test or prod secret based on platform header
+    const { secret: rpSecret } = getRazorpayForRequest(req);
     const expectedSignature = crypto
-        .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET!)
+        .createHmac("sha256", rpSecret)
         .update(body.toString())
         .digest("hex");
 
