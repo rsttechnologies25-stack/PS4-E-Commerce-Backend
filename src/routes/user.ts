@@ -48,7 +48,7 @@ router.post('/register', authLimiter, validate(registerSchema), async (req, res)
             }
         });
 
-        const token = jwt.sign({ id: user.id, email: user.email }, process.env.USER_JWT_SECRET!, { expiresIn: '24h' });
+        const token = jwt.sign({ id: user.id, email: user.email }, process.env.USER_JWT_SECRET!, { expiresIn: '30d' });
         res.json({ token, user: { id: user.id, email: user.email, name: user.name } });
     } catch (error) {
         console.error('Registration error:', error);
@@ -74,7 +74,7 @@ router.post('/login', authLimiter, validate(loginSchema), async (req, res) => {
         const isValid = await bcrypt.compare(password, user.password);
         if (!isValid) return res.status(401).json({ error: 'Invalid credentials' });
 
-        const token = jwt.sign({ id: user.id, email: user.email }, process.env.USER_JWT_SECRET!, { expiresIn: '24h' });
+        const token = jwt.sign({ id: user.id, email: user.email }, process.env.USER_JWT_SECRET!, { expiresIn: '30d' });
         res.json({ token, user: { id: user.id, email: user.email, name: user.name } });
     } catch (error) {
         console.error('Login error:', error);
@@ -378,7 +378,7 @@ router.post('/verify-otp', otpLimiter, validate(verifyOtpSchema), async (req, re
         const token = jwt.sign(
             { id: user.id, email: user.email || '', phoneNumber: user.phoneNumber }, 
             process.env.USER_JWT_SECRET!, 
-            { expiresIn: '24h' }
+            { expiresIn: '30d' }
         );
 
         res.json({ 
