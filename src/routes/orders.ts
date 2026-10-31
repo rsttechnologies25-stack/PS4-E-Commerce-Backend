@@ -39,6 +39,10 @@ router.post('/', userAuthMiddleware, validate(orderSchema), async (req, res) => 
                 return res.status(400).json({ error: `Item variant not found: ${item.name}` });
             }
 
+            if (variant.product.isSoldOut) {
+                return res.status(400).json({ error: `Item "${variant.product.name}" is currently sold out and cannot be ordered.` });
+            }
+
             item.variantId = variant.id;
             item.actualPrice = variant.price;
             item.productId = variant.productId;

@@ -54,7 +54,8 @@ const formatCartItem = (item: any) => {
         slug: product.slug,
         quantity: item.quantity,
         categoryName: product.category?.name || 'Category',
-        categoryId: product.categoryId
+        categoryId: product.categoryId,
+        isSoldOut: product.isSoldOut || false
     };
 };
 

@@ -21,7 +21,7 @@ const productInclude = {
 
 // GET all products (flat list)
 router.get('/', async (req, res) => {
-    const { category, isBestSeller, isNewLaunch, includeChildren, limit } = req.query;
+    const { category, isBestSeller, isNewLaunch, inStockOnly, isSoldOut, includeChildren, limit } = req.query;
     const limitNum = limit ? parseInt(limit as string) : undefined;
 
     try {
@@ -41,7 +41,7 @@ router.get('/', async (req, res) => {
             }
         }
 
-        const where = {
+        const where: any = {
             ...(category ? {
                 OR: [
                     { categoryId: categoryId },
@@ -51,6 +51,12 @@ router.get('/', async (req, res) => {
             ...(isBestSeller === 'true' ? { isBestSeller: true } : {}),
             ...(isNewLaunch === 'true' ? { isNewLaunch: true } : {}),
         };
+
+        if (isSoldOut !== undefined) {
+            where.isSoldOut = isSoldOut === 'true';
+        } else if (inStockOnly === 'true' || isNewLaunch === 'true') {
+            where.isSoldOut = false;
+        }
 
         const products = await prisma.product.findMany({
             where,
