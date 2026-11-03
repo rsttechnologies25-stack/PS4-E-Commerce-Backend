@@ -92,28 +92,48 @@ export async function confirmOrderPayment({
         return order;
     });
 
-    // Create User Notification
+    // Create User Notification (Idempotent: only if not already created)
     const displayId = updatedOrder.readableId || "#" + updatedOrder.id.slice(-6);
-    await prisma.notification.create({
-        data: {
-            userId: updatedOrder.userId,
-            isAdmin: false,
-            type: 'ORDER_CONFIRMED',
-            message: `Thank you! Your order ${displayId} has been confirmed and is now being processed.`,
-            orderId: updatedOrder.id
+    if (updatedOrder.userId) {
+        const existingUserNotif = await prisma.notification.findFirst({
+            where: {
+                orderId: updatedOrder.id,
+                userId: updatedOrder.userId,
+                type: 'ORDER_CONFIRMED'
+            }
+        });
+        if (!existingUserNotif) {
+            await prisma.notification.create({
+                data: {
+                    userId: updatedOrder.userId,
+                    isAdmin: false,
+                    type: 'ORDER_CONFIRMED',
+                    message: `Thank you! Your order ${displayId} has been confirmed and is now being processed.`,
+                    orderId: updatedOrder.id
+                }
+            }).catch(console.error);
         }
-    }).catch(console.error);
+    }
 
-    // Create Admin Notification (High Priority)
-    await prisma.notification.create({
-        data: {
+    // Create Admin Notification (High Priority, Idempotent: only if not already created)
+    const existingAdminNotif = await prisma.notification.findFirst({
+        where: {
+            orderId: updatedOrder.id,
             isAdmin: true,
-            priority: 'HIGH',
-            type: 'NEW_ORDER',
-            message: `New Order ${displayId} received! Click to process.`,
-            orderId: updatedOrder.id
+            type: 'NEW_ORDER'
         }
-    }).catch(console.error);
+    });
+    if (!existingAdminNotif) {
+        await prisma.notification.create({
+            data: {
+                isAdmin: true,
+                priority: 'HIGH',
+                type: 'NEW_ORDER',
+                message: `New Order ${displayId} received! Click to process.`,
+                orderId: updatedOrder.id
+            }
+        }).catch(console.error);
+    }
 
     // Fire-and-forget: Send WhatsApp order confirmation
     sendOrderWhatsApp('ORDER_CONFIRMED', updatedOrder).catch(err =>
@@ -546,7 +566,8 @@ router.get('/admin/sales-analytics', authMiddleware, async (req, res) => {
 
         // Sales strictly include confirmed paid orders
         const whereClause: any = {
-            paymentStatus: 'PAID'
+            paymentStatus: 'PAID',
+            status: { notIn: ['CANCELLED', 'FAILED', 'PENDING'] }
         };
 
         if (startDate && endDate) {
