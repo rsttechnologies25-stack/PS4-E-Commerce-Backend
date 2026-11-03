@@ -148,7 +148,8 @@ exports.Prisma.ProductScalarFieldEnum = {
   isNewLaunch: 'isNewLaunch',
   createdAt: 'createdAt',
   deliveryInfo: 'deliveryInfo',
-  isSoldOut: 'isSoldOut'
+  isSoldOut: 'isSoldOut',
+  isDisabled: 'isDisabled'
 };
 
 exports.Prisma.ProductImageScalarFieldEnum = {

@@ -16,6 +16,7 @@ router.get('/', async (req: Request, res: Response) => {
         const [products, categories] = await Promise.all([
             prisma.product.findMany({
                 where: {
+                    isDisabled: false,
                     OR: [
                         { name: { contains: query, mode: 'insensitive' } },
                         { description: { contains: query, mode: 'insensitive' } }

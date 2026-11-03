@@ -75,6 +75,7 @@ router.post('/', async (req: Request, res: Response) => {
         // Fetch products from paired categories, excluding items already in cart
         const products = await prisma.product.findMany({
             where: {
+                isDisabled: false,
                 categoryId: { in: allPairedIds },
                 id: { notIn: excludeIds },
             },

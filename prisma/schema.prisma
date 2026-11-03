@@ -43,6 +43,7 @@ model Product {
   createdAt    DateTime         @default(now())
   deliveryInfo String?
   isSoldOut    Boolean          @default(false)
+  isDisabled   Boolean          @default(false)
   cartItems    CartItem[]
   heroBanners  HeroBanner[]
   orderItems   OrderItem[]

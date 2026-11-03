@@ -4999,6 +4999,7 @@ export namespace Prisma {
     createdAt: Date | null
     deliveryInfo: string | null
     isSoldOut: boolean | null
+    isDisabled: boolean | null
   }
 
   export type ProductMaxAggregateOutputType = {
@@ -5015,6 +5016,7 @@ export namespace Prisma {
     createdAt: Date | null
     deliveryInfo: string | null
     isSoldOut: boolean | null
+    isDisabled: boolean | null
   }
 
   export type ProductCountAggregateOutputType = {
@@ -5031,6 +5033,7 @@ export namespace Prisma {
     createdAt: number
     deliveryInfo: number
     isSoldOut: number
+    isDisabled: number
     _all: number
   }
 
@@ -5057,6 +5060,7 @@ export namespace Prisma {
     createdAt?: true
     deliveryInfo?: true
     isSoldOut?: true
+    isDisabled?: true
   }
 
   export type ProductMaxAggregateInputType = {
@@ -5073,6 +5077,7 @@ export namespace Prisma {
     createdAt?: true
     deliveryInfo?: true
     isSoldOut?: true
+    isDisabled?: true
   }
 
   export type ProductCountAggregateInputType = {
@@ -5089,6 +5094,7 @@ export namespace Prisma {
     createdAt?: true
     deliveryInfo?: true
     isSoldOut?: true
+    isDisabled?: true
     _all?: true
   }
 
@@ -5192,6 +5198,7 @@ export namespace Prisma {
     createdAt: Date
     deliveryInfo: string | null
     isSoldOut: boolean
+    isDisabled: boolean
     _count: ProductCountAggregateOutputType | null
     _avg: ProductAvgAggregateOutputType | null
     _sum: ProductSumAggregateOutputType | null
@@ -5227,6 +5234,7 @@ export namespace Prisma {
     createdAt?: boolean
     deliveryInfo?: boolean
     isSoldOut?: boolean
+    isDisabled?: boolean
     cartItems?: boolean | Product$cartItemsArgs<ExtArgs>
     heroBanners?: boolean | Product$heroBannersArgs<ExtArgs>
     orderItems?: boolean | Product$orderItemsArgs<ExtArgs>
@@ -5251,6 +5259,7 @@ export namespace Prisma {
     createdAt?: boolean
     deliveryInfo?: boolean
     isSoldOut?: boolean
+    isDisabled?: boolean
     category?: boolean | CategoryDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["product"]>
 
@@ -5268,6 +5277,7 @@ export namespace Prisma {
     createdAt?: boolean
     deliveryInfo?: boolean
     isSoldOut?: boolean
+    isDisabled?: boolean
     category?: boolean | CategoryDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["product"]>
 
@@ -5285,9 +5295,10 @@ export namespace Prisma {
     createdAt?: boolean
     deliveryInfo?: boolean
     isSoldOut?: boolean
+    isDisabled?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "price" | "weight" | "image" | "categoryId" | "isBestSeller" | "isNewLaunch" | "createdAt" | "deliveryInfo" | "isSoldOut", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "price" | "weight" | "image" | "categoryId" | "isBestSeller" | "isNewLaunch" | "createdAt" | "deliveryInfo" | "isSoldOut" | "isDisabled", ExtArgs["result"]["product"]>
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     cartItems?: boolean | Product$cartItemsArgs<ExtArgs>
     heroBanners?: boolean | Product$heroBannersArgs<ExtArgs>
@@ -5330,6 +5341,7 @@ export namespace Prisma {
       createdAt: Date
       deliveryInfo: string | null
       isSoldOut: boolean
+      isDisabled: boolean
     }, ExtArgs["result"]["product"]>
     composites: {}
   }
@@ -5773,6 +5785,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Product", 'DateTime'>
     readonly deliveryInfo: FieldRef<"Product", 'String'>
     readonly isSoldOut: FieldRef<"Product", 'Boolean'>
+    readonly isDisabled: FieldRef<"Product", 'Boolean'>
   }
     
 
@@ -25704,7 +25717,8 @@ export namespace Prisma {
     isNewLaunch: 'isNewLaunch',
     createdAt: 'createdAt',
     deliveryInfo: 'deliveryInfo',
-    isSoldOut: 'isSoldOut'
+    isSoldOut: 'isSoldOut',
+    isDisabled: 'isDisabled'
   };
 
   export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
@@ -26262,6 +26276,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Product"> | Date | string
     deliveryInfo?: StringNullableFilter<"Product"> | string | null
     isSoldOut?: BoolFilter<"Product"> | boolean
+    isDisabled?: BoolFilter<"Product"> | boolean
     cartItems?: CartItemListRelationFilter
     heroBanners?: HeroBannerListRelationFilter
     orderItems?: OrderItemListRelationFilter
@@ -26285,6 +26300,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     deliveryInfo?: SortOrderInput | SortOrder
     isSoldOut?: SortOrder
+    isDisabled?: SortOrder
     cartItems?: CartItemOrderByRelationAggregateInput
     heroBanners?: HeroBannerOrderByRelationAggregateInput
     orderItems?: OrderItemOrderByRelationAggregateInput
@@ -26311,6 +26327,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Product"> | Date | string
     deliveryInfo?: StringNullableFilter<"Product"> | string | null
     isSoldOut?: BoolFilter<"Product"> | boolean
+    isDisabled?: BoolFilter<"Product"> | boolean
     cartItems?: CartItemListRelationFilter
     heroBanners?: HeroBannerListRelationFilter
     orderItems?: OrderItemListRelationFilter
@@ -26334,6 +26351,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     deliveryInfo?: SortOrderInput | SortOrder
     isSoldOut?: SortOrder
+    isDisabled?: SortOrder
     _count?: ProductCountOrderByAggregateInput
     _avg?: ProductAvgOrderByAggregateInput
     _max?: ProductMaxOrderByAggregateInput
@@ -26358,6 +26376,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
     deliveryInfo?: StringNullableWithAggregatesFilter<"Product"> | string | null
     isSoldOut?: BoolWithAggregatesFilter<"Product"> | boolean
+    isDisabled?: BoolWithAggregatesFilter<"Product"> | boolean
   }
 
   export type ProductImageWhereInput = {
@@ -27987,6 +28006,7 @@ export namespace Prisma {
     createdAt?: Date | string
     deliveryInfo?: string | null
     isSoldOut?: boolean
+    isDisabled?: boolean
     cartItems?: CartItemCreateNestedManyWithoutProductInput
     heroBanners?: HeroBannerCreateNestedManyWithoutProductInput
     orderItems?: OrderItemCreateNestedManyWithoutProductInput
@@ -28010,6 +28030,7 @@ export namespace Prisma {
     createdAt?: Date | string
     deliveryInfo?: string | null
     isSoldOut?: boolean
+    isDisabled?: boolean
     cartItems?: CartItemUncheckedCreateNestedManyWithoutProductInput
     heroBanners?: HeroBannerUncheckedCreateNestedManyWithoutProductInput
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutProductInput
@@ -28031,6 +28052,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deliveryInfo?: NullableStringFieldUpdateOperationsInput | string | null
     isSoldOut?: BoolFieldUpdateOperationsInput | boolean
+    isDisabled?: BoolFieldUpdateOperationsInput | boolean
     cartItems?: CartItemUpdateManyWithoutProductNestedInput
     heroBanners?: HeroBannerUpdateManyWithoutProductNestedInput
     orderItems?: OrderItemUpdateManyWithoutProductNestedInput
@@ -28054,6 +28076,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deliveryInfo?: NullableStringFieldUpdateOperationsInput | string | null
     isSoldOut?: BoolFieldUpdateOperationsInput | boolean
+    isDisabled?: BoolFieldUpdateOperationsInput | boolean
     cartItems?: CartItemUncheckedUpdateManyWithoutProductNestedInput
     heroBanners?: HeroBannerUncheckedUpdateManyWithoutProductNestedInput
     orderItems?: OrderItemUncheckedUpdateManyWithoutProductNestedInput
@@ -28076,6 +28099,7 @@ export namespace Prisma {
     createdAt?: Date | string
     deliveryInfo?: string | null
     isSoldOut?: boolean
+    isDisabled?: boolean
   }
 
   export type ProductUpdateManyMutationInput = {
@@ -28091,6 +28115,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deliveryInfo?: NullableStringFieldUpdateOperationsInput | string | null
     isSoldOut?: BoolFieldUpdateOperationsInput | boolean
+    isDisabled?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ProductUncheckedUpdateManyInput = {
@@ -28107,6 +28132,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deliveryInfo?: NullableStringFieldUpdateOperationsInput | string | null
     isSoldOut?: BoolFieldUpdateOperationsInput | boolean
+    isDisabled?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ProductImageCreateInput = {
@@ -30114,6 +30140,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     deliveryInfo?: SortOrder
     isSoldOut?: SortOrder
+    isDisabled?: SortOrder
   }
 
   export type ProductAvgOrderByAggregateInput = {
@@ -30134,6 +30161,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     deliveryInfo?: SortOrder
     isSoldOut?: SortOrder
+    isDisabled?: SortOrder
   }
 
   export type ProductMinOrderByAggregateInput = {
@@ -30150,6 +30178,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     deliveryInfo?: SortOrder
     isSoldOut?: SortOrder
+    isDisabled?: SortOrder
   }
 
   export type ProductSumOrderByAggregateInput = {
@@ -32263,6 +32292,7 @@ export namespace Prisma {
     createdAt?: Date | string
     deliveryInfo?: string | null
     isSoldOut?: boolean
+    isDisabled?: boolean
     cartItems?: CartItemCreateNestedManyWithoutProductInput
     heroBanners?: HeroBannerCreateNestedManyWithoutProductInput
     orderItems?: OrderItemCreateNestedManyWithoutProductInput
@@ -32284,6 +32314,7 @@ export namespace Prisma {
     createdAt?: Date | string
     deliveryInfo?: string | null
     isSoldOut?: boolean
+    isDisabled?: boolean
     cartItems?: CartItemUncheckedCreateNestedManyWithoutProductInput
     heroBanners?: HeroBannerUncheckedCreateNestedManyWithoutProductInput
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutProductInput
@@ -32397,6 +32428,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Product"> | Date | string
     deliveryInfo?: StringNullableFilter<"Product"> | string | null
     isSoldOut?: BoolFilter<"Product"> | boolean
+    isDisabled?: BoolFilter<"Product"> | boolean
   }
 
   export type CartItemCreateWithoutProductInput = {
@@ -32865,6 +32897,7 @@ export namespace Prisma {
     createdAt?: Date | string
     deliveryInfo?: string | null
     isSoldOut?: boolean
+    isDisabled?: boolean
     cartItems?: CartItemCreateNestedManyWithoutProductInput
     heroBanners?: HeroBannerCreateNestedManyWithoutProductInput
     orderItems?: OrderItemCreateNestedManyWithoutProductInput
@@ -32887,6 +32920,7 @@ export namespace Prisma {
     createdAt?: Date | string
     deliveryInfo?: string | null
     isSoldOut?: boolean
+    isDisabled?: boolean
     cartItems?: CartItemUncheckedCreateNestedManyWithoutProductInput
     heroBanners?: HeroBannerUncheckedCreateNestedManyWithoutProductInput
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutProductInput
@@ -32923,6 +32957,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deliveryInfo?: NullableStringFieldUpdateOperationsInput | string | null
     isSoldOut?: BoolFieldUpdateOperationsInput | boolean
+    isDisabled?: BoolFieldUpdateOperationsInput | boolean
     cartItems?: CartItemUpdateManyWithoutProductNestedInput
     heroBanners?: HeroBannerUpdateManyWithoutProductNestedInput
     orderItems?: OrderItemUpdateManyWithoutProductNestedInput
@@ -32945,6 +32980,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deliveryInfo?: NullableStringFieldUpdateOperationsInput | string | null
     isSoldOut?: BoolFieldUpdateOperationsInput | boolean
+    isDisabled?: BoolFieldUpdateOperationsInput | boolean
     cartItems?: CartItemUncheckedUpdateManyWithoutProductNestedInput
     heroBanners?: HeroBannerUncheckedUpdateManyWithoutProductNestedInput
     orderItems?: OrderItemUncheckedUpdateManyWithoutProductNestedInput
@@ -32965,6 +33001,7 @@ export namespace Prisma {
     createdAt?: Date | string
     deliveryInfo?: string | null
     isSoldOut?: boolean
+    isDisabled?: boolean
     cartItems?: CartItemCreateNestedManyWithoutProductInput
     heroBanners?: HeroBannerCreateNestedManyWithoutProductInput
     orderItems?: OrderItemCreateNestedManyWithoutProductInput
@@ -32987,6 +33024,7 @@ export namespace Prisma {
     createdAt?: Date | string
     deliveryInfo?: string | null
     isSoldOut?: boolean
+    isDisabled?: boolean
     cartItems?: CartItemUncheckedCreateNestedManyWithoutProductInput
     heroBanners?: HeroBannerUncheckedCreateNestedManyWithoutProductInput
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutProductInput
@@ -33023,6 +33061,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deliveryInfo?: NullableStringFieldUpdateOperationsInput | string | null
     isSoldOut?: BoolFieldUpdateOperationsInput | boolean
+    isDisabled?: BoolFieldUpdateOperationsInput | boolean
     cartItems?: CartItemUpdateManyWithoutProductNestedInput
     heroBanners?: HeroBannerUpdateManyWithoutProductNestedInput
     orderItems?: OrderItemUpdateManyWithoutProductNestedInput
@@ -33045,6 +33084,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deliveryInfo?: NullableStringFieldUpdateOperationsInput | string | null
     isSoldOut?: BoolFieldUpdateOperationsInput | boolean
+    isDisabled?: BoolFieldUpdateOperationsInput | boolean
     cartItems?: CartItemUncheckedUpdateManyWithoutProductNestedInput
     heroBanners?: HeroBannerUncheckedUpdateManyWithoutProductNestedInput
     orderItems?: OrderItemUncheckedUpdateManyWithoutProductNestedInput
@@ -33065,6 +33105,7 @@ export namespace Prisma {
     createdAt?: Date | string
     deliveryInfo?: string | null
     isSoldOut?: boolean
+    isDisabled?: boolean
     cartItems?: CartItemCreateNestedManyWithoutProductInput
     orderItems?: OrderItemCreateNestedManyWithoutProductInput
     category: CategoryCreateNestedOneWithoutProductsInput
@@ -33087,6 +33128,7 @@ export namespace Prisma {
     createdAt?: Date | string
     deliveryInfo?: string | null
     isSoldOut?: boolean
+    isDisabled?: boolean
     cartItems?: CartItemUncheckedCreateNestedManyWithoutProductInput
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutProductInput
     images?: ProductImageUncheckedCreateNestedManyWithoutProductInput
@@ -33123,6 +33165,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deliveryInfo?: NullableStringFieldUpdateOperationsInput | string | null
     isSoldOut?: BoolFieldUpdateOperationsInput | boolean
+    isDisabled?: BoolFieldUpdateOperationsInput | boolean
     cartItems?: CartItemUpdateManyWithoutProductNestedInput
     orderItems?: OrderItemUpdateManyWithoutProductNestedInput
     category?: CategoryUpdateOneRequiredWithoutProductsNestedInput
@@ -33145,6 +33188,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deliveryInfo?: NullableStringFieldUpdateOperationsInput | string | null
     isSoldOut?: BoolFieldUpdateOperationsInput | boolean
+    isDisabled?: BoolFieldUpdateOperationsInput | boolean
     cartItems?: CartItemUncheckedUpdateManyWithoutProductNestedInput
     orderItems?: OrderItemUncheckedUpdateManyWithoutProductNestedInput
     images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput
@@ -33165,6 +33209,7 @@ export namespace Prisma {
     createdAt?: Date | string
     deliveryInfo?: string | null
     isSoldOut?: boolean
+    isDisabled?: boolean
     cartItems?: CartItemCreateNestedManyWithoutProductInput
     heroBanners?: HeroBannerCreateNestedManyWithoutProductInput
     orderItems?: OrderItemCreateNestedManyWithoutProductInput
@@ -33187,6 +33232,7 @@ export namespace Prisma {
     createdAt?: Date | string
     deliveryInfo?: string | null
     isSoldOut?: boolean
+    isDisabled?: boolean
     cartItems?: CartItemUncheckedCreateNestedManyWithoutProductInput
     heroBanners?: HeroBannerUncheckedCreateNestedManyWithoutProductInput
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutProductInput
@@ -33280,6 +33326,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deliveryInfo?: NullableStringFieldUpdateOperationsInput | string | null
     isSoldOut?: BoolFieldUpdateOperationsInput | boolean
+    isDisabled?: BoolFieldUpdateOperationsInput | boolean
     cartItems?: CartItemUpdateManyWithoutProductNestedInput
     heroBanners?: HeroBannerUpdateManyWithoutProductNestedInput
     orderItems?: OrderItemUpdateManyWithoutProductNestedInput
@@ -33302,6 +33349,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deliveryInfo?: NullableStringFieldUpdateOperationsInput | string | null
     isSoldOut?: BoolFieldUpdateOperationsInput | boolean
+    isDisabled?: BoolFieldUpdateOperationsInput | boolean
     cartItems?: CartItemUncheckedUpdateManyWithoutProductNestedInput
     heroBanners?: HeroBannerUncheckedUpdateManyWithoutProductNestedInput
     orderItems?: OrderItemUncheckedUpdateManyWithoutProductNestedInput
@@ -33679,6 +33727,7 @@ export namespace Prisma {
     createdAt?: Date | string
     deliveryInfo?: string | null
     isSoldOut?: boolean
+    isDisabled?: boolean
     heroBanners?: HeroBannerCreateNestedManyWithoutProductInput
     orderItems?: OrderItemCreateNestedManyWithoutProductInput
     category: CategoryCreateNestedOneWithoutProductsInput
@@ -33701,6 +33750,7 @@ export namespace Prisma {
     createdAt?: Date | string
     deliveryInfo?: string | null
     isSoldOut?: boolean
+    isDisabled?: boolean
     heroBanners?: HeroBannerUncheckedCreateNestedManyWithoutProductInput
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutProductInput
     images?: ProductImageUncheckedCreateNestedManyWithoutProductInput
@@ -33794,6 +33844,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deliveryInfo?: NullableStringFieldUpdateOperationsInput | string | null
     isSoldOut?: BoolFieldUpdateOperationsInput | boolean
+    isDisabled?: BoolFieldUpdateOperationsInput | boolean
     heroBanners?: HeroBannerUpdateManyWithoutProductNestedInput
     orderItems?: OrderItemUpdateManyWithoutProductNestedInput
     category?: CategoryUpdateOneRequiredWithoutProductsNestedInput
@@ -33816,6 +33867,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deliveryInfo?: NullableStringFieldUpdateOperationsInput | string | null
     isSoldOut?: BoolFieldUpdateOperationsInput | boolean
+    isDisabled?: BoolFieldUpdateOperationsInput | boolean
     heroBanners?: HeroBannerUncheckedUpdateManyWithoutProductNestedInput
     orderItems?: OrderItemUncheckedUpdateManyWithoutProductNestedInput
     images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput
@@ -34134,6 +34186,7 @@ export namespace Prisma {
     createdAt?: Date | string
     deliveryInfo?: string | null
     isSoldOut?: boolean
+    isDisabled?: boolean
     cartItems?: CartItemCreateNestedManyWithoutProductInput
     heroBanners?: HeroBannerCreateNestedManyWithoutProductInput
     category: CategoryCreateNestedOneWithoutProductsInput
@@ -34156,6 +34209,7 @@ export namespace Prisma {
     createdAt?: Date | string
     deliveryInfo?: string | null
     isSoldOut?: boolean
+    isDisabled?: boolean
     cartItems?: CartItemUncheckedCreateNestedManyWithoutProductInput
     heroBanners?: HeroBannerUncheckedCreateNestedManyWithoutProductInput
     images?: ProductImageUncheckedCreateNestedManyWithoutProductInput
@@ -34269,6 +34323,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deliveryInfo?: NullableStringFieldUpdateOperationsInput | string | null
     isSoldOut?: BoolFieldUpdateOperationsInput | boolean
+    isDisabled?: BoolFieldUpdateOperationsInput | boolean
     cartItems?: CartItemUpdateManyWithoutProductNestedInput
     heroBanners?: HeroBannerUpdateManyWithoutProductNestedInput
     category?: CategoryUpdateOneRequiredWithoutProductsNestedInput
@@ -34291,6 +34346,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deliveryInfo?: NullableStringFieldUpdateOperationsInput | string | null
     isSoldOut?: BoolFieldUpdateOperationsInput | boolean
+    isDisabled?: BoolFieldUpdateOperationsInput | boolean
     cartItems?: CartItemUncheckedUpdateManyWithoutProductNestedInput
     heroBanners?: HeroBannerUncheckedUpdateManyWithoutProductNestedInput
     images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput
@@ -34440,6 +34496,7 @@ export namespace Prisma {
     createdAt?: Date | string
     deliveryInfo?: string | null
     isSoldOut?: boolean
+    isDisabled?: boolean
   }
 
   export type CategoryUpdateWithoutParentInput = {
@@ -34486,6 +34543,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deliveryInfo?: NullableStringFieldUpdateOperationsInput | string | null
     isSoldOut?: BoolFieldUpdateOperationsInput | boolean
+    isDisabled?: BoolFieldUpdateOperationsInput | boolean
     cartItems?: CartItemUpdateManyWithoutProductNestedInput
     heroBanners?: HeroBannerUpdateManyWithoutProductNestedInput
     orderItems?: OrderItemUpdateManyWithoutProductNestedInput
@@ -34507,6 +34565,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deliveryInfo?: NullableStringFieldUpdateOperationsInput | string | null
     isSoldOut?: BoolFieldUpdateOperationsInput | boolean
+    isDisabled?: BoolFieldUpdateOperationsInput | boolean
     cartItems?: CartItemUncheckedUpdateManyWithoutProductNestedInput
     heroBanners?: HeroBannerUncheckedUpdateManyWithoutProductNestedInput
     orderItems?: OrderItemUncheckedUpdateManyWithoutProductNestedInput
@@ -34528,6 +34587,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deliveryInfo?: NullableStringFieldUpdateOperationsInput | string | null
     isSoldOut?: BoolFieldUpdateOperationsInput | boolean
+    isDisabled?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CartItemCreateManyProductInput = {

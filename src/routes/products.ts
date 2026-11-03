@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import { Router } from 'express';
 import prisma from '../lib/prisma';
 import { authMiddleware } from '../middleware/auth';
@@ -21,7 +22,7 @@ const productInclude = {
 
 // GET all products (flat list)
 router.get('/', async (req, res) => {
-    const { category, isBestSeller, isNewLaunch, inStockOnly, isSoldOut, includeChildren, limit } = req.query;
+    const { category, isBestSeller, isNewLaunch, inStockOnly, isSoldOut, includeChildren, includeDisabled, limit } = req.query;
     const limitNum = limit ? parseInt(limit as string) : undefined;
 
     try {
@@ -52,6 +53,27 @@ router.get('/', async (req, res) => {
             ...(isNewLaunch === 'true' ? { isNewLaunch: true } : {}),
         };
 
+        let allowDisabled = false;
+        if (includeDisabled === 'true') {
+            const token = req.headers.authorization?.split(' ')[1];
+            if (token && process.env.JWT_SECRET) {
+                try {
+                    const decoded = jwt.verify(token, process.env.JWT_SECRET) as any;
+                    const adminExists = await prisma.admin.findUnique({
+                        where: { id: decoded.id },
+                        select: { id: true }
+                    });
+                    if (adminExists) allowDisabled = true;
+                } catch {
+                    allowDisabled = false;
+                }
+            }
+        }
+
+        if (!allowDisabled) {
+            where.isDisabled = false;
+        }
+
         if (isSoldOut !== undefined) {
             where.isSoldOut = isSoldOut === 'true';
         } else if (inStockOnly === 'true' || isNewLaunch === 'true') {
@@ -74,7 +96,7 @@ router.get('/', async (req, res) => {
 
 // CREATE product with variants + images
 router.post('/', authMiddleware, async (req, res) => {
-    const { name, slug, description, deliveryInfo, image, categoryId, isBestSeller, isNewLaunch, isSoldOut, variants, images } = req.body;
+    const { name, slug, description, deliveryInfo, image, categoryId, isBestSeller, isNewLaunch, isSoldOut, isDisabled, variants, images } = req.body;
     try {
         const product = await prisma.product.create({
             data: {
@@ -87,6 +109,7 @@ router.post('/', authMiddleware, async (req, res) => {
                 isBestSeller: isBestSeller || false,
                 isNewLaunch: isNewLaunch || false,
                 isSoldOut: isSoldOut || false,
+                isDisabled: isDisabled || false,
                 variants: {
                     create: (variants || []).map((v: any, idx: number) => ({
                         weight: v.weight,
@@ -116,7 +139,7 @@ router.post('/', authMiddleware, async (req, res) => {
 
 // UPDATE product with variants + images
 router.put('/:id', authMiddleware, async (req, res) => {
-    const { name, slug, description, deliveryInfo, image, categoryId, isBestSeller, isNewLaunch, isSoldOut, variants, images } = req.body;
+    const { name, slug, description, deliveryInfo, image, categoryId, isBestSeller, isNewLaunch, isSoldOut, isDisabled, variants, images } = req.body;
     try {
         // Delete old variants and images, then recreate
         await prisma.productVariant.deleteMany({ where: { productId: req.params.id as string } });
@@ -161,6 +184,27 @@ router.put('/:id', authMiddleware, async (req, res) => {
     }
 });
 
+// PATCH quick update product status (e.g. toggle isDisabled, isSoldOut, isBestSeller, isNewLaunch)
+router.patch('/:id/status', authMiddleware, async (req, res) => {
+    const { isDisabled, isSoldOut, isBestSeller, isNewLaunch } = req.body;
+    try {
+        const product = await prisma.product.update({
+            where: { id: req.params.id as string },
+            data: {
+                ...(isDisabled !== undefined ? { isDisabled } : {}),
+                ...(isSoldOut !== undefined ? { isSoldOut } : {}),
+                ...(isBestSeller !== undefined ? { isBestSeller } : {}),
+                ...(isNewLaunch !== undefined ? { isNewLaunch } : {}),
+            },
+            include: productInclude
+        });
+        res.json(product);
+    } catch (error) {
+        console.error('Quick update status error:', error);
+        res.status(500).json({ error: 'Failed to update product status' });
+    }
+});
+
 // DELETE product
 router.delete('/:id', authMiddleware, async (req, res) => {
     try {
@@ -176,6 +220,7 @@ router.delete('/:id', authMiddleware, async (req, res) => {
 router.get('/:idOrSlug', async (req, res) => {
     try {
         const { idOrSlug } = req.params;
+        const { includeDisabled } = req.query;
 
         let product = await prisma.product.findUnique({
             where: { id: idOrSlug },
@@ -190,6 +235,28 @@ router.get('/:idOrSlug', async (req, res) => {
         }
 
         if (!product) return res.status(404).json({ error: 'Product not found' });
+
+        // If product is disabled, it should not appear anywhere in user pages
+        if (product.isDisabled) {
+            const token = req.headers.authorization?.split(' ')[1];
+            let isAdmin = false;
+            if (token && process.env.JWT_SECRET) {
+                try {
+                    const decoded = jwt.verify(token, process.env.JWT_SECRET) as any;
+                    const adminExists = await prisma.admin.findUnique({
+                        where: { id: decoded.id },
+                        select: { id: true }
+                    });
+                    if (adminExists) isAdmin = true;
+                } catch {
+                    isAdmin = false;
+                }
+            }
+
+            if (!isAdmin) {
+                return res.status(404).json({ error: 'Product not found' });
+            }
+        }
 
         // Calculate average rating
         const ratingAggregate = await prisma.review.aggregate({
