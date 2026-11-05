@@ -125,6 +125,18 @@ exports.Prisma.AdminScalarFieldEnum = {
   passwordResetExpires: 'passwordResetExpires'
 };
 
+exports.Prisma.AdminLoginHistoryScalarFieldEnum = {
+  id: 'id',
+  adminId: 'adminId',
+  email: 'email',
+  ip: 'ip',
+  device: 'device',
+  browser: 'browser',
+  os: 'os',
+  userAgent: 'userAgent',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.CategoryScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -421,6 +433,7 @@ exports.Prisma.JsonNullValueFilter = {
 
 exports.Prisma.ModelName = {
   Admin: 'Admin',
+  AdminLoginHistory: 'AdminLoginHistory',
   Category: 'Category',
   Product: 'Product',
   ProductImage: 'ProductImage',

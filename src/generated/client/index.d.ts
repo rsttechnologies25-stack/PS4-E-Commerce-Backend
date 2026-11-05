@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type Admin = $Result.DefaultSelection<Prisma.$AdminPayload>
 /**
+ * Model AdminLoginHistory
+ * 
+ */
+export type AdminLoginHistory = $Result.DefaultSelection<Prisma.$AdminLoginHistoryPayload>
+/**
  * Model Category
  * 
  */
@@ -248,6 +253,16 @@ export class PrismaClient<
     * ```
     */
   get admin(): Prisma.AdminDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.adminLoginHistory`: Exposes CRUD operations for the **AdminLoginHistory** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AdminLoginHistories
+    * const adminLoginHistories = await prisma.adminLoginHistory.findMany()
+    * ```
+    */
+  get adminLoginHistory(): Prisma.AdminLoginHistoryDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.category`: Exposes CRUD operations for the **Category** model.
@@ -879,6 +894,7 @@ export namespace Prisma {
 
   export const ModelName: {
     Admin: 'Admin',
+    AdminLoginHistory: 'AdminLoginHistory',
     Category: 'Category',
     Product: 'Product',
     ProductImage: 'ProductImage',
@@ -913,7 +929,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "admin" | "category" | "product" | "productImage" | "productVariant" | "branch" | "announcement" | "heroBanner" | "review" | "siteSettings" | "user" | "cartItem" | "order" | "orderItem" | "coupon" | "shippingRule" | "categoryPairing" | "notification" | "bannedEmail" | "whatsAppTemplate"
+      modelProps: "admin" | "adminLoginHistory" | "category" | "product" | "productImage" | "productVariant" | "branch" | "announcement" | "heroBanner" | "review" | "siteSettings" | "user" | "cartItem" | "order" | "orderItem" | "coupon" | "shippingRule" | "categoryPairing" | "notification" | "bannedEmail" | "whatsAppTemplate"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -988,6 +1004,80 @@ export namespace Prisma {
           count: {
             args: Prisma.AdminCountArgs<ExtArgs>
             result: $Utils.Optional<AdminCountAggregateOutputType> | number
+          }
+        }
+      }
+      AdminLoginHistory: {
+        payload: Prisma.$AdminLoginHistoryPayload<ExtArgs>
+        fields: Prisma.AdminLoginHistoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AdminLoginHistoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminLoginHistoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AdminLoginHistoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminLoginHistoryPayload>
+          }
+          findFirst: {
+            args: Prisma.AdminLoginHistoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminLoginHistoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AdminLoginHistoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminLoginHistoryPayload>
+          }
+          findMany: {
+            args: Prisma.AdminLoginHistoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminLoginHistoryPayload>[]
+          }
+          create: {
+            args: Prisma.AdminLoginHistoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminLoginHistoryPayload>
+          }
+          createMany: {
+            args: Prisma.AdminLoginHistoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AdminLoginHistoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminLoginHistoryPayload>[]
+          }
+          delete: {
+            args: Prisma.AdminLoginHistoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminLoginHistoryPayload>
+          }
+          update: {
+            args: Prisma.AdminLoginHistoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminLoginHistoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.AdminLoginHistoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AdminLoginHistoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AdminLoginHistoryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminLoginHistoryPayload>[]
+          }
+          upsert: {
+            args: Prisma.AdminLoginHistoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminLoginHistoryPayload>
+          }
+          aggregate: {
+            args: Prisma.AdminLoginHistoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAdminLoginHistory>
+          }
+          groupBy: {
+            args: Prisma.AdminLoginHistoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AdminLoginHistoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AdminLoginHistoryCountArgs<ExtArgs>
+            result: $Utils.Optional<AdminLoginHistoryCountAggregateOutputType> | number
           }
         }
       }
@@ -2482,6 +2572,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     admin?: AdminOmit
+    adminLoginHistory?: AdminLoginHistoryOmit
     category?: CategoryOmit
     product?: ProductOmit
     productImage?: ProductImageOmit
@@ -2588,6 +2679,37 @@ export namespace Prisma {
   /**
    * Count Types
    */
+
+
+  /**
+   * Count Type AdminCountOutputType
+   */
+
+  export type AdminCountOutputType = {
+    loginHistory: number
+  }
+
+  export type AdminCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    loginHistory?: boolean | AdminCountOutputTypeCountLoginHistoryArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AdminCountOutputType without action
+   */
+  export type AdminCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminCountOutputType
+     */
+    select?: AdminCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AdminCountOutputType without action
+   */
+  export type AdminCountOutputTypeCountLoginHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdminLoginHistoryWhereInput
+  }
 
 
   /**
@@ -2963,6 +3085,8 @@ export namespace Prisma {
     password?: boolean
     passwordResetToken?: boolean
     passwordResetExpires?: boolean
+    loginHistory?: boolean | Admin$loginHistoryArgs<ExtArgs>
+    _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["admin"]>
 
   export type AdminSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2990,10 +3114,18 @@ export namespace Prisma {
   }
 
   export type AdminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "passwordResetToken" | "passwordResetExpires", ExtArgs["result"]["admin"]>
+  export type AdminInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    loginHistory?: boolean | Admin$loginHistoryArgs<ExtArgs>
+    _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type AdminIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type AdminIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $AdminPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Admin"
-    objects: {}
+    objects: {
+      loginHistory: Prisma.$AdminLoginHistoryPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       email: string
@@ -3394,6 +3526,7 @@ export namespace Prisma {
    */
   export interface Prisma__AdminClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    loginHistory<T extends Admin$loginHistoryArgs<ExtArgs> = {}>(args?: Subset<T, Admin$loginHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminLoginHistoryPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3445,6 +3578,10 @@ export namespace Prisma {
      */
     omit?: AdminOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminInclude<ExtArgs> | null
+    /**
      * Filter, which Admin to fetch.
      */
     where: AdminWhereUniqueInput
@@ -3463,6 +3600,10 @@ export namespace Prisma {
      */
     omit?: AdminOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminInclude<ExtArgs> | null
+    /**
      * Filter, which Admin to fetch.
      */
     where: AdminWhereUniqueInput
@@ -3480,6 +3621,10 @@ export namespace Prisma {
      * Omit specific fields from the Admin
      */
     omit?: AdminOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminInclude<ExtArgs> | null
     /**
      * Filter, which Admin to fetch.
      */
@@ -3529,6 +3674,10 @@ export namespace Prisma {
      */
     omit?: AdminOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminInclude<ExtArgs> | null
+    /**
      * Filter, which Admin to fetch.
      */
     where?: AdminWhereInput
@@ -3577,6 +3726,10 @@ export namespace Prisma {
      */
     omit?: AdminOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminInclude<ExtArgs> | null
+    /**
      * Filter, which Admins to fetch.
      */
     where?: AdminWhereInput
@@ -3619,6 +3772,10 @@ export namespace Prisma {
      * Omit specific fields from the Admin
      */
     omit?: AdminOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminInclude<ExtArgs> | null
     /**
      * The data needed to create a Admin.
      */
@@ -3667,6 +3824,10 @@ export namespace Prisma {
      * Omit specific fields from the Admin
      */
     omit?: AdminOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminInclude<ExtArgs> | null
     /**
      * The data needed to update a Admin.
      */
@@ -3726,6 +3887,10 @@ export namespace Prisma {
      */
     omit?: AdminOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminInclude<ExtArgs> | null
+    /**
      * The filter to search for the Admin to update in case it exists.
      */
     where: AdminWhereUniqueInput
@@ -3752,6 +3917,10 @@ export namespace Prisma {
      */
     omit?: AdminOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminInclude<ExtArgs> | null
+    /**
      * Filter which Admin to delete.
      */
     where: AdminWhereUniqueInput
@@ -3768,6 +3937,30 @@ export namespace Prisma {
   }
 
   /**
+   * Admin.loginHistory
+   */
+  export type Admin$loginHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminLoginHistory
+     */
+    select?: AdminLoginHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminLoginHistory
+     */
+    omit?: AdminLoginHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminLoginHistoryInclude<ExtArgs> | null
+    where?: AdminLoginHistoryWhereInput
+    orderBy?: AdminLoginHistoryOrderByWithRelationInput | AdminLoginHistoryOrderByWithRelationInput[]
+    cursor?: AdminLoginHistoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AdminLoginHistoryScalarFieldEnum | AdminLoginHistoryScalarFieldEnum[]
+  }
+
+  /**
    * Admin without action
    */
   export type AdminDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3779,6 +3972,1108 @@ export namespace Prisma {
      * Omit specific fields from the Admin
      */
     omit?: AdminOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AdminLoginHistory
+   */
+
+  export type AggregateAdminLoginHistory = {
+    _count: AdminLoginHistoryCountAggregateOutputType | null
+    _min: AdminLoginHistoryMinAggregateOutputType | null
+    _max: AdminLoginHistoryMaxAggregateOutputType | null
+  }
+
+  export type AdminLoginHistoryMinAggregateOutputType = {
+    id: string | null
+    adminId: string | null
+    email: string | null
+    ip: string | null
+    device: string | null
+    browser: string | null
+    os: string | null
+    userAgent: string | null
+    createdAt: Date | null
+  }
+
+  export type AdminLoginHistoryMaxAggregateOutputType = {
+    id: string | null
+    adminId: string | null
+    email: string | null
+    ip: string | null
+    device: string | null
+    browser: string | null
+    os: string | null
+    userAgent: string | null
+    createdAt: Date | null
+  }
+
+  export type AdminLoginHistoryCountAggregateOutputType = {
+    id: number
+    adminId: number
+    email: number
+    ip: number
+    device: number
+    browser: number
+    os: number
+    userAgent: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type AdminLoginHistoryMinAggregateInputType = {
+    id?: true
+    adminId?: true
+    email?: true
+    ip?: true
+    device?: true
+    browser?: true
+    os?: true
+    userAgent?: true
+    createdAt?: true
+  }
+
+  export type AdminLoginHistoryMaxAggregateInputType = {
+    id?: true
+    adminId?: true
+    email?: true
+    ip?: true
+    device?: true
+    browser?: true
+    os?: true
+    userAgent?: true
+    createdAt?: true
+  }
+
+  export type AdminLoginHistoryCountAggregateInputType = {
+    id?: true
+    adminId?: true
+    email?: true
+    ip?: true
+    device?: true
+    browser?: true
+    os?: true
+    userAgent?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type AdminLoginHistoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdminLoginHistory to aggregate.
+     */
+    where?: AdminLoginHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminLoginHistories to fetch.
+     */
+    orderBy?: AdminLoginHistoryOrderByWithRelationInput | AdminLoginHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AdminLoginHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminLoginHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminLoginHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AdminLoginHistories
+    **/
+    _count?: true | AdminLoginHistoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AdminLoginHistoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AdminLoginHistoryMaxAggregateInputType
+  }
+
+  export type GetAdminLoginHistoryAggregateType<T extends AdminLoginHistoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateAdminLoginHistory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAdminLoginHistory[P]>
+      : GetScalarType<T[P], AggregateAdminLoginHistory[P]>
+  }
+
+
+
+
+  export type AdminLoginHistoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdminLoginHistoryWhereInput
+    orderBy?: AdminLoginHistoryOrderByWithAggregationInput | AdminLoginHistoryOrderByWithAggregationInput[]
+    by: AdminLoginHistoryScalarFieldEnum[] | AdminLoginHistoryScalarFieldEnum
+    having?: AdminLoginHistoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AdminLoginHistoryCountAggregateInputType | true
+    _min?: AdminLoginHistoryMinAggregateInputType
+    _max?: AdminLoginHistoryMaxAggregateInputType
+  }
+
+  export type AdminLoginHistoryGroupByOutputType = {
+    id: string
+    adminId: string
+    email: string
+    ip: string | null
+    device: string | null
+    browser: string | null
+    os: string | null
+    userAgent: string | null
+    createdAt: Date
+    _count: AdminLoginHistoryCountAggregateOutputType | null
+    _min: AdminLoginHistoryMinAggregateOutputType | null
+    _max: AdminLoginHistoryMaxAggregateOutputType | null
+  }
+
+  type GetAdminLoginHistoryGroupByPayload<T extends AdminLoginHistoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AdminLoginHistoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AdminLoginHistoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AdminLoginHistoryGroupByOutputType[P]>
+            : GetScalarType<T[P], AdminLoginHistoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AdminLoginHistorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    adminId?: boolean
+    email?: boolean
+    ip?: boolean
+    device?: boolean
+    browser?: boolean
+    os?: boolean
+    userAgent?: boolean
+    createdAt?: boolean
+    admin?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adminLoginHistory"]>
+
+  export type AdminLoginHistorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    adminId?: boolean
+    email?: boolean
+    ip?: boolean
+    device?: boolean
+    browser?: boolean
+    os?: boolean
+    userAgent?: boolean
+    createdAt?: boolean
+    admin?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adminLoginHistory"]>
+
+  export type AdminLoginHistorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    adminId?: boolean
+    email?: boolean
+    ip?: boolean
+    device?: boolean
+    browser?: boolean
+    os?: boolean
+    userAgent?: boolean
+    createdAt?: boolean
+    admin?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adminLoginHistory"]>
+
+  export type AdminLoginHistorySelectScalar = {
+    id?: boolean
+    adminId?: boolean
+    email?: boolean
+    ip?: boolean
+    device?: boolean
+    browser?: boolean
+    os?: boolean
+    userAgent?: boolean
+    createdAt?: boolean
+  }
+
+  export type AdminLoginHistoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminId" | "email" | "ip" | "device" | "browser" | "os" | "userAgent" | "createdAt", ExtArgs["result"]["adminLoginHistory"]>
+  export type AdminLoginHistoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    admin?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+  export type AdminLoginHistoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    admin?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+  export type AdminLoginHistoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    admin?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+
+  export type $AdminLoginHistoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AdminLoginHistory"
+    objects: {
+      admin: Prisma.$AdminPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      adminId: string
+      email: string
+      ip: string | null
+      device: string | null
+      browser: string | null
+      os: string | null
+      userAgent: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["adminLoginHistory"]>
+    composites: {}
+  }
+
+  type AdminLoginHistoryGetPayload<S extends boolean | null | undefined | AdminLoginHistoryDefaultArgs> = $Result.GetResult<Prisma.$AdminLoginHistoryPayload, S>
+
+  type AdminLoginHistoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AdminLoginHistoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AdminLoginHistoryCountAggregateInputType | true
+    }
+
+  export interface AdminLoginHistoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AdminLoginHistory'], meta: { name: 'AdminLoginHistory' } }
+    /**
+     * Find zero or one AdminLoginHistory that matches the filter.
+     * @param {AdminLoginHistoryFindUniqueArgs} args - Arguments to find a AdminLoginHistory
+     * @example
+     * // Get one AdminLoginHistory
+     * const adminLoginHistory = await prisma.adminLoginHistory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AdminLoginHistoryFindUniqueArgs>(args: SelectSubset<T, AdminLoginHistoryFindUniqueArgs<ExtArgs>>): Prisma__AdminLoginHistoryClient<$Result.GetResult<Prisma.$AdminLoginHistoryPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one AdminLoginHistory that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AdminLoginHistoryFindUniqueOrThrowArgs} args - Arguments to find a AdminLoginHistory
+     * @example
+     * // Get one AdminLoginHistory
+     * const adminLoginHistory = await prisma.adminLoginHistory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AdminLoginHistoryFindUniqueOrThrowArgs>(args: SelectSubset<T, AdminLoginHistoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AdminLoginHistoryClient<$Result.GetResult<Prisma.$AdminLoginHistoryPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first AdminLoginHistory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminLoginHistoryFindFirstArgs} args - Arguments to find a AdminLoginHistory
+     * @example
+     * // Get one AdminLoginHistory
+     * const adminLoginHistory = await prisma.adminLoginHistory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AdminLoginHistoryFindFirstArgs>(args?: SelectSubset<T, AdminLoginHistoryFindFirstArgs<ExtArgs>>): Prisma__AdminLoginHistoryClient<$Result.GetResult<Prisma.$AdminLoginHistoryPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first AdminLoginHistory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminLoginHistoryFindFirstOrThrowArgs} args - Arguments to find a AdminLoginHistory
+     * @example
+     * // Get one AdminLoginHistory
+     * const adminLoginHistory = await prisma.adminLoginHistory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AdminLoginHistoryFindFirstOrThrowArgs>(args?: SelectSubset<T, AdminLoginHistoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__AdminLoginHistoryClient<$Result.GetResult<Prisma.$AdminLoginHistoryPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more AdminLoginHistories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminLoginHistoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AdminLoginHistories
+     * const adminLoginHistories = await prisma.adminLoginHistory.findMany()
+     * 
+     * // Get first 10 AdminLoginHistories
+     * const adminLoginHistories = await prisma.adminLoginHistory.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const adminLoginHistoryWithIdOnly = await prisma.adminLoginHistory.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AdminLoginHistoryFindManyArgs>(args?: SelectSubset<T, AdminLoginHistoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminLoginHistoryPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a AdminLoginHistory.
+     * @param {AdminLoginHistoryCreateArgs} args - Arguments to create a AdminLoginHistory.
+     * @example
+     * // Create one AdminLoginHistory
+     * const AdminLoginHistory = await prisma.adminLoginHistory.create({
+     *   data: {
+     *     // ... data to create a AdminLoginHistory
+     *   }
+     * })
+     * 
+     */
+    create<T extends AdminLoginHistoryCreateArgs>(args: SelectSubset<T, AdminLoginHistoryCreateArgs<ExtArgs>>): Prisma__AdminLoginHistoryClient<$Result.GetResult<Prisma.$AdminLoginHistoryPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many AdminLoginHistories.
+     * @param {AdminLoginHistoryCreateManyArgs} args - Arguments to create many AdminLoginHistories.
+     * @example
+     * // Create many AdminLoginHistories
+     * const adminLoginHistory = await prisma.adminLoginHistory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AdminLoginHistoryCreateManyArgs>(args?: SelectSubset<T, AdminLoginHistoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AdminLoginHistories and returns the data saved in the database.
+     * @param {AdminLoginHistoryCreateManyAndReturnArgs} args - Arguments to create many AdminLoginHistories.
+     * @example
+     * // Create many AdminLoginHistories
+     * const adminLoginHistory = await prisma.adminLoginHistory.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AdminLoginHistories and only return the `id`
+     * const adminLoginHistoryWithIdOnly = await prisma.adminLoginHistory.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AdminLoginHistoryCreateManyAndReturnArgs>(args?: SelectSubset<T, AdminLoginHistoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminLoginHistoryPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a AdminLoginHistory.
+     * @param {AdminLoginHistoryDeleteArgs} args - Arguments to delete one AdminLoginHistory.
+     * @example
+     * // Delete one AdminLoginHistory
+     * const AdminLoginHistory = await prisma.adminLoginHistory.delete({
+     *   where: {
+     *     // ... filter to delete one AdminLoginHistory
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AdminLoginHistoryDeleteArgs>(args: SelectSubset<T, AdminLoginHistoryDeleteArgs<ExtArgs>>): Prisma__AdminLoginHistoryClient<$Result.GetResult<Prisma.$AdminLoginHistoryPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one AdminLoginHistory.
+     * @param {AdminLoginHistoryUpdateArgs} args - Arguments to update one AdminLoginHistory.
+     * @example
+     * // Update one AdminLoginHistory
+     * const adminLoginHistory = await prisma.adminLoginHistory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AdminLoginHistoryUpdateArgs>(args: SelectSubset<T, AdminLoginHistoryUpdateArgs<ExtArgs>>): Prisma__AdminLoginHistoryClient<$Result.GetResult<Prisma.$AdminLoginHistoryPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more AdminLoginHistories.
+     * @param {AdminLoginHistoryDeleteManyArgs} args - Arguments to filter AdminLoginHistories to delete.
+     * @example
+     * // Delete a few AdminLoginHistories
+     * const { count } = await prisma.adminLoginHistory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AdminLoginHistoryDeleteManyArgs>(args?: SelectSubset<T, AdminLoginHistoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AdminLoginHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminLoginHistoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AdminLoginHistories
+     * const adminLoginHistory = await prisma.adminLoginHistory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AdminLoginHistoryUpdateManyArgs>(args: SelectSubset<T, AdminLoginHistoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AdminLoginHistories and returns the data updated in the database.
+     * @param {AdminLoginHistoryUpdateManyAndReturnArgs} args - Arguments to update many AdminLoginHistories.
+     * @example
+     * // Update many AdminLoginHistories
+     * const adminLoginHistory = await prisma.adminLoginHistory.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AdminLoginHistories and only return the `id`
+     * const adminLoginHistoryWithIdOnly = await prisma.adminLoginHistory.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AdminLoginHistoryUpdateManyAndReturnArgs>(args: SelectSubset<T, AdminLoginHistoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminLoginHistoryPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one AdminLoginHistory.
+     * @param {AdminLoginHistoryUpsertArgs} args - Arguments to update or create a AdminLoginHistory.
+     * @example
+     * // Update or create a AdminLoginHistory
+     * const adminLoginHistory = await prisma.adminLoginHistory.upsert({
+     *   create: {
+     *     // ... data to create a AdminLoginHistory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AdminLoginHistory we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AdminLoginHistoryUpsertArgs>(args: SelectSubset<T, AdminLoginHistoryUpsertArgs<ExtArgs>>): Prisma__AdminLoginHistoryClient<$Result.GetResult<Prisma.$AdminLoginHistoryPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of AdminLoginHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminLoginHistoryCountArgs} args - Arguments to filter AdminLoginHistories to count.
+     * @example
+     * // Count the number of AdminLoginHistories
+     * const count = await prisma.adminLoginHistory.count({
+     *   where: {
+     *     // ... the filter for the AdminLoginHistories we want to count
+     *   }
+     * })
+    **/
+    count<T extends AdminLoginHistoryCountArgs>(
+      args?: Subset<T, AdminLoginHistoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AdminLoginHistoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AdminLoginHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminLoginHistoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AdminLoginHistoryAggregateArgs>(args: Subset<T, AdminLoginHistoryAggregateArgs>): Prisma.PrismaPromise<GetAdminLoginHistoryAggregateType<T>>
+
+    /**
+     * Group by AdminLoginHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminLoginHistoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AdminLoginHistoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AdminLoginHistoryGroupByArgs['orderBy'] }
+        : { orderBy?: AdminLoginHistoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AdminLoginHistoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAdminLoginHistoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AdminLoginHistory model
+   */
+  readonly fields: AdminLoginHistoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AdminLoginHistory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AdminLoginHistoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    admin<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AdminLoginHistory model
+   */ 
+  interface AdminLoginHistoryFieldRefs {
+    readonly id: FieldRef<"AdminLoginHistory", 'String'>
+    readonly adminId: FieldRef<"AdminLoginHistory", 'String'>
+    readonly email: FieldRef<"AdminLoginHistory", 'String'>
+    readonly ip: FieldRef<"AdminLoginHistory", 'String'>
+    readonly device: FieldRef<"AdminLoginHistory", 'String'>
+    readonly browser: FieldRef<"AdminLoginHistory", 'String'>
+    readonly os: FieldRef<"AdminLoginHistory", 'String'>
+    readonly userAgent: FieldRef<"AdminLoginHistory", 'String'>
+    readonly createdAt: FieldRef<"AdminLoginHistory", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AdminLoginHistory findUnique
+   */
+  export type AdminLoginHistoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminLoginHistory
+     */
+    select?: AdminLoginHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminLoginHistory
+     */
+    omit?: AdminLoginHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminLoginHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which AdminLoginHistory to fetch.
+     */
+    where: AdminLoginHistoryWhereUniqueInput
+  }
+
+  /**
+   * AdminLoginHistory findUniqueOrThrow
+   */
+  export type AdminLoginHistoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminLoginHistory
+     */
+    select?: AdminLoginHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminLoginHistory
+     */
+    omit?: AdminLoginHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminLoginHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which AdminLoginHistory to fetch.
+     */
+    where: AdminLoginHistoryWhereUniqueInput
+  }
+
+  /**
+   * AdminLoginHistory findFirst
+   */
+  export type AdminLoginHistoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminLoginHistory
+     */
+    select?: AdminLoginHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminLoginHistory
+     */
+    omit?: AdminLoginHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminLoginHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which AdminLoginHistory to fetch.
+     */
+    where?: AdminLoginHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminLoginHistories to fetch.
+     */
+    orderBy?: AdminLoginHistoryOrderByWithRelationInput | AdminLoginHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdminLoginHistories.
+     */
+    cursor?: AdminLoginHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminLoginHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminLoginHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdminLoginHistories.
+     */
+    distinct?: AdminLoginHistoryScalarFieldEnum | AdminLoginHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * AdminLoginHistory findFirstOrThrow
+   */
+  export type AdminLoginHistoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminLoginHistory
+     */
+    select?: AdminLoginHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminLoginHistory
+     */
+    omit?: AdminLoginHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminLoginHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which AdminLoginHistory to fetch.
+     */
+    where?: AdminLoginHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminLoginHistories to fetch.
+     */
+    orderBy?: AdminLoginHistoryOrderByWithRelationInput | AdminLoginHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdminLoginHistories.
+     */
+    cursor?: AdminLoginHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminLoginHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminLoginHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdminLoginHistories.
+     */
+    distinct?: AdminLoginHistoryScalarFieldEnum | AdminLoginHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * AdminLoginHistory findMany
+   */
+  export type AdminLoginHistoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminLoginHistory
+     */
+    select?: AdminLoginHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminLoginHistory
+     */
+    omit?: AdminLoginHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminLoginHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which AdminLoginHistories to fetch.
+     */
+    where?: AdminLoginHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminLoginHistories to fetch.
+     */
+    orderBy?: AdminLoginHistoryOrderByWithRelationInput | AdminLoginHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AdminLoginHistories.
+     */
+    cursor?: AdminLoginHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminLoginHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminLoginHistories.
+     */
+    skip?: number
+    distinct?: AdminLoginHistoryScalarFieldEnum | AdminLoginHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * AdminLoginHistory create
+   */
+  export type AdminLoginHistoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminLoginHistory
+     */
+    select?: AdminLoginHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminLoginHistory
+     */
+    omit?: AdminLoginHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminLoginHistoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AdminLoginHistory.
+     */
+    data: XOR<AdminLoginHistoryCreateInput, AdminLoginHistoryUncheckedCreateInput>
+  }
+
+  /**
+   * AdminLoginHistory createMany
+   */
+  export type AdminLoginHistoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AdminLoginHistories.
+     */
+    data: AdminLoginHistoryCreateManyInput | AdminLoginHistoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AdminLoginHistory createManyAndReturn
+   */
+  export type AdminLoginHistoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminLoginHistory
+     */
+    select?: AdminLoginHistorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminLoginHistory
+     */
+    omit?: AdminLoginHistoryOmit<ExtArgs> | null
+    /**
+     * The data used to create many AdminLoginHistories.
+     */
+    data: AdminLoginHistoryCreateManyInput | AdminLoginHistoryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminLoginHistoryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AdminLoginHistory update
+   */
+  export type AdminLoginHistoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminLoginHistory
+     */
+    select?: AdminLoginHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminLoginHistory
+     */
+    omit?: AdminLoginHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminLoginHistoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AdminLoginHistory.
+     */
+    data: XOR<AdminLoginHistoryUpdateInput, AdminLoginHistoryUncheckedUpdateInput>
+    /**
+     * Choose, which AdminLoginHistory to update.
+     */
+    where: AdminLoginHistoryWhereUniqueInput
+  }
+
+  /**
+   * AdminLoginHistory updateMany
+   */
+  export type AdminLoginHistoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AdminLoginHistories.
+     */
+    data: XOR<AdminLoginHistoryUpdateManyMutationInput, AdminLoginHistoryUncheckedUpdateManyInput>
+    /**
+     * Filter which AdminLoginHistories to update
+     */
+    where?: AdminLoginHistoryWhereInput
+  }
+
+  /**
+   * AdminLoginHistory updateManyAndReturn
+   */
+  export type AdminLoginHistoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminLoginHistory
+     */
+    select?: AdminLoginHistorySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminLoginHistory
+     */
+    omit?: AdminLoginHistoryOmit<ExtArgs> | null
+    /**
+     * The data used to update AdminLoginHistories.
+     */
+    data: XOR<AdminLoginHistoryUpdateManyMutationInput, AdminLoginHistoryUncheckedUpdateManyInput>
+    /**
+     * Filter which AdminLoginHistories to update
+     */
+    where?: AdminLoginHistoryWhereInput
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminLoginHistoryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AdminLoginHistory upsert
+   */
+  export type AdminLoginHistoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminLoginHistory
+     */
+    select?: AdminLoginHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminLoginHistory
+     */
+    omit?: AdminLoginHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminLoginHistoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AdminLoginHistory to update in case it exists.
+     */
+    where: AdminLoginHistoryWhereUniqueInput
+    /**
+     * In case the AdminLoginHistory found by the `where` argument doesn't exist, create a new AdminLoginHistory with this data.
+     */
+    create: XOR<AdminLoginHistoryCreateInput, AdminLoginHistoryUncheckedCreateInput>
+    /**
+     * In case the AdminLoginHistory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AdminLoginHistoryUpdateInput, AdminLoginHistoryUncheckedUpdateInput>
+  }
+
+  /**
+   * AdminLoginHistory delete
+   */
+  export type AdminLoginHistoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminLoginHistory
+     */
+    select?: AdminLoginHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminLoginHistory
+     */
+    omit?: AdminLoginHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminLoginHistoryInclude<ExtArgs> | null
+    /**
+     * Filter which AdminLoginHistory to delete.
+     */
+    where: AdminLoginHistoryWhereUniqueInput
+  }
+
+  /**
+   * AdminLoginHistory deleteMany
+   */
+  export type AdminLoginHistoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdminLoginHistories to delete
+     */
+    where?: AdminLoginHistoryWhereInput
+  }
+
+  /**
+   * AdminLoginHistory without action
+   */
+  export type AdminLoginHistoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminLoginHistory
+     */
+    select?: AdminLoginHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminLoginHistory
+     */
+    omit?: AdminLoginHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminLoginHistoryInclude<ExtArgs> | null
   }
 
 
@@ -25691,6 +26986,21 @@ export namespace Prisma {
   export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof AdminScalarFieldEnum]
 
 
+  export const AdminLoginHistoryScalarFieldEnum: {
+    id: 'id',
+    adminId: 'adminId',
+    email: 'email',
+    ip: 'ip',
+    device: 'device',
+    browser: 'browser',
+    os: 'os',
+    userAgent: 'userAgent',
+    createdAt: 'createdAt'
+  };
+
+  export type AdminLoginHistoryScalarFieldEnum = (typeof AdminLoginHistoryScalarFieldEnum)[keyof typeof AdminLoginHistoryScalarFieldEnum]
+
+
   export const CategoryScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -26143,6 +27453,7 @@ export namespace Prisma {
     password?: StringFilter<"Admin"> | string
     passwordResetToken?: StringNullableFilter<"Admin"> | string | null
     passwordResetExpires?: DateTimeNullableFilter<"Admin"> | Date | string | null
+    loginHistory?: AdminLoginHistoryListRelationFilter
   }
 
   export type AdminOrderByWithRelationInput = {
@@ -26151,6 +27462,7 @@ export namespace Prisma {
     password?: SortOrder
     passwordResetToken?: SortOrderInput | SortOrder
     passwordResetExpires?: SortOrderInput | SortOrder
+    loginHistory?: AdminLoginHistoryOrderByRelationAggregateInput
   }
 
   export type AdminWhereUniqueInput = Prisma.AtLeast<{
@@ -26162,6 +27474,7 @@ export namespace Prisma {
     password?: StringFilter<"Admin"> | string
     passwordResetToken?: StringNullableFilter<"Admin"> | string | null
     passwordResetExpires?: DateTimeNullableFilter<"Admin"> | Date | string | null
+    loginHistory?: AdminLoginHistoryListRelationFilter
   }, "id" | "email">
 
   export type AdminOrderByWithAggregationInput = {
@@ -26184,6 +27497,81 @@ export namespace Prisma {
     password?: StringWithAggregatesFilter<"Admin"> | string
     passwordResetToken?: StringNullableWithAggregatesFilter<"Admin"> | string | null
     passwordResetExpires?: DateTimeNullableWithAggregatesFilter<"Admin"> | Date | string | null
+  }
+
+  export type AdminLoginHistoryWhereInput = {
+    AND?: AdminLoginHistoryWhereInput | AdminLoginHistoryWhereInput[]
+    OR?: AdminLoginHistoryWhereInput[]
+    NOT?: AdminLoginHistoryWhereInput | AdminLoginHistoryWhereInput[]
+    id?: StringFilter<"AdminLoginHistory"> | string
+    adminId?: StringFilter<"AdminLoginHistory"> | string
+    email?: StringFilter<"AdminLoginHistory"> | string
+    ip?: StringNullableFilter<"AdminLoginHistory"> | string | null
+    device?: StringNullableFilter<"AdminLoginHistory"> | string | null
+    browser?: StringNullableFilter<"AdminLoginHistory"> | string | null
+    os?: StringNullableFilter<"AdminLoginHistory"> | string | null
+    userAgent?: StringNullableFilter<"AdminLoginHistory"> | string | null
+    createdAt?: DateTimeFilter<"AdminLoginHistory"> | Date | string
+    admin?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }
+
+  export type AdminLoginHistoryOrderByWithRelationInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    email?: SortOrder
+    ip?: SortOrderInput | SortOrder
+    device?: SortOrderInput | SortOrder
+    browser?: SortOrderInput | SortOrder
+    os?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    admin?: AdminOrderByWithRelationInput
+  }
+
+  export type AdminLoginHistoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: AdminLoginHistoryWhereInput | AdminLoginHistoryWhereInput[]
+    OR?: AdminLoginHistoryWhereInput[]
+    NOT?: AdminLoginHistoryWhereInput | AdminLoginHistoryWhereInput[]
+    adminId?: StringFilter<"AdminLoginHistory"> | string
+    email?: StringFilter<"AdminLoginHistory"> | string
+    ip?: StringNullableFilter<"AdminLoginHistory"> | string | null
+    device?: StringNullableFilter<"AdminLoginHistory"> | string | null
+    browser?: StringNullableFilter<"AdminLoginHistory"> | string | null
+    os?: StringNullableFilter<"AdminLoginHistory"> | string | null
+    userAgent?: StringNullableFilter<"AdminLoginHistory"> | string | null
+    createdAt?: DateTimeFilter<"AdminLoginHistory"> | Date | string
+    admin?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }, "id">
+
+  export type AdminLoginHistoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    email?: SortOrder
+    ip?: SortOrderInput | SortOrder
+    device?: SortOrderInput | SortOrder
+    browser?: SortOrderInput | SortOrder
+    os?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: AdminLoginHistoryCountOrderByAggregateInput
+    _max?: AdminLoginHistoryMaxOrderByAggregateInput
+    _min?: AdminLoginHistoryMinOrderByAggregateInput
+  }
+
+  export type AdminLoginHistoryScalarWhereWithAggregatesInput = {
+    AND?: AdminLoginHistoryScalarWhereWithAggregatesInput | AdminLoginHistoryScalarWhereWithAggregatesInput[]
+    OR?: AdminLoginHistoryScalarWhereWithAggregatesInput[]
+    NOT?: AdminLoginHistoryScalarWhereWithAggregatesInput | AdminLoginHistoryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AdminLoginHistory"> | string
+    adminId?: StringWithAggregatesFilter<"AdminLoginHistory"> | string
+    email?: StringWithAggregatesFilter<"AdminLoginHistory"> | string
+    ip?: StringNullableWithAggregatesFilter<"AdminLoginHistory"> | string | null
+    device?: StringNullableWithAggregatesFilter<"AdminLoginHistory"> | string | null
+    browser?: StringNullableWithAggregatesFilter<"AdminLoginHistory"> | string | null
+    os?: StringNullableWithAggregatesFilter<"AdminLoginHistory"> | string | null
+    userAgent?: StringNullableWithAggregatesFilter<"AdminLoginHistory"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"AdminLoginHistory"> | Date | string
   }
 
   export type CategoryWhereInput = {
@@ -27866,6 +29254,7 @@ export namespace Prisma {
     password: string
     passwordResetToken?: string | null
     passwordResetExpires?: Date | string | null
+    loginHistory?: AdminLoginHistoryCreateNestedManyWithoutAdminInput
   }
 
   export type AdminUncheckedCreateInput = {
@@ -27874,6 +29263,7 @@ export namespace Prisma {
     password: string
     passwordResetToken?: string | null
     passwordResetExpires?: Date | string | null
+    loginHistory?: AdminLoginHistoryUncheckedCreateNestedManyWithoutAdminInput
   }
 
   export type AdminUpdateInput = {
@@ -27882,6 +29272,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    loginHistory?: AdminLoginHistoryUpdateManyWithoutAdminNestedInput
   }
 
   export type AdminUncheckedUpdateInput = {
@@ -27890,6 +29281,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    loginHistory?: AdminLoginHistoryUncheckedUpdateManyWithoutAdminNestedInput
   }
 
   export type AdminCreateManyInput = {
@@ -27914,6 +29306,89 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
     passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type AdminLoginHistoryCreateInput = {
+    id?: string
+    email: string
+    ip?: string | null
+    device?: string | null
+    browser?: string | null
+    os?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+    admin: AdminCreateNestedOneWithoutLoginHistoryInput
+  }
+
+  export type AdminLoginHistoryUncheckedCreateInput = {
+    id?: string
+    adminId: string
+    email: string
+    ip?: string | null
+    device?: string | null
+    browser?: string | null
+    os?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+  }
+
+  export type AdminLoginHistoryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    device?: NullableStringFieldUpdateOperationsInput | string | null
+    browser?: NullableStringFieldUpdateOperationsInput | string | null
+    os?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    admin?: AdminUpdateOneRequiredWithoutLoginHistoryNestedInput
+  }
+
+  export type AdminLoginHistoryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    adminId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    device?: NullableStringFieldUpdateOperationsInput | string | null
+    browser?: NullableStringFieldUpdateOperationsInput | string | null
+    os?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminLoginHistoryCreateManyInput = {
+    id?: string
+    adminId: string
+    email: string
+    ip?: string | null
+    device?: string | null
+    browser?: string | null
+    os?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+  }
+
+  export type AdminLoginHistoryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    device?: NullableStringFieldUpdateOperationsInput | string | null
+    browser?: NullableStringFieldUpdateOperationsInput | string | null
+    os?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminLoginHistoryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    adminId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    device?: NullableStringFieldUpdateOperationsInput | string | null
+    browser?: NullableStringFieldUpdateOperationsInput | string | null
+    os?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CategoryCreateInput = {
@@ -29865,9 +31340,19 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type AdminLoginHistoryListRelationFilter = {
+    every?: AdminLoginHistoryWhereInput
+    some?: AdminLoginHistoryWhereInput
+    none?: AdminLoginHistoryWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type AdminLoginHistoryOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type AdminCountOrderByAggregateInput = {
@@ -29942,6 +31427,72 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type AdminScalarRelationFilter = {
+    is?: AdminWhereInput
+    isNot?: AdminWhereInput
+  }
+
+  export type AdminLoginHistoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    email?: SortOrder
+    ip?: SortOrder
+    device?: SortOrder
+    browser?: SortOrder
+    os?: SortOrder
+    userAgent?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AdminLoginHistoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    email?: SortOrder
+    ip?: SortOrder
+    device?: SortOrder
+    browser?: SortOrder
+    os?: SortOrder
+    userAgent?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AdminLoginHistoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    email?: SortOrder
+    ip?: SortOrder
+    device?: SortOrder
+    browser?: SortOrder
+    os?: SortOrder
+    userAgent?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -30048,17 +31599,6 @@ export namespace Prisma {
   export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type CartItemListRelationFilter = {
@@ -30207,20 +31747,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type ProductScalarRelationFilter = {
@@ -31199,6 +32725,20 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type AdminLoginHistoryCreateNestedManyWithoutAdminInput = {
+    create?: XOR<AdminLoginHistoryCreateWithoutAdminInput, AdminLoginHistoryUncheckedCreateWithoutAdminInput> | AdminLoginHistoryCreateWithoutAdminInput[] | AdminLoginHistoryUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: AdminLoginHistoryCreateOrConnectWithoutAdminInput | AdminLoginHistoryCreateOrConnectWithoutAdminInput[]
+    createMany?: AdminLoginHistoryCreateManyAdminInputEnvelope
+    connect?: AdminLoginHistoryWhereUniqueInput | AdminLoginHistoryWhereUniqueInput[]
+  }
+
+  export type AdminLoginHistoryUncheckedCreateNestedManyWithoutAdminInput = {
+    create?: XOR<AdminLoginHistoryCreateWithoutAdminInput, AdminLoginHistoryUncheckedCreateWithoutAdminInput> | AdminLoginHistoryCreateWithoutAdminInput[] | AdminLoginHistoryUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: AdminLoginHistoryCreateOrConnectWithoutAdminInput | AdminLoginHistoryCreateOrConnectWithoutAdminInput[]
+    createMany?: AdminLoginHistoryCreateManyAdminInputEnvelope
+    connect?: AdminLoginHistoryWhereUniqueInput | AdminLoginHistoryWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -31209,6 +32749,52 @@ export namespace Prisma {
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
+  }
+
+  export type AdminLoginHistoryUpdateManyWithoutAdminNestedInput = {
+    create?: XOR<AdminLoginHistoryCreateWithoutAdminInput, AdminLoginHistoryUncheckedCreateWithoutAdminInput> | AdminLoginHistoryCreateWithoutAdminInput[] | AdminLoginHistoryUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: AdminLoginHistoryCreateOrConnectWithoutAdminInput | AdminLoginHistoryCreateOrConnectWithoutAdminInput[]
+    upsert?: AdminLoginHistoryUpsertWithWhereUniqueWithoutAdminInput | AdminLoginHistoryUpsertWithWhereUniqueWithoutAdminInput[]
+    createMany?: AdminLoginHistoryCreateManyAdminInputEnvelope
+    set?: AdminLoginHistoryWhereUniqueInput | AdminLoginHistoryWhereUniqueInput[]
+    disconnect?: AdminLoginHistoryWhereUniqueInput | AdminLoginHistoryWhereUniqueInput[]
+    delete?: AdminLoginHistoryWhereUniqueInput | AdminLoginHistoryWhereUniqueInput[]
+    connect?: AdminLoginHistoryWhereUniqueInput | AdminLoginHistoryWhereUniqueInput[]
+    update?: AdminLoginHistoryUpdateWithWhereUniqueWithoutAdminInput | AdminLoginHistoryUpdateWithWhereUniqueWithoutAdminInput[]
+    updateMany?: AdminLoginHistoryUpdateManyWithWhereWithoutAdminInput | AdminLoginHistoryUpdateManyWithWhereWithoutAdminInput[]
+    deleteMany?: AdminLoginHistoryScalarWhereInput | AdminLoginHistoryScalarWhereInput[]
+  }
+
+  export type AdminLoginHistoryUncheckedUpdateManyWithoutAdminNestedInput = {
+    create?: XOR<AdminLoginHistoryCreateWithoutAdminInput, AdminLoginHistoryUncheckedCreateWithoutAdminInput> | AdminLoginHistoryCreateWithoutAdminInput[] | AdminLoginHistoryUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: AdminLoginHistoryCreateOrConnectWithoutAdminInput | AdminLoginHistoryCreateOrConnectWithoutAdminInput[]
+    upsert?: AdminLoginHistoryUpsertWithWhereUniqueWithoutAdminInput | AdminLoginHistoryUpsertWithWhereUniqueWithoutAdminInput[]
+    createMany?: AdminLoginHistoryCreateManyAdminInputEnvelope
+    set?: AdminLoginHistoryWhereUniqueInput | AdminLoginHistoryWhereUniqueInput[]
+    disconnect?: AdminLoginHistoryWhereUniqueInput | AdminLoginHistoryWhereUniqueInput[]
+    delete?: AdminLoginHistoryWhereUniqueInput | AdminLoginHistoryWhereUniqueInput[]
+    connect?: AdminLoginHistoryWhereUniqueInput | AdminLoginHistoryWhereUniqueInput[]
+    update?: AdminLoginHistoryUpdateWithWhereUniqueWithoutAdminInput | AdminLoginHistoryUpdateWithWhereUniqueWithoutAdminInput[]
+    updateMany?: AdminLoginHistoryUpdateManyWithWhereWithoutAdminInput | AdminLoginHistoryUpdateManyWithWhereWithoutAdminInput[]
+    deleteMany?: AdminLoginHistoryScalarWhereInput | AdminLoginHistoryScalarWhereInput[]
+  }
+
+  export type AdminCreateNestedOneWithoutLoginHistoryInput = {
+    create?: XOR<AdminCreateWithoutLoginHistoryInput, AdminUncheckedCreateWithoutLoginHistoryInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutLoginHistoryInput
+    connect?: AdminWhereUniqueInput
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type AdminUpdateOneRequiredWithoutLoginHistoryNestedInput = {
+    create?: XOR<AdminCreateWithoutLoginHistoryInput, AdminUncheckedCreateWithoutLoginHistoryInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutLoginHistoryInput
+    upsert?: AdminUpsertWithoutLoginHistoryInput
+    connect?: AdminWhereUniqueInput
+    update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutLoginHistoryInput, AdminUpdateWithoutLoginHistoryInput>, AdminUncheckedUpdateWithoutLoginHistoryInput>
   }
 
   export type CategoryCreateNestedOneWithoutChildrenInput = {
@@ -31419,10 +33005,6 @@ export namespace Prisma {
 
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type CartItemUpdateManyWithoutProductNestedInput = {
@@ -32090,6 +33672,31 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -32133,17 +33740,6 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
   export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel> | null
     in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
@@ -32166,20 +33762,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -32218,6 +33800,117 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type AdminLoginHistoryCreateWithoutAdminInput = {
+    id?: string
+    email: string
+    ip?: string | null
+    device?: string | null
+    browser?: string | null
+    os?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+  }
+
+  export type AdminLoginHistoryUncheckedCreateWithoutAdminInput = {
+    id?: string
+    email: string
+    ip?: string | null
+    device?: string | null
+    browser?: string | null
+    os?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+  }
+
+  export type AdminLoginHistoryCreateOrConnectWithoutAdminInput = {
+    where: AdminLoginHistoryWhereUniqueInput
+    create: XOR<AdminLoginHistoryCreateWithoutAdminInput, AdminLoginHistoryUncheckedCreateWithoutAdminInput>
+  }
+
+  export type AdminLoginHistoryCreateManyAdminInputEnvelope = {
+    data: AdminLoginHistoryCreateManyAdminInput | AdminLoginHistoryCreateManyAdminInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AdminLoginHistoryUpsertWithWhereUniqueWithoutAdminInput = {
+    where: AdminLoginHistoryWhereUniqueInput
+    update: XOR<AdminLoginHistoryUpdateWithoutAdminInput, AdminLoginHistoryUncheckedUpdateWithoutAdminInput>
+    create: XOR<AdminLoginHistoryCreateWithoutAdminInput, AdminLoginHistoryUncheckedCreateWithoutAdminInput>
+  }
+
+  export type AdminLoginHistoryUpdateWithWhereUniqueWithoutAdminInput = {
+    where: AdminLoginHistoryWhereUniqueInput
+    data: XOR<AdminLoginHistoryUpdateWithoutAdminInput, AdminLoginHistoryUncheckedUpdateWithoutAdminInput>
+  }
+
+  export type AdminLoginHistoryUpdateManyWithWhereWithoutAdminInput = {
+    where: AdminLoginHistoryScalarWhereInput
+    data: XOR<AdminLoginHistoryUpdateManyMutationInput, AdminLoginHistoryUncheckedUpdateManyWithoutAdminInput>
+  }
+
+  export type AdminLoginHistoryScalarWhereInput = {
+    AND?: AdminLoginHistoryScalarWhereInput | AdminLoginHistoryScalarWhereInput[]
+    OR?: AdminLoginHistoryScalarWhereInput[]
+    NOT?: AdminLoginHistoryScalarWhereInput | AdminLoginHistoryScalarWhereInput[]
+    id?: StringFilter<"AdminLoginHistory"> | string
+    adminId?: StringFilter<"AdminLoginHistory"> | string
+    email?: StringFilter<"AdminLoginHistory"> | string
+    ip?: StringNullableFilter<"AdminLoginHistory"> | string | null
+    device?: StringNullableFilter<"AdminLoginHistory"> | string | null
+    browser?: StringNullableFilter<"AdminLoginHistory"> | string | null
+    os?: StringNullableFilter<"AdminLoginHistory"> | string | null
+    userAgent?: StringNullableFilter<"AdminLoginHistory"> | string | null
+    createdAt?: DateTimeFilter<"AdminLoginHistory"> | Date | string
+  }
+
+  export type AdminCreateWithoutLoginHistoryInput = {
+    id?: string
+    email: string
+    password: string
+    passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
+  }
+
+  export type AdminUncheckedCreateWithoutLoginHistoryInput = {
+    id?: string
+    email: string
+    password: string
+    passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
+  }
+
+  export type AdminCreateOrConnectWithoutLoginHistoryInput = {
+    where: AdminWhereUniqueInput
+    create: XOR<AdminCreateWithoutLoginHistoryInput, AdminUncheckedCreateWithoutLoginHistoryInput>
+  }
+
+  export type AdminUpsertWithoutLoginHistoryInput = {
+    update: XOR<AdminUpdateWithoutLoginHistoryInput, AdminUncheckedUpdateWithoutLoginHistoryInput>
+    create: XOR<AdminCreateWithoutLoginHistoryInput, AdminUncheckedCreateWithoutLoginHistoryInput>
+    where?: AdminWhereInput
+  }
+
+  export type AdminUpdateToOneWithWhereWithoutLoginHistoryInput = {
+    where?: AdminWhereInput
+    data: XOR<AdminUpdateWithoutLoginHistoryInput, AdminUncheckedUpdateWithoutLoginHistoryInput>
+  }
+
+  export type AdminUpdateWithoutLoginHistoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type AdminUncheckedUpdateWithoutLoginHistoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type CategoryCreateWithoutChildrenInput = {
@@ -34472,6 +36165,50 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type AdminLoginHistoryCreateManyAdminInput = {
+    id?: string
+    email: string
+    ip?: string | null
+    device?: string | null
+    browser?: string | null
+    os?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+  }
+
+  export type AdminLoginHistoryUpdateWithoutAdminInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    device?: NullableStringFieldUpdateOperationsInput | string | null
+    browser?: NullableStringFieldUpdateOperationsInput | string | null
+    os?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminLoginHistoryUncheckedUpdateWithoutAdminInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    device?: NullableStringFieldUpdateOperationsInput | string | null
+    browser?: NullableStringFieldUpdateOperationsInput | string | null
+    os?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminLoginHistoryUncheckedUpdateManyWithoutAdminInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    device?: NullableStringFieldUpdateOperationsInput | string | null
+    browser?: NullableStringFieldUpdateOperationsInput | string | null
+    os?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CategoryCreateManyParentInput = {

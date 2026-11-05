@@ -14,6 +14,24 @@ model Admin {
   password             String
   passwordResetToken   String?
   passwordResetExpires DateTime?
+  loginHistory         AdminLoginHistory[]
+}
+
+model AdminLoginHistory {
+  id        String   @id @default(cuid())
+  adminId   String
+  email     String
+  ip        String?
+  device    String?
+  browser   String?
+  os        String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  admin Admin @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@index([adminId])
+  @@index([createdAt])
 }
 
 model Category {

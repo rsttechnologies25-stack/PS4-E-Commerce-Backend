@@ -19,6 +19,62 @@ const adminAuthLimiter = rateLimit({
     legacyHeaders: false,
 });
 
+function parseUserAgent(uaString?: string) {
+    const ua = uaString || '';
+    let browser = 'Browser';
+    let os = 'Unknown OS';
+    let device = 'Desktop';
+
+    // Device
+    if (/tablet|ipad/i.test(ua)) {
+        device = 'Tablet';
+    } else if (/mobile|iphone|ipod|android/i.test(ua)) {
+        device = 'Mobile';
+    }
+
+    // OS
+    if (/windows nt 10\.0/i.test(ua)) {
+        os = 'Windows';
+    } else if (/windows/i.test(ua)) {
+        os = 'Windows';
+    } else if (/iphone/i.test(ua)) {
+        os = 'iOS (iPhone)';
+    } else if (/ipad/i.test(ua)) {
+        os = 'iOS (iPad)';
+    } else if (/macintosh|mac os x/i.test(ua)) {
+        os = 'macOS';
+    } else if (/android/i.test(ua)) {
+        os = 'Android';
+    } else if (/linux/i.test(ua)) {
+        os = 'Linux';
+    }
+
+    // Browser
+    if (/edg\//i.test(ua)) {
+        browser = 'Edge';
+    } else if (/opr\/|opera\//i.test(ua)) {
+        browser = 'Opera';
+    } else if (/chrome|crios/i.test(ua)) {
+        browser = 'Chrome';
+    } else if (/firefox|fxios/i.test(ua)) {
+        browser = 'Firefox';
+    } else if (/safari/i.test(ua) && !/chrome|crios/i.test(ua)) {
+        browser = 'Safari';
+    }
+
+    return { browser, os, device };
+}
+
+function getClientIp(req: any): string {
+    const forwarded = req.headers['x-forwarded-for'];
+    if (forwarded) {
+        const ip = typeof forwarded === 'string' ? forwarded.split(',')[0].trim() : forwarded[0];
+        if (ip) return ip === '::1' ? '127.0.0.1' : ip.replace(/^::ffff:/, '');
+    }
+    const remote = req.socket?.remoteAddress || req.ip || '127.0.0.1';
+    return remote === '::1' ? '127.0.0.1' : remote.replace(/^::ffff:/, '');
+}
+
 router.post('/login', adminAuthLimiter, validate(adminLoginSchema), async (req, res) => {
     const { email, password } = req.body;
 
@@ -34,6 +90,28 @@ router.post('/login', adminAuthLimiter, validate(adminLoginSchema), async (req, 
             process.env.JWT_SECRET!, 
             { expiresIn: '1d' }
         );
+
+        // Record login history (non-blocking)
+        try {
+            const uaString = (req.headers['user-agent'] as string) || '';
+            const parsed = parseUserAgent(uaString);
+            const ip = getClientIp(req);
+
+            await prisma.adminLoginHistory.create({
+                data: {
+                    adminId: admin.id,
+                    email: admin.email,
+                    ip,
+                    device: parsed.device,
+                    browser: parsed.browser,
+                    os: parsed.os,
+                    userAgent: uaString.substring(0, 500)
+                }
+            });
+        } catch (historyErr) {
+            console.error('Failed to record admin login history:', historyErr);
+        }
+
         res.json({ token, admin: { email: admin.email, role: 'ADMIN' } });
     } catch (error) {
         res.status(500).json({ error: 'Login failed' });
@@ -45,13 +123,68 @@ router.post('/login', adminAuthLimiter, validate(adminLoginSchema), async (req, 
 // Get current admin info
 router.get('/me', authMiddleware, async (req, res) => {
     try {
+        const adminId = (req as any).admin?.id;
         const admin = await prisma.admin.findUnique({
-            where: { id: (req as any).admin?.id },
-            select: { email: true }
+            where: { id: adminId },
+            select: { 
+                id: true,
+                email: true,
+                loginHistory: {
+                    orderBy: { createdAt: 'desc' },
+                    take: 10,
+                    select: {
+                        id: true,
+                        ip: true,
+                        device: true,
+                        browser: true,
+                        os: true,
+                        createdAt: true
+                    }
+                }
+            }
         });
         if (!admin) return res.status(404).json({ error: 'Admin not found' });
-        res.json(admin);
+
+        let loginHistory = admin.loginHistory;
+        // If history is empty (e.g. active session before tracking began), record current session
+        if (loginHistory.length === 0) {
+            try {
+                const uaString = (req.headers['user-agent'] as string) || '';
+                const parsed = parseUserAgent(uaString);
+                const ip = getClientIp(req);
+
+                const currentEntry = await prisma.adminLoginHistory.create({
+                    data: {
+                        adminId: admin.id,
+                        email: admin.email,
+                        ip,
+                        device: parsed.device,
+                        browser: parsed.browser,
+                        os: parsed.os,
+                        userAgent: uaString.substring(0, 500)
+                    },
+                    select: {
+                        id: true,
+                        ip: true,
+                        device: true,
+                        browser: true,
+                        os: true,
+                        createdAt: true
+                    }
+                });
+                loginHistory = [currentEntry];
+            } catch (err) {
+                console.error('Failed to auto-seed initial session:', err);
+            }
+        }
+
+        res.json({
+            id: admin.id,
+            email: admin.email,
+            loginHistory
+        });
     } catch (error) {
+        console.error('Failed to fetch admin info:', error);
         res.status(500).json({ error: 'Failed to fetch admin info' });
     }
 });
