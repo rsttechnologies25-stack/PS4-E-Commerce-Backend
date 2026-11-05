@@ -7,6 +7,8 @@ import Razorpay from 'razorpay';
 import crypto from 'crypto';
 import { validate } from '../middleware/validate';
 import { orderSchema } from '../lib/schemas';
+import { getDeliveryZoneConfig } from './shipping';
+import { isDeliveryLocationAllowed } from '../utils/deliveryZones';
 
 const router = Router();
 
@@ -152,6 +154,18 @@ router.post('/', userAuthMiddleware, validate(orderSchema), async (req, res) => 
     if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
 
     try {
+        // Validate Delivery Zone Restrictions (if configured by admin)
+        const zoneConfig = await getDeliveryZoneConfig();
+        const locationCheck = isDeliveryLocationAllowed(
+            { city, pincode, state: req.body.state, addressLine1 },
+            zoneConfig
+        );
+        if (!locationCheck.allowed) {
+            return res.status(400).json({
+                error: locationCheck.reason || `Delivery is currently restricted to: ${zoneConfig.allowedAreas.join(', ')}.`
+            });
+        }
+
         let calculatedSubtotal = 0;
         let totalWeightKg = 0;
 

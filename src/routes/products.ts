@@ -184,6 +184,32 @@ router.put('/:id', authMiddleware, async (req, res) => {
     }
 });
 
+// POST /bulk-sold-out - Toggle isSoldOut for ALL products across the catalog
+router.post('/bulk-sold-out', authMiddleware, async (req, res) => {
+    const { isSoldOut } = req.body;
+    if (typeof isSoldOut !== 'boolean') {
+        return res.status(400).json({ error: 'isSoldOut boolean is required' });
+    }
+
+    try {
+        const result = await prisma.product.updateMany({
+            data: { isSoldOut }
+        });
+
+        res.json({
+            success: true,
+            isSoldOut,
+            updatedCount: result.count,
+            message: isSoldOut
+                ? 'All products marked as Sold Out.'
+                : 'All products are now back on sale.'
+        });
+    } catch (error) {
+        console.error('Bulk sold out error:', error);
+        res.status(500).json({ error: 'Failed to bulk update products' });
+    }
+});
+
 // PATCH quick update product status (e.g. toggle isDisabled, isSoldOut, isBestSeller, isNewLaunch)
 router.patch('/:id/status', authMiddleware, async (req, res) => {
     const { isDisabled, isSoldOut, isBestSeller, isNewLaunch } = req.body;
